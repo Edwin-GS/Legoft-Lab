@@ -1,0 +1,83 @@
+<div class="container">
+  <h1 class="app-title">Legoft</h1>
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>User:</label>
+      <input type="text" formControlName="user" />
+      <div
+        *ngIf="
+          registrationForm.get('user')?.hasError('required') &&
+          registrationForm.get('user')?.touched
+        "
+        class="required-message"
+      >
+        User is required.
+      </div>
+      <div
+        class="required-message"
+        *ngIf="registrationForm.get('user')?.hasError('minlength')"
+      >
+        User must be at least 5 characters long.
+      </div>
+      <div
+        class="required-message"
+        *ngIf="registrationForm.get('user')?.hasError('maxlength')"
+      >
+        User cannot be longer than 25 characters.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email:</label>
+      <input type="email" formControlName="email" />
+      <div
+        class="required-message"
+        *ngIf="
+          registrationForm.get('email')?.hasError('required') &&
+          registrationForm.get('email')?.touched
+        "
+      >
+        Email is required.
+      </div>
+      <div
+        class="required-message"
+        *ngIf="registrationForm.get('email')?.hasError('email')"
+      >
+        Invalid email format.
+      </div>
+      <div
+        class="required-message"
+        *ngIf="registrationForm.get('email')?.hasError('minlength')"
+      >
+        Email must be at least 1 character long.
+      </div>
+      <div
+        class="required-message"
+        *ngIf="registrationForm.get('email')?.hasError('maxlength')"
+      >
+        Email cannot be longer than 150 characters.
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Password:</label>
+      <input type="password" formControlName="password" />
+      <div
+        class="required-message"
+        *ngIf="
+          registrationForm.get('password')?.hasError('required') &&
+          registrationForm.get('password')?.touched
+        "
+      >
+        Password is required.
+      </div>
+    </div>
+
+    <div class="form-group center-button">
+      <button type="submit" [disabled]="!registrationForm.valid">
+        Register
+      </button>
+    </div>
+  </form>
+  <p class="login-link" (click)="goToLogin()">
+    Already have an account? Log in here.
+  </p>
+</div>
