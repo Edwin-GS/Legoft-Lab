@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
 
 @Component({
   selector: 'lib-login',
@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
+
+  /**
+   * Login with admin only by email
+   * **/
+
+  @Input() isAdmin = false;
 
 }

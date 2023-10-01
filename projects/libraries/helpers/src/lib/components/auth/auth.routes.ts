@@ -23,7 +23,7 @@ const AuthRoutes: Routes = [
   {
     path: 'legoft-lab',
     loadChildren: () =>
-      import('../dashboard/dashboard.module').then(m => m.DashboardModule)
+      import('../../../../../../applications/client/src/app/components/dashboard/dashboard.module').then(m => m.DashboardModule)
   },
   {
     path: '**',

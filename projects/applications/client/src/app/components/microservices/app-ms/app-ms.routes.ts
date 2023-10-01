@@ -4,6 +4,21 @@ import {RelationshipsComponent} from "./relationships/relationships.component";
 import {RelationshipComponent} from "./relationships/extra/relationship.component";
 import {SchemasComponent} from "./schemas/schemas.component";
 
+/**
+ * Base route information
+ *
+ * applications >> /legoft-lab/applications/:user/user_id
+ *
+ * application >> /legoft-lab/applications/:user/:user_id/application
+ *
+ * relationships >> /legoft-lab/applications/:user/:user_id/relationships
+ *
+ * relationship >> /legoft-lab/applications/:user/:user_id/relationship
+ *
+ * schemas >> /legoft-lab/applications/:user/:user_id/schemas
+ *
+ * **/
+
 const ApplicationRoutes: Routes = [
   {
     path: '',

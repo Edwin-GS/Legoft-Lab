@@ -5,6 +5,22 @@ import {FollowedComponent} from "./followeds/extra/followed.component";
 import {FollowersComponent} from "./followers/followers.component";
 import {FollowerComponent} from "./followers/extra/follower.component";
 
+
+/**
+ * Base route information
+ *
+ * users >> /legoft-lab/users/:user/:user_id
+ *
+ * followeds >> /legoft-lab/users/:user/:user_id/followeds
+ *
+ * followed >> /legoft-lab/users/:user/:user_id/followed
+ *
+ * followers >> /legoft-lab/users/:user/:user_id/followers
+ *
+ * follower >> /legoft-lab/users/:user/:user_id/follower
+ *
+ * **/
+
 const UserRoutes: Routes = [
   {
     path: '',
