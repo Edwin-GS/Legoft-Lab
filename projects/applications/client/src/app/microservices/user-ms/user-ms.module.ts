@@ -4,8 +4,8 @@ import {FollowedsComponent} from './followeds/followeds.component';
 import {FollowersComponent} from './followers/followers.component';
 import { FollowerComponent } from './followers/extra/follower.component';
 import { FollowedComponent } from './followeds/extra/followed.component';
-import { UsersComponent } from './users/users.component';
-import { UserComponent } from './users/extra/user.component';
+import { UserComponent } from './users/user.component';
+import {USER_ROUTES} from "./users-ms.routes";
 
 
 
@@ -15,11 +15,11 @@ import { UserComponent } from './users/extra/user.component';
     FollowersComponent,
     FollowerComponent,
     FollowedComponent,
-    UsersComponent,
     UserComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    USER_ROUTES
   ]
 })
 export class UserMsModule {

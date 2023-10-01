@@ -15,7 +15,7 @@ export class UserService {
 
     localStorage.removeItem('legoft-sid');
 
-    this.router.navigate(['/authentication/login']).catch(()=> {
+    this.router.navigate(['/auth/login']).catch(()=> {
       // Todo: add toast notifier
       console.log('Navigating to login page failed')
     });
