@@ -5,6 +5,7 @@ import { ApplicationComponent } from './applications/extra/application.component
 import { SchemasComponent } from './schemas/schemas.component';
 import { RelationshipsComponent } from './relationships/relationships.component';
 import { RelationshipComponent } from './relationships/extra/relationship.component';
+import {APPLICATION_ROUTES} from "./app-ms.routes";
 
 
 
@@ -20,7 +21,8 @@ import { RelationshipComponent } from './relationships/extra/relationship.compon
     SchemasComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    APPLICATION_ROUTES
   ]
 })
 export class AppMsModule { }
