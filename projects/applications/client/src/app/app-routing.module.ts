@@ -2,14 +2,18 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 
-const routes: Routes = [
-  { path: 'register', component: RegisterComponent },
-  // { path: '', component: RegisterComponent },
-  // { path: 'login', component: LoginComponent }
+
+const ROUTES: Routes = [
+  {
+    path: '',
+    loadChildren: () =>
+      import('../../../../libraries/helpers/src/lib/components/auth/auth.module').then(m => m.AuthModule)
+  }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  imports: [RouterModule.forRoot(ROUTES)],
+  exports: [RouterModule]
+
 })
 export class AppRoutingModule {}
