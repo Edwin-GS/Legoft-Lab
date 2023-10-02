@@ -81,7 +81,7 @@ export class HandlerService {
   response(data: any) {
     this.sid = data['sid'];
     if (data['sid']) {
-      localStorage.setItem('legoft-sid', this.sid)
+      localStorage.setItem('LEGOFT_SID_SITE', this.sid)
     }
     return data['resp'];
   }

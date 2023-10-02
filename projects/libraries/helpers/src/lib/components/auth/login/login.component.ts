@@ -1,11 +1,12 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {HandlerService} from "../../../services/handler.service";
 
 @Component({
   selector: 'lib-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   /**
    * Login with admin only by email
@@ -13,4 +14,35 @@ export class LoginComponent {
 
   @Input() isAdmin = false;
 
+  constructor(private hs: HandlerService) {
+  }
+
+  ngOnInit(): void {
+
+    this.login()
+  }
+
+  login() {
+
+    localStorage.setItem('LEGOFT_SID_SITE', '')
+
+    let user = {userOrEmail: "edwin", password: "Edwin25."}
+
+    this.hs.post(user, `users/login`).subscribe({
+      next(resp) {
+
+        if (resp['success'] === false) {
+
+          console.log('Error creating user')
+
+        } else {
+
+          console.log(resp)
+        }
+      },
+      error(err) {
+        console.error('Error creating user: ' + err);
+      }
+    })
+  }
 }

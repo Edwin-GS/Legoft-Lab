@@ -13,7 +13,7 @@ export class UserService {
 
   logout() {
 
-    localStorage.removeItem('legoft-sid');
+    localStorage.removeItem('LEGOFT_SID_SITE');
 
     this.router.navigate(['/auth/login']).catch(()=> {
       // Todo: add toast notifier
@@ -23,7 +23,7 @@ export class UserService {
 
   getSID() {
 
-    const sidTmp = localStorage.getItem('legoft-sid');
+    const sidTmp = localStorage.getItem('LEGOFT_SID_SITE');
 
     if (sidTmp && sidTmp !== 'undefined') {
 
