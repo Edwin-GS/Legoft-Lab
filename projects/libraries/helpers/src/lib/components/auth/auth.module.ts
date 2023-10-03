@@ -3,13 +3,20 @@ import { CommonModule } from '@angular/common';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
-import { AUTH_ROUTES } from './auth.routes';
-import { HelpersModule } from '../../helpers.module';
-import { FormsModule } from '@angular/forms';
-import { ReactiveFormsModule } from '@angular/forms';
+import {AUTH_ROUTES} from "./auth.routes";
+import {HelpersModule} from "../../helpers.module";
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
+
+
 
 @NgModule({
-  declarations: [NotFoundComponent, LoginComponent, SignupComponent],
+  declarations: [
+    NotFoundComponent,
+    LoginComponent,
+    SignupComponent,
+    VerifyEmailComponent
+  ],
+
   imports: [
     CommonModule,
     HelpersModule,
