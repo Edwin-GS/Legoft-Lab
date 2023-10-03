@@ -16,10 +16,13 @@ import { VerifyEmailComponent } from './verify-email/verify-email.component';
     SignupComponent,
     VerifyEmailComponent
   ],
+
   imports: [
     CommonModule,
     HelpersModule,
-    AUTH_ROUTES
-  ]
+    AUTH_ROUTES,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
 })
-export class AuthModule { }
+export class AuthModule {}
