@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import {AUTH_ROUTES} from "./auth.routes";
 import {HelpersModule} from "../../helpers.module";
+import { VerifyEmailComponent } from './verify-email/verify-email.component';
 
 
 
@@ -12,7 +13,8 @@ import {HelpersModule} from "../../helpers.module";
   declarations: [
     NotFoundComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    VerifyEmailComponent
   ],
   imports: [
     CommonModule,
