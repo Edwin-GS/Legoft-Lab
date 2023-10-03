@@ -1,1 +1,116 @@
-<p>signup works!</p>
+<div class="registration-container">
+  <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+    <header>
+      <img src="{{ logoUrl }}" alt="Legoft logo" />
+    </header>
+    <!-- User Section -->
+    <div formGroupName="user">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          formControlName="username"
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            signupForm.get('user.username')?.hasError('required') &&
+            signupForm.get('user.username')?.touched
+          "
+        >
+          Username is required.
+        </div>
+        <div
+          class="error-message"
+          *ngIf="
+            signupForm.get('user.username')?.hasError('minlength') &&
+            signupForm.get('user.username')?.touched
+          "
+        >
+          Username must be at least 5 characters long.
+        </div>
+        <div
+          class="error-message"
+          *ngIf="
+            signupForm.get('user.username')?.hasError('maxlength') &&
+            signupForm.get('user.username')?.touched
+          "
+        >
+          Username cannot exceed 25 characters.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" formControlName="email" />
+        <div
+          class="error-message"
+          *ngIf="
+            signupForm.get('user.email')?.hasError('required') &&
+            signupForm.get('user.email')?.touched
+          "
+        >
+          Email is required.
+        </div>
+        <div
+          class="error-message"
+          *ngIf="
+            signupForm.get('user.email')?.hasError('minlength') &&
+            signupForm.get('user.email')?.touched
+          "
+        >
+          Email must not be empty.
+        </div>
+        <div
+          class="error-message"
+          *ngIf="
+            signupForm.get('user.email')?.hasError('maxlength') &&
+            signupForm.get('user.email')?.touched
+          "
+        >
+          Email cannot exceed 150 characters.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          formControlName="password"
+        />
+        <div
+          class="error-message"
+          *ngIf="
+            signupForm.get('user.password')?.hasError('required') &&
+            signupForm.get('user.password')?.touched
+          "
+        >
+          Password is required.
+        </div>
+        <div
+          class="error-message"
+          *ngIf="
+            signupForm.get('user.password')?.hasError('pattern') &&
+            signupForm.get('user.password')?.touched
+          "
+        >
+          Password must contain 8-15 characters, uppercase, lowercase, numbers,
+          and special characters.
+        </div>
+      </div>
+    </div>
+
+    <button
+      type="submit"
+      [disabled]="signupForm.invalid || signupForm.pristine"
+    >
+      Register
+    </button>
+  </form>
+
+  <p>Already have an account? <a href="">Login here.</a></p>
+</div>
