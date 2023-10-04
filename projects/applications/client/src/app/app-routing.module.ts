@@ -5,12 +5,15 @@ const ROUTES: Routes = [
   {
     path: '',
     loadChildren: () =>
-      import('../../../../libraries/helpers/src/lib/components/auth/auth.module').then(m => m.AuthModule)
-  }
+      import(
+        '../../../../libraries/helpers/src/lib/components/auth/auth.module'
+      ).then((m) => m.AuthModule),
+  },
 ];
 
+// imports: [RouterModule.forRoot(ROUTES,{useHash: true})],
 @NgModule({
-  imports: [RouterModule.forRoot(ROUTES,{useHash: true})],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(ROUTES)],
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
