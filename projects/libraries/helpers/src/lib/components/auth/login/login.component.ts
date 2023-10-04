@@ -28,8 +28,8 @@ export class LoginComponent implements OnInit {
 
     let user = {userOrEmail: "edwin", password: "Edwin25."}
 
-    this.hs.post(user, `users/login`).subscribe({
-      next(resp) {
+    this.hs.post(user, `users/login`)
+      .subscribe((resp) => {
 
         if (resp['success'] === false) {
 
@@ -38,11 +38,13 @@ export class LoginComponent implements OnInit {
         } else {
 
           console.log(resp)
+
         }
-      },
-      error(err) {
+      }, (err) => {
+
         console.error('Error creating user: ' + err);
       }
-    })
+
+    )
   }
 }
