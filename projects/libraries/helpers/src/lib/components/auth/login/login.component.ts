@@ -1,48 +1,70 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {HandlerService} from "../../../services/handler.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HandlerService } from '../../../services/handler.service';
 
 @Component({
   selector: 'lib-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
-  /**
-   * Login with admin only by email
-   * **/
-
+  appName = 'Legoft';
+  logoUrl = 'assets/logo/Legoft-Logo-OK-01-HIGH.png';
   @Input() isAdmin = false;
 
-  constructor(private hs: HandlerService) {
+  loginForm: FormGroup;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private hs: HandlerService
+  ) {
+    this.loginForm = this.formBuilder.group({
+      user: this.formBuilder.group({
+        userOrEmail: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(150),
+          ],
+        ],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,15}$'
+            ),
+          ],
+        ],
+      }),
+    });
   }
 
   ngOnInit(): void {
-
-    this.login()
+    this.onSubmit();
   }
 
-  login() {
+  onSubmit() {
+    if (this.loginForm.valid) {
+      localStorage.setItem('LEGOFT_SID_SITE', '');
 
-    localStorage.setItem('LEGOFT_SID_SITE', '')
+      let user = this.loginForm.value.user;
 
-    let user = {userOrEmail: "edwin", password: "Edwin25."}
-
-    this.hs.post(user, `users/login`).subscribe({
-      next(resp) {
-
-        if (resp['success'] === false) {
-
-          console.log('Error creating user')
-
-        } else {
-
-          console.log(resp)
+      this.hs.post(user, `users/login`).subscribe(
+        (resp) => {
+          if (resp['success'] === false) {
+            console.log('Error creating user');
+          } else {
+            console.log(resp, 'Esto es la respuesta');
+          }
+        },
+        (err) => {
+          console.error('Error creating user: ' + err);
         }
-      },
-      error(err) {
-        console.error('Error creating user: ' + err);
-      }
-    })
+      );
+    }
   }
 }
