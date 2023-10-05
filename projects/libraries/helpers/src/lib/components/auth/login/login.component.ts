@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
 
     localStorage.setItem('LEGOFT_SID_SITE', '')
 
-    let user = {userOrEmail: "edwin", password: "Edwin25."}
+    let user = {userOrEmail: "andres25", password: "Andres25."}
 
     this.hs.post(user, `users/login`)
       .subscribe((resp) => {
