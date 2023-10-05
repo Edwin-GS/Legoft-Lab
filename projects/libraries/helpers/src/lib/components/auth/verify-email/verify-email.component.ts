@@ -7,8 +7,9 @@ import {User} from "../../../models/user.doc";
 @Component({
   selector: 'lib-verify-email',
   templateUrl: './verify-email.component.html',
-  styleUrls: ['./verify-email.component.css']
+  styleUrls: ['./verify-email.component.css'],
 })
+
 export class VerifyEmailComponent implements OnInit, AfterViewInit {
 
   confirm = '';
