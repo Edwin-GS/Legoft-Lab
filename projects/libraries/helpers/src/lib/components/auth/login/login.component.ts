@@ -11,9 +11,11 @@ import { HandlerService } from '../../../services/handler.service';
 export class LoginComponent implements OnInit {
   appName = 'Legoft';
   logoUrl = 'assets/logo/Legoft-Logo-OK-01-HIGH.png';
+  dashboard = 'legoft-lab/client/:user/:user_id';
   @Input() isAdmin = false;
 
   loginForm: FormGroup;
+  isLoggedin: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -43,15 +45,14 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.onSubmit();
-  }
+  ngOnInit(): void {}
 
   onSubmit() {
     if (this.loginForm.valid) {
       localStorage.setItem('LEGOFT_SID_SITE', '');
 
-      let user = this.loginForm.value.user;
+      const user = this.loginForm.value.user;
+      const userId = this.loginForm.value.user_id;
 
       this.hs.post(user, `users/login`).subscribe(
         (resp) => {
@@ -59,6 +60,11 @@ export class LoginComponent implements OnInit {
             console.log('Error creating user');
           } else {
             console.log(resp, 'Esto es la respuesta');
+            this.isLoggedin = true;
+            const updatedDashboard = this.dashboard
+              .replace(':user', user)
+              .replace(':user_id', userId);
+            this.router.navigate([updatedDashboard, { user, userId }]);
           }
         },
         (err) => {
