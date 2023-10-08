@@ -111,6 +111,19 @@
       Register
     </button>
   </form>
-
+  <div *ngIf="signupForm.value.notifier" class="notifier-dialog">
+    <div class="notifier-dialog-header">
+      <h2>Check your email</h2>
+    </div>
+    <div class="notifier-dialog-body">
+      <p>
+        Please check your email ({{ signupForm.value.user.email }}) to verify
+        your account.
+      </p>
+    </div>
+    <div class="notifier-dialog-footer">
+      <button type="button" (click)="closeDialog()">Close</button>
+    </div>
+  </div>
   <p>Already have an account? <a routerLink="">Login here</a></p>
 </div>
