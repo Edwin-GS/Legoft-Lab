@@ -7,7 +7,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./classic.component.css'],
 })
 export class ClassicComponent {
-  logoUrl = 'assets/favicon/ms-icon-150x150.png';
+  logoUrl = 'assets/logo/Legoft-Logo-OK-01-HIGH.png';
+  logoMiniUrl = 'assets/favicon/android-icon-192x192.png';
   sidebarOpen = true;
   user!: string;
   userId!: number;
