@@ -5,9 +5,9 @@ import { ApplicationComponent } from './applications/extra/application.component
 import { SchemasComponent } from './schemas/schemas.component';
 import { RelationshipsComponent } from './relationships/relationships.component';
 import { RelationshipComponent } from './relationships/extra/relationship.component';
-import {APPLICATION_ROUTES} from "./app-ms.routes";
-
-
+import { APPLICATION_ROUTES } from './app-ms.routes';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -15,14 +15,9 @@ import {APPLICATION_ROUTES} from "./app-ms.routes";
     ApplicationComponent,
     SchemasComponent,
     RelationshipsComponent,
-    RelationshipComponent
+    RelationshipComponent,
   ],
-  exports: [
-    SchemasComponent
-  ],
-  imports: [
-    CommonModule,
-    APPLICATION_ROUTES
-  ]
+  exports: [SchemasComponent],
+  imports: [CommonModule, APPLICATION_ROUTES, FormsModule, ReactiveFormsModule],
 })
-export class AppMsModule { }
+export class AppMsModule {}

@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HandlerService } from '../../../services/handler.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'lib-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
-    private hs: HandlerService
+    private hs: HandlerService,
+    private dataService: DataService
   ) {
     this.loginForm = this.formBuilder.group({
       user: this.formBuilder.group({
@@ -52,21 +54,24 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('LEGOFT_SID_SITE', '');
 
       const user = this.loginForm.value.user;
-      const userId = this.loginForm.value.user_id;
 
       this.hs.post(user, `users/login`).subscribe(
         (resp) => {
           if (resp['success'] === false) {
             console.log('Error creating user');
           } else {
-            console.log(resp, 'Esto es la respuesta');
             this.isLoggedin = true;
+            this.dataService.setUser(resp.data.user);
+            this.dataService.setUserId(resp.data.id);
             const updatedDashboard = this.dashboard
-              .replace(':user', user)
-              .replace(':user_id', userId);
-            this.router.navigate([updatedDashboard, { user, userId }]);
+              .replace(':user', resp.data.user)
+              .replace(':user_id', resp.data.id);
+            this.router.navigate([updatedDashboard], {
+              queryParams: { user: resp.data.user, id: resp.data.id },
+            });
           }
         },
+
         (err) => {
           console.error('Error creating user: ' + err);
         }

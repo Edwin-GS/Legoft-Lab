@@ -190,10 +190,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a
-              class="nav-link"
-              [routerLink]="['/legoft-lab/client/:user/:user_id']"
-            >
+            <a class="nav-link" [routerLink]="['/legoft-lab/client', user, id]">
               <span class="menu-title">Dashboard</span>
               <i class="material-icons menu-icon"></i>
             </a>
@@ -202,7 +199,7 @@
             <a
               class="nav-link"
               data-bs-toggle="collapse"
-              [routerLink]="['/legoft-lab/client/:user/:user_id/users']"
+              [routerLink]="['/legoft-lab/client', user, id, 'users']"
               aria-expanded="false"
               aria-controls="ui-basic"
             >
@@ -214,7 +211,7 @@
           <li class="nav-item">
             <a
               class="nav-link"
-              [routerLink]="['/legoft-lab/client/:user/:user_id/applications']"
+              [routerLink]="['/legoft-lab/client', user, id, 'applications']"
             >
               <span class="menu-title">Applicaciones</span>
               <i class="menu-icon material-icons">apps</i>
