@@ -13,6 +13,7 @@
         <th>Icon</th>
         <th>Nombre</th>
         <th>Descripción</th>
+        <th>Esquema</th>
       </tr>
     </thead>
     <tbody>
@@ -31,6 +32,13 @@
         </td>
         <td>{{ application.name }}</td>
         <td>{{ application.description }}</td>
+        <td>
+          <div class="button-container">
+            <a [routerLink]="['/legoft-lab/client', user, id, 'schemaentity']"
+              ><button>Agregar</button></a
+            >
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>

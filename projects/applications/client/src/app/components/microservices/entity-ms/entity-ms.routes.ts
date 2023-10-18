@@ -1,8 +1,8 @@
-import {RouterModule, Routes} from "@angular/router";
-import {EntitiesComponent} from "./entities/entities.component";
-import {EntityComponent} from "./entities/extra/entity.component";
-import {SchemaEntitiesComponent} from "./schema-entities/schema-entities.component";
-import {SchemaEntityComponent} from "./schema-entities/extra/schema-entity.component";
+import { RouterModule, Routes } from '@angular/router';
+import { EntitiesComponent } from './entities/entities.component';
+import { EntityComponent } from './entities/extra/entity.component';
+import { SchemaEntitiesComponent } from './schema-entities/schema-entities.component';
+import { SchemaEntityComponent } from './schema-entities/extra/schema-entity.component';
 
 /**
  * Base route information
@@ -19,25 +19,25 @@ import {SchemaEntityComponent} from "./schema-entities/extra/schema-entity.compo
 
 const EntityRoutes: Routes = [
   {
+    path: '',
+    component: SchemaEntitiesComponent,
+    title: 'Schemaentity',
+  },
+  {
     path: 'entities/:schema_name',
     component: EntitiesComponent,
-    title: 'Entities'
+    title: 'Entities',
   },
   {
     path: 'entity/:schema_name',
     component: EntityComponent,
-    title: 'Entity'
+    title: 'Entity',
   },
   {
     path: 'schema-entities',
     component: SchemaEntitiesComponent,
-    title: 'Schema Entities'
+    title: 'Schema Entities',
   },
-  {
-    path: 'schema-entity',
-    component: SchemaEntityComponent,
-    title: 'Schema Entity'
-  }
 ];
 
 export const ENTITY_ROUTES = RouterModule.forChild(EntityRoutes);

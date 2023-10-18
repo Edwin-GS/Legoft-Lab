@@ -1,10 +1,9 @@
-import {RouterModule, Routes} from '@angular/router';
-import {UserComponent} from "./users/user.component";
-import {FollowedsComponent} from "./followeds/followeds.component";
-import {FollowedComponent} from "./followeds/extra/followed.component";
-import {FollowersComponent} from "./followers/followers.component";
-import {FollowerComponent} from "./followers/extra/follower.component";
-
+import { RouterModule, Routes } from '@angular/router';
+import { UserComponent } from './users/user.component';
+import { FollowedsComponent } from './followeds/followeds.component';
+import { FollowedComponent } from './followeds/extra/followed.component';
+import { FollowersComponent } from './followers/followers.component';
+import { FollowerComponent } from './followers/extra/follower.component';
 
 /**
  * Base route information
@@ -25,29 +24,28 @@ const UserRoutes: Routes = [
   {
     path: '',
     component: UserComponent,
-    title: 'Users'
+    title: 'Users',
   },
   {
     path: 'followeds',
     component: FollowedsComponent,
-    title: 'Followed'
+    title: 'Followed',
   },
   {
     path: 'followed',
     component: FollowedComponent,
-    title: 'Followed'
+    title: 'Followed',
   },
   {
     path: 'followers',
     component: FollowersComponent,
-    title: 'Followed'
+    title: 'Followed',
   },
   {
     path: 'follower',
     component: FollowerComponent,
-    title: 'Follower'
-  }
+    title: 'Follower',
+  },
 ];
 
 export const USER_ROUTES = RouterModule.forChild(UserRoutes);
-

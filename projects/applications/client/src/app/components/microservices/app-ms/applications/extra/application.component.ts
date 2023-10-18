@@ -13,12 +13,17 @@ export class ApplicationComponent implements OnInit {
   showModal: boolean = false;
   applications: any[] = [];
   newAppForm!: FormGroup;
+  user!: string;
+  id!: string;
 
   constructor(
     private formBuilder: FormBuilder,
     private handlerService: HandlerService,
     private dataService: DataService
-  ) {}
+  ) {
+    this.user = this.dataService.getUser();
+    this.id = this.dataService.getUserId();
+  }
 
   ngOnInit() {
     this.newAppForm = this.formBuilder.group({
@@ -112,6 +117,8 @@ export class ApplicationComponent implements OnInit {
                 name: app.name,
                 icon: decodedIcon,
                 description: app.description,
+                _id: app._id,
+                manager: app.manager,
               };
             });
             console.log('Loaded applications:', this.applications);
