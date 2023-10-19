@@ -37,7 +37,6 @@ export class ClassicComponent {
         this.id,
         'applications',
       ]);
-    } else if (route === 'applications') {
     } else {
       this.router.navigate([route]);
     }

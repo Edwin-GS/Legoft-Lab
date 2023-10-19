@@ -4,8 +4,9 @@ import { EntitiesComponent } from './entities/entities.component';
 import { EntityComponent } from './entities/extra/entity.component';
 import { SchemaEntitiesComponent } from './schema-entities/schema-entities.component';
 import { SchemaEntityComponent } from './schema-entities/extra/schema-entity.component';
-import { AppMsModule } from '../app-ms/app-ms.module';
 import { ENTITY_ROUTES } from './entity-ms.routes';
+import { FormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,6 @@ import { ENTITY_ROUTES } from './entity-ms.routes';
     SchemaEntitiesComponent,
     SchemaEntityComponent,
   ],
-  imports: [CommonModule, AppMsModule, ENTITY_ROUTES],
+  imports: [CommonModule, ENTITY_ROUTES, FormsModule, ReactiveFormsModule],
 })
 export class EntityMsModule {}

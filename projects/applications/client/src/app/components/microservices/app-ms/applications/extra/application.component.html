@@ -34,7 +34,11 @@
         <td>{{ application.description }}</td>
         <td>
           <div class="button-container">
-            <button>Agregar</button>
+            <a
+              (click)="IdApli()"
+              [routerLink]="['/legoft-lab/client', user, id, 'schemaentity']"
+              ><button>Agregar</button></a
+            >
           </div>
         </td>
       </tr>

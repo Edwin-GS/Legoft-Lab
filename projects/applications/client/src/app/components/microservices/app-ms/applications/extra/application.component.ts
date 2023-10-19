@@ -143,4 +143,9 @@ export class ApplicationComponent implements OnInit {
       return false;
     }
   }
+
+  IdApli() {
+    const dataToShare = this.applications[0]._id;
+    this.dataService.setConsoleLogData(dataToShare);
+  }
 }

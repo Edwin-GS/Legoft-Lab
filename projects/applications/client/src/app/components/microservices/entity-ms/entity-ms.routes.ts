@@ -20,7 +20,7 @@ import { SchemaEntityComponent } from './schema-entities/extra/schema-entity.com
 const EntityRoutes: Routes = [
   {
     path: '',
-    component: SchemaEntitiesComponent,
+    component: SchemaEntityComponent,
     title: 'Schemaentity',
   },
   {
