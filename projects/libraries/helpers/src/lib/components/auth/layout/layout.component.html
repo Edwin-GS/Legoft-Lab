@@ -1,0 +1,112 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+  rel="stylesheet"
+/>
+<header class="headerHome">
+  <a href="#" class="logoHome"><span>LEGO</span>ft </a>
+
+  <input type="checkbox" id="menu-barHome" />
+  <label for="menu-barHome" class="fa fa-bars"></label>
+
+  <nav class="navbarHome">
+    <a routerLink="">Home</a>
+    <a routerLink="signin">Sign in</a>
+    <a routerLink="signup">Sign up</a>
+  </nav>
+</header>
+
+<section class="inicioHome" id="inicioHome">
+  <div class="contentHome">
+    <h3>LEGOFT <span>backend</span></h3>
+    <p>Boosting Your App's Engine with Our Backend Magic!</p>
+    <a href="#detalles" class="btnHome">More details.</a>
+  </div>
+  <div class="imageHome">
+    <img src="{{ servidor }}" alt="image-inicio" />
+  </div>
+</section>
+
+<section class="detallesHome" id="detallesHome">
+  <h1 class="headind">FUNCTIONS</h1>
+  <div class="caja-contenedor">
+    <div class="caja">
+      <img src="{{ icono1 }}" alt="imagen-funcion" />
+      <h2>Performance Optimization</h2>
+      <p>
+        The application is focused on improving the speed and efficiency of your
+        project's backend to ensure a smoother and faster experience for your
+        users.
+      </p>
+      <a href="#" class="btnCaja">Read more</a>
+    </div>
+
+    <div class="caja">
+      <img src="{{ icono2 }}" alt="imagen-funcion" />
+      <h2>Advanced Security</h2>
+      <p>
+        Security is essential in the backend of any application. Legoft includes
+        advanced security measures to protect your application's data and
+        integrity.
+      </p>
+      <a href="#" class="btnCaja">Read more</a>
+    </div>
+
+    <div class="caja">
+      <img src="{{ icono3 }}" alt="imagen-funcion" />
+      <h2>Scalability and Growth Management</h2>
+      <p>
+        Legoft has ensured the backend can adapt to changing needs as your
+        application expands.
+      </p>
+      <a href="#" class="btnCaja">Read more</a>
+    </div>
+  </div>
+</section>
+
+<section class="acerca_de" id="acerca_de">
+  <h1 class="heading">Storage</h1>
+  <div class="columnaHome">
+    <div class="imageHome2">
+      <img src="{{ aul }}" alt="image-home" />
+    </div>
+    <div class="contentHome">
+      <h3>The best servers in the world.</h3>
+
+      <p>
+        <b>1. Secure Storage:</b> Our backend ensures the secure storage of your
+        application's data, employing advanced security measures to protect
+        confidential information. <br />
+        <b>2. Flexible Scalability:</b>
+        Servers can flexibly scale to accommodate data growth as your
+        application expands, without compromising performance.
+        <br />
+        <b>3. Redundant Storage:</b>
+        We implement redundant storage strategies to ensure that your data is
+        backed up and protected against potential failures or data loss.
+      </p>
+      <p>
+        <b>4. Efficient Storage:</b>
+        We employ efficient storage techniques to optimize resource usage and
+        ensure fast data access when needed.<br />
+        <b>5. Data Recovery:</b>
+        In case of disruptions or issues, we offer data recovery capabilities to
+        minimize downtime and ensure data availability.
+        <br />
+        <b>6. Regulatory Compliance:</b>
+        Our storage solution complies with data security regulations and
+        standards to guarantee the integrity and privacy of information.
+      </p>
+
+      <div class="bottons">
+        <a routerLink="signin" class="btnHome">Sign in</a>
+        <a routerLink="signup" class="btnHome">Sign up</a>
+      </div>
+    </div>
+  </div>
+</section>
