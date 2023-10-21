@@ -25,15 +25,15 @@
   <div class="contentHome">
     <h3>LEGOFT <span>backend</span></h3>
     <p>Boosting Your App's Engine with Our Backend Magic!</p>
-    <a href="#detalles" class="btnHome">More details.</a>
+    <a routerLink="signup" class="btnHome">More details.</a>
   </div>
   <div class="imageHome">
     <img src="{{ servidor }}" alt="image-inicio" />
   </div>
 </section>
 
-<section class="detallesHome" id="detallesHome">
-  <h1 class="headind">FUNCTIONS</h1>
+<section class="detallesHome" id="detalles">
+  <h1 class="heading">FUNCTIONS</h1>
   <div class="caja-contenedor">
     <div class="caja">
       <img src="{{ icono1 }}" alt="imagen-funcion" />
@@ -43,7 +43,7 @@
         project's backend to ensure a smoother and faster experience for your
         users.
       </p>
-      <a href="#" class="btnCaja">Read more</a>
+      <a routerLink="signup" class="btnCaja">Read more</a>
     </div>
 
     <div class="caja">
@@ -54,7 +54,7 @@
         advanced security measures to protect your application's data and
         integrity.
       </p>
-      <a href="#" class="btnCaja">Read more</a>
+      <a routerLink="signup" class="btnCaja">Read more</a>
     </div>
 
     <div class="caja">
@@ -64,7 +64,7 @@
         Legoft has ensured the backend can adapt to changing needs as your
         application expands.
       </p>
-      <a href="#" class="btnCaja">Read more</a>
+      <a routerLink="signup" class="btnCaja">Read more</a>
     </div>
   </div>
 </section>
@@ -110,3 +110,203 @@
     </div>
   </div>
 </section>
+
+<div class="suscribete">
+  <h3>SUBSCRIBE FOR MORE UPDATES.</h3>
+  <p>
+    As a subscriber, you'll be the first to receive exclusive news and
+    announcements. Stay informed about the latest products, special offers, and
+    events before anyone else.
+  </p>
+  <form action="">
+    <input type="email" placeholder="Enter your email" />
+    <input type="submit" value="Subscribe" />
+  </form>
+</div>
+
+<section class="opiniones" id="opiniones">
+  <h1 class="heading">Customer reviews</h1>
+  <div class="caja-contenedor">
+    <div class="caja">
+      <i class="fa-solid fa-comment"></i>
+      <div class="user">
+        <img src="{{ unuser1 }}" alt="" />
+        <h3>Andres Acevedo</h3>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="comentarios">
+          I'm truly impressed with this application. It has completely
+          streamlined the backend development process for my projects. The
+          ability to adapt to the changing needs of my clients and advanced
+          security are invaluable. I would recommend this platform to any
+          developer!
+        </div>
+      </div>
+    </div>
+
+    <div class="caja">
+      <i class="fa-solid fa-comment"></i>
+      <div class="user">
+        <img src="{{ unuser2 }}" alt="" />
+        <h3>Noeury Féliz</h3>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="comentarios">
+          Using this application has been a true blessing for my business. The
+          efficiency in performance optimization and flexible scalability has
+          allowed me to deliver projects faster and more cost-effectively.
+          Additionally, the focus on regulatory compliance is a relief. I can't
+          imagine working without it!
+        </div>
+      </div>
+    </div>
+
+    <div class="caja">
+      <i class="fa-solid fa-comment"></i>
+      <div class="user">
+        <img src="{{ unuser3 }}" alt="" />
+        <h3>Woody Jacques</h3>
+        <div class="stars">
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="fas fa-star"></i>
+          <i class="far fa-star"></i>
+        </div>
+        <div class="comentarios">
+          Not only did I get an excellent backend solution with this
+          application, but I also received exceptional support. The team behind
+          the platform is always ready to assist and resolve any issues. Fast
+          and reliable data recovery has been a lifesaver on more than one
+          occasion. A must-have application for any development company!
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="precios" id="precios">
+  <h1 class="heading">Price plans</h1>
+  <div class="caja-contenedor">
+    <div class="caja">
+      <h3 class="titulo">Basic Plan</h3>
+      <div class="tipos">$29 <span>/per month</span></div>
+      <ul>
+        <li>
+          <i class="fas fa-check"></i>Backend creation for one application
+        </li>
+        <li><i class="fas fa-check"></i>Up to 10 GB of storage</li>
+        <li><i class="fas fa-check"></i>Email support</li>
+      </ul>
+      <a routerLink="signup" class="btnHome">Buy now !!!</a>
+    </div>
+
+    <div class="caja">
+      <h3 class="titulo">Business Plan</h3>
+      <div class="tipos">$99 <span>/per month</span></div>
+      <ul>
+        <li>
+          <i class="fas fa-check"></i>Backend creation for up to 5 applications
+        </li>
+        <li><i class="fas fa-check"></i>Up to 50 GB of storage</li>
+        <li><i class="fas fa-check"></i>Advanced security</li>
+        <li><i class="fas fa-check"></i>Priority access to email support</li>
+        <li><i class="fas fa-check"></i>Fast data recovery</li>
+      </ul>
+      <a routerLink="signup" class="btnHome">Buy now !!!</a>
+    </div>
+
+    <div class="caja">
+      <h3 class="titulo">Premium Plan</h3>
+      <div class="tipos">$199 <span>/per month</span></div>
+      <ul>
+        <li>
+          <i class="fas fa-check"></i>Backend creation for unlimited
+          applications
+        </li>
+        <li><i class="fas fa-check"></i>Unlimited storage</li>
+        <li><i class="fas fa-check"></i>Scalability and growth management</li>
+        <li><i class="fas fa-check"></i>24/7 dedicated phone support</li>
+        <li><i class="fas fa-check"></i>Regulatory compliance</li>
+        <li>
+          <i class="fas fa-check"></i>Exclusive updates and advanced features
+        </li>
+      </ul>
+      <a routerLink="signup" class="btnHome">Buy now !!!</a>
+    </div>
+  </div>
+</section>
+
+<section class="contactos" id="contactos">
+  <div class="image">
+    <img src="{{ formImage }}" alt="imagen-form" />
+  </div>
+  <form action="">
+    <h1 class="heading">Contacts</h1>
+    <div class="inputcaja">
+      <input type="text" required />
+      <label for="">name</label>
+    </div>
+    <div class="inputcaja">
+      <input type="email" required />
+      <label for="">email</label>
+    </div>
+    <div class="inputcaja">
+      <input type="number" required />
+      <label for="">phone</label>
+    </div>
+    <div class="inputcaja">
+      <textarea name="" id="" cols="30" rows="10" required></textarea>
+      <label for="">Message</label>
+    </div>
+    <input type="submit" class="btnHome" value="Send" />
+  </form>
+</section>
+
+<div class="footer">
+  <div class="caja-contenedor">
+    <div class="caja">
+      <h3>News</h3>
+      <p>Here you will see the news and information about Legoft.</p>
+    </div>
+    <div class="caja">
+      <h3>Find us on</h3>
+      <a routerLink="signup">facebook</a>
+      <a routerLink="signup">instagram</a>
+      <a routerLink="signup">youtube</a>
+    </div>
+
+    <div class="caja">
+      <h3>More information</h3>
+
+      <div class="info">
+        <i class="fas fa-phone"></i>
+        <p>123-456-789 <br />789-444-521</p>
+      </div>
+
+      <div class="info">
+        <i class="fas fa-envelope"></i>
+        <p>legoftunidadf5@gmail.com<br />legoftunidadf5@gmail.com</p>
+      </div>
+
+      <div class="info">
+        <i class="fas fa-map-marker-alt"></i>
+        <p>Barahona Rep. Dominicana <br />Madrid España</p>
+      </div>
+    </div>
+  </div>
+
+  <h1 class="creditos">
+    &copy, copyright @ 2024 <a href="https://unidad.com">unidadf5.com</a>
+  </h1>
+</div>
