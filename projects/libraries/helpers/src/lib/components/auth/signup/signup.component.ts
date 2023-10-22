@@ -10,10 +10,13 @@ import { environment } from '../../../../../../../applications/client/src/enviro
 })
 export class SignupComponent {
   appName = 'Legoft';
+  viche = 'assets/img/viche.png';
   logoUrl = 'assets/logo/Legoft-Logo-OK-01-HIGH.png';
 
   signupForm: FormGroup;
   notifier: boolean = false;
+  errornotifier: boolean = false;
+  larespuesta: string = '';
 
   constructor(private formBuilder: FormBuilder, private hs: HandlerService) {
     this.signupForm = this.formBuilder.group({
@@ -48,10 +51,13 @@ export class SignupComponent {
         header: [1, [Validators.required]],
       }),
       notifier: [false],
+      errornotifier: [false],
     });
   }
 
   onSubmit() {
+    this.signupForm.markAllAsTouched();
+
     if (this.signupForm.valid) {
       const sendEmail = {
         to: this.signupForm.value.user.email,
@@ -71,25 +77,24 @@ export class SignupComponent {
           },
         },
       };
-      console.log(sendEmail);
 
       this.hs.post(sendEmail, `notifier`).subscribe(
         (resp) => {
           if (resp['success'] === false) {
-            console.log('Error creating user', resp);
+            this.errornotifier = true;
+            this.larespuesta = resp['message'];
           } else {
-            console.log(resp, 'Esto es la respuesta');
-            this.signupForm.patchValue({
-              notifier: true,
-            });
+            this.notifier = true;
           }
         },
         (err) => {
-          console.error('Error creating user: ' + err);
+          this.errornotifier = true;
+          this.larespuesta = err['message'];
         }
       );
       (err: string) => {
-        console.error('Error creating user: ' + err);
+        this.errornotifier = true;
+        this.larespuesta = err;
       };
     }
   }
@@ -97,5 +102,9 @@ export class SignupComponent {
   closeDialog() {
     this.signupForm.reset();
     this.notifier = false;
+  }
+
+  closeDialog2() {
+    this.errornotifier = false;
   }
 }

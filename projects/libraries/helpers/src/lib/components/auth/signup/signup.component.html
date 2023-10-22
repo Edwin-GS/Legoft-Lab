@@ -1,19 +1,41 @@
-<div class="registration-container">
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+  rel="stylesheet"
+/>
+
+<div *ngIf="notifier" class="popup" id="popup" [class.open-popup]="notifier">
+  <img src="{{ viche }}" alt="imagen-legoft" />
+  <h2>Check your email</h2>
+  <p>
+    Please check your email ({{ signupForm.value.user.email }}) to verify your
+    account.
+  </p>
+  <button class="btnHome" type="button" (click)="closeDialog()">Ok</button>
+</div>
+
+<section class="contactos" id="contactos">
+  <div class="image">
+    <a href="/#/"><img src="{{ logoUrl }}" alt="imagen-form" /></a>
+  </div>
   <form [formGroup]="signupForm" (ngSubmit)="onSubmit()">
-    <header>
-      <img src="{{ logoUrl }}" alt="Legoft logo" />
-    </header>
-    <!-- User Section -->
+    <div *ngIf="errornotifier" class="alert" [class.alert-open]="errornotifier">
+      <span class="fas fa-exclamation-circle"></span>
+      <span class="msg">{{ larespuesta }}</span>
+      <span class="fas fa-times" (click)="closeDialog2()"></span>
+    </div>
+
     <div formGroupName="user">
-      <div class="form-group">
-        <label for="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          formControlName="username"
-        />
-        <div
+      <div class="inputcaja">
+        <input type="text" formControlName="username" />
+        <label for="">username</label>
+        <p
           class="error-message"
           *ngIf="
             signupForm.get('user.username')?.hasError('required') &&
@@ -21,8 +43,8 @@
           "
         >
           Username is required.
-        </div>
-        <div
+        </p>
+        <p
           class="error-message"
           *ngIf="
             signupForm.get('user.username')?.hasError('minlength') &&
@@ -30,8 +52,8 @@
           "
         >
           Username must be at least 5 characters long.
-        </div>
-        <div
+        </p>
+        <p
           class="error-message"
           *ngIf="
             signupForm.get('user.username')?.hasError('maxlength') &&
@@ -39,13 +61,13 @@
           "
         >
           Username cannot exceed 25 characters.
-        </div>
+        </p>
       </div>
 
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" formControlName="email" />
-        <div
+      <div class="inputcaja">
+        <input type="text" formControlName="email" />
+        <label for="">email</label>
+        <p
           class="error-message"
           *ngIf="
             signupForm.get('user.email')?.hasError('required') &&
@@ -53,8 +75,8 @@
           "
         >
           Email is required.
-        </div>
-        <div
+        </p>
+        <p
           class="error-message"
           *ngIf="
             signupForm.get('user.email')?.hasError('minlength') &&
@@ -62,8 +84,8 @@
           "
         >
           Email must not be empty.
-        </div>
-        <div
+        </p>
+        <p
           class="error-message"
           *ngIf="
             signupForm.get('user.email')?.hasError('maxlength') &&
@@ -71,18 +93,13 @@
           "
         >
           Email cannot exceed 150 characters.
-        </div>
+        </p>
       </div>
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          formControlName="password"
-        />
-        <div
+      <div class="inputcaja">
+        <input type="password" formControlName="password" />
+        <label for="">password</label>
+        <p
           class="error-message"
           *ngIf="
             signupForm.get('user.password')?.hasError('required') &&
@@ -90,8 +107,8 @@
           "
         >
           Password is required.
-        </div>
-        <div
+        </p>
+        <p
           class="error-message"
           *ngIf="
             signupForm.get('user.password')?.hasError('pattern') &&
@@ -100,30 +117,10 @@
         >
           Password must contain 8-15 characters, uppercase, lowercase, numbers,
           and special characters.
-        </div>
+        </p>
       </div>
     </div>
-
-    <button
-      type="submit"
-      [disabled]="signupForm.invalid || signupForm.pristine"
-    >
-      Register
-    </button>
+    <button type="submit" class="btnHome">Sign up</button>
+    <p>Already have an account? <a href="/#/signin">Login here</a></p>
   </form>
-  <div *ngIf="signupForm.value.notifier" class="notifier-dialog">
-    <div class="notifier-dialog-header">
-      <h2>Check your email</h2>
-    </div>
-    <div class="notifier-dialog-body">
-      <p>
-        Please check your email ({{ signupForm.value.user.email }}) to verify
-        your account.
-      </p>
-    </div>
-    <div class="notifier-dialog-footer">
-      <button type="button" (click)="closeDialog()">Close</button>
-    </div>
-  </div>
-  <p>Already have an account? <a routerLink="">Login here</a></p>
-</div>
+</section>

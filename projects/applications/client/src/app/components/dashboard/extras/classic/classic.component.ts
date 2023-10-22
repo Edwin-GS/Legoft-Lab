@@ -8,6 +8,7 @@ import { DataService } from 'projects/libraries/helpers/src/lib/components/auth/
   styleUrls: ['./classic.component.css'],
 })
 export class ClassicComponent {
+  avatar = 'assets/img/Avatar.png';
   logoUrl = 'assets/logo/Legoft-Logo-OK-01-HIGH.png';
   logoMiniUrl = 'assets/favicon/android-icon-192x192.png';
   sidebarOpen = true;

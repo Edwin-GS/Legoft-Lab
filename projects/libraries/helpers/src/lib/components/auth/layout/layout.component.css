@@ -12,11 +12,6 @@ Azul oscuro: #2E86C1 */
   text-transform: capitalize;
 }
 
-*::selection {
-  background-color: var(--limon);
-  color: white;
-}
-
 html {
   font-size: 62.4%;
   overflow: hidden;
@@ -312,17 +307,7 @@ section {
 
 .acerca_de .columnaHome .imageHome2 {
   flex: 1 1 30rem;
-  animation: float2 3s linear infinite;
-}
-
-@keyframes float2 {
-  0%,
-  100% {
-    transform: translateY(0rem);
-  }
-  50% {
-    transform: translateY(-3.5rem);
-  }
+  animation: float 3s linear infinite;
 }
 
 .acerca_de .columnaHome .imageHome2 img {
@@ -543,17 +528,7 @@ section {
 
 .contactos .image {
   flex: 1 1 30rem;
-  animation: float3 3s linear infinite;
-}
-
-@keyframes float3 {
-  0%,
-  100% {
-    transform: translateY(0rem);
-  }
-  50% {
-    transform: translateY(-3.5rem);
-  }
+  animation: float 3s linear infinite;
 }
 
 .contactos .image img {

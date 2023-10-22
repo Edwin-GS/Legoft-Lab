@@ -17,6 +17,9 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
   isLoggedin: boolean = false;
+  errornotifier: boolean = false;
+  larespuesta: string = '';
+  isSigningIn: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,32 +53,39 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit() {
-    if (this.loginForm.valid) {
-      localStorage.setItem('LEGOFT_SID_SITE', '');
+    this.isSigningIn = true;
+    localStorage.setItem('LEGOFT_SID_SITE', '');
 
-      const user = this.loginForm.value.user;
+    const user = this.loginForm.value.user;
 
-      this.hs.post(user, `users/login`).subscribe(
-        (resp) => {
-          if (resp['success'] === false) {
-            console.log('Error creating user');
-          } else {
-            this.isLoggedin = true;
-            this.dataService.setUser(resp.data.user);
-            this.dataService.setUserId(resp.data.id);
-            const updatedDashboard = this.dashboard
-              .replace(':user', resp.data.user)
-              .replace(':user_id', resp.data.id);
-            this.router.navigate([updatedDashboard], {
-              queryParams: { user: resp.data.user, id: resp.data.id },
-            });
-          }
-        },
-
-        (err) => {
-          console.error('Error creating user: ' + err);
+    this.hs.post(user, `users/login`).subscribe(
+      (resp) => {
+        if (resp['success'] === false) {
+          this.errornotifier = true;
+          this.larespuesta = resp['message'];
+        } else {
+          this.isLoggedin = true;
+          this.dataService.setUser(resp.data.user);
+          this.dataService.setUserId(resp.data.id);
+          const updatedDashboard = this.dashboard
+            .replace(':user', resp.data.user)
+            .replace(':user_id', resp.data.id);
+          this.router.navigate([updatedDashboard], {
+            queryParams: { user: resp.data.user, id: resp.data.id },
+          });
         }
-      );
-    }
+      },
+      (err) => {
+        this.errornotifier = true;
+        this.larespuesta = err['message'];
+      },
+      () => {
+        this.isSigningIn = false;
+      }
+    );
+  }
+
+  closeDialog2() {
+    this.errornotifier = false;
   }
 }
