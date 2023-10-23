@@ -22,7 +22,7 @@
 
     <div formGroupName="user">
       <div class="inputcaja">
-        <input type="text" formControlName="userOrEmail" />
+        <input type="text" formControlName="userOrEmail" autofocus />
         <label for="">email</label>
         <p
           class="error-message"
@@ -79,7 +79,7 @@
     </div>
 
     <button class="btnHome" type="submit">
-      {{ isSigningIn ? "Sign in..." : "Sign in" }}
+      {{ isSigningIn ? "Signing In..." : "Sign in" }}
     </button>
 
     <p><a href="/#/verify-email/:confirm">Forgot your password?</a></p>

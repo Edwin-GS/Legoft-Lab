@@ -2,13 +2,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
 import { ClassicComponent } from './extras/classic/classic.component';
 
-/**
- * Base route information
- *
- * Dashboard Client App >> /legoft-lab/client/:user/:user_id
- *
- * **/
-
 const DashboardRoutes: Routes = [
   {
     path: 'client/:user/:user_id',
@@ -45,14 +38,6 @@ const DashboardRoutes: Routes = [
       },
     ],
   },
-
-  // {
-  //   path: 'owner/:user/:user_id',
-  //   loadChildren: () =>
-  //     import(
-  //       '../../../../../owner/src/app/components/dashboard/dashboard.module'
-  //     ).then((m) => m.DashboardModule),
-  // },
 ];
 
 export const DASHBOARD_ROUTES = RouterModule.forChild(DashboardRoutes);

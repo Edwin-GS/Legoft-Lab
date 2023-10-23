@@ -1,19 +1,57 @@
-<div class="button-container">
-  <button (click)="openModal()">Create App</button>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+
+<div *ngIf="notifier" [class.open-popup]="notifier" class="popup" id="popup">
+  <img src="{{ viche }}" alt="imagen-legoft" />
+  <h2>Successfully</h2>
+  <p>Application created successfully</p>
+  <button class="btnHome" type="button" (click)="closeDialog()">Ok</button>
 </div>
+
+<form>
+  <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only"
+    >Search</label
+  >
+  <div class="relative">
+    <div
+      class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+    ></div>
+    <input
+      type="search"
+      id="search"
+      class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+      placeholder="Search"
+      required
+    />
+    <button
+      (click)="openModal()"
+      type="submit"
+      class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+    >
+      Create App
+    </button>
+  </div>
+</form>
 
 <div
   *ngIf="applications.length > 0; else noApplicationsMessage"
   class="table-container"
 >
-  <h2>List of Apps</h2>
   <table>
     <thead>
       <tr>
         <th>Icon</th>
-        <th>Nombre</th>
-        <th>Descripción</th>
-        <th>Esquema</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Schema</th>
       </tr>
     </thead>
     <tbody>
@@ -33,13 +71,11 @@
         <td>{{ application.name }}</td>
         <td>{{ application.description }}</td>
         <td>
-          <div class="button-container">
-            <a
-              (click)="IdApli()"
-              [routerLink]="['/legoft-lab/client', user, id, 'schemaentity']"
-              ><button>Agregar</button></a
-            >
-          </div>
+          <a
+            (click)="IdApli()"
+            [routerLink]="['/legoft-lab/client', user, id, 'schemaentity']"
+            >Add schema</a
+          >
         </td>
       </tr>
     </tbody>
@@ -52,7 +88,6 @@
   </div>
 </ng-template>
 
-<!-- Modal -->
 <div *ngIf="showModal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
@@ -60,15 +95,81 @@
       <h2>Create App</h2>
     </div>
     <form [formGroup]="newAppForm" class="modal-form">
-      <label for="appName">Name:</label>
+      <div
+        *ngIf="errornotifier"
+        class="alert"
+        [class.alert-open]="errornotifier"
+      >
+        <span class="fas fa-exclamation-circle"></span>
+        <span class="msg">{{ larespuesta }}</span>
+        <span class="fas fa-times" (click)="closeDialog2()"></span>
+      </div>
+
+      <label for="appName">Name</label>
       <input type="text" id="appName" name="appName" formControlName="name" />
-      <label for="appDescription">Description:</label>
+      <p
+        class="error-message"
+        *ngIf="
+          newAppForm.get('name')?.hasError('required') &&
+          newAppForm.get('name')?.touched
+        "
+      >
+        Name is required.
+      </p>
+      <p
+        class="error-message"
+        *ngIf="
+          newAppForm.get('name')?.hasError('minlength') &&
+          newAppForm.get('name')?.touched
+        "
+      >
+        Name must be at least 1 characters long.
+      </p>
+      <p
+        class="error-message"
+        *ngIf="
+          newAppForm.get('name')?.hasError('maxlength') &&
+          newAppForm.get('name')?.touched
+        "
+      >
+        Name cannot exceed 50 characters.
+      </p>
+
+      <label for="appDescription">Description</label>
       <textarea
         id="appDescription"
         name="appDescription"
         formControlName="description"
       ></textarea>
-      <label for="appImage">Image:</label>
+      <p
+        class="error-message"
+        *ngIf="
+          newAppForm.get('description')?.hasError('required') &&
+          newAppForm.get('description')?.touched
+        "
+      >
+        Description is required.
+      </p>
+      <p
+        class="error-message"
+        *ngIf="
+          newAppForm.get('description')?.hasError('minlength') &&
+          newAppForm.get('description')?.touched
+        "
+      >
+        Description must be at least 1 characters long.
+      </p>
+      <p
+        class="error-message"
+        *ngIf="
+          newAppForm.get('description')?.hasError('maxlength') &&
+          newAppForm.get('description')?.touched
+        "
+      >
+        Description cannot exceed 255 characters.
+      </p>
+
+      <label for="appImage">Image</label>
       <input
         type="file"
         id="appImage"
@@ -76,6 +177,7 @@
         (change)="onFileSelected($event)"
         accept="image/*"
       />
+
       <div class="modal-buttons">
         <button type="button" (click)="createApplication()">Save</button>
         <button type="button" (click)="closeModal()">Cancel</button>
