@@ -22,7 +22,6 @@ const DashboardRoutes: Routes = [
             (m) => m.UserMsModule
           ),
       },
-
       {
         path: 'applications',
         loadChildren: () =>
@@ -30,7 +29,13 @@ const DashboardRoutes: Routes = [
             (m) => m.AppMsModule
           ),
       },
-
+      {
+        path: 'schemaentity',
+        loadChildren: () =>
+          import('../microservices/entity-ms/entity-ms.module').then(
+            (m) => m.EntityMsModule
+          ),
+      },
       {
         path: 'entities/:application_id',
         loadChildren: () =>

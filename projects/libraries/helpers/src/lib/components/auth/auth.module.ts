@@ -8,6 +8,7 @@ import { SignupComponent } from './signup/signup.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
 import { AUTH_ROUTES } from './auth.routes';
 import { HelpersModule } from '../../helpers.module';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { HelpersModule } from '../../helpers.module';
     LoginComponent,
     SignupComponent,
     VerifyEmailComponent,
+    LayoutComponent,
   ],
 
   imports: [

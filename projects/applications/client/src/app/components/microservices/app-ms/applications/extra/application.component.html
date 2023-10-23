@@ -1,1 +1,85 @@
-<p>application works!</p>
+<div class="button-container">
+  <button (click)="openModal()">Create App</button>
+</div>
+
+<div
+  *ngIf="applications.length > 0; else noApplicationsMessage"
+  class="table-container"
+>
+  <h2>List of Apps</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Icon</th>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Esquema</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let application of applications">
+        <td>
+          <ng-container
+            *ngIf="application.icon && application.icon !== '<ICON BASE64>'"
+          >
+            <img [src]="application.icon" alt="Icon" class="icon" />
+          </ng-container>
+          <ng-container
+            *ngIf="!application.icon || application.icon === '<ICON BASE64>'"
+          >
+            <p>[No icon inserted]</p>
+          </ng-container>
+        </td>
+        <td>{{ application.name }}</td>
+        <td>{{ application.description }}</td>
+        <td>
+          <div class="button-container">
+            <a
+              (click)="IdApli()"
+              [routerLink]="['/legoft-lab/client', user, id, 'schemaentity']"
+              ><button>Agregar</button></a
+            >
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noApplicationsMessage>
+  <div class="no-applications-message">
+    <h1>No applications created.</h1>
+  </div>
+</ng-template>
+
+<!-- Modal -->
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <img [src]="logoUrl" alt="Legoft logo" class="modal-logo" />
+      <h2>Create App</h2>
+    </div>
+    <form [formGroup]="newAppForm" class="modal-form">
+      <label for="appName">Name:</label>
+      <input type="text" id="appName" name="appName" formControlName="name" />
+      <label for="appDescription">Description:</label>
+      <textarea
+        id="appDescription"
+        name="appDescription"
+        formControlName="description"
+      ></textarea>
+      <label for="appImage">Image:</label>
+      <input
+        type="file"
+        id="appImage"
+        name="appImage"
+        (change)="onFileSelected($event)"
+        accept="image/*"
+      />
+      <div class="modal-buttons">
+        <button type="button" (click)="createApplication()">Save</button>
+        <button type="button" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

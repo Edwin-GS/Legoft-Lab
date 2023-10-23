@@ -1,1 +1,123 @@
-<p>schema-entity works!</p>
+<main>
+  <form [formGroup]="formulario" class="formulario">
+    <!-- Grupo:Name -->
+    <div class="formulario__grupo" id="grupo__name">
+      <label for="name" class="formulario__label">Name</label>
+      <div class="formulario__grupo-input">
+        <input
+          type="text"
+          class="formulario__input"
+          name="name"
+          id="name"
+          placeholder="name"
+          formControlName="name"
+        />
+        <i class="formulario__validacion-estado fas fa-times-circle"></i>
+      </div>
+      <p class="formulario__input-error">
+        El name tiene que ser de 4 a 16 dígitos.
+      </p>
+    </div>
+
+    <!-- Grupo: Type -->
+    <div class="formulario__grupo" id="grupo__type">
+      <label for="type" class="formulario__label">Type</label>
+      <div class="formulario__grupo-input">
+        <select
+          class="formulario__input"
+          formControlName="type"
+          name="type"
+          id="type"
+        >
+          <option value="string">String</option>
+          <option value="number">Number</option>
+        </select>
+        <i class="formulario__validacion-estado fas fa-times-circle"></i>
+      </div>
+      <p class="formulario__input-error">Elige un tipo de datos.</p>
+    </div>
+
+    <!-- Grupo: Required -->
+    <div class="formulario__grupo" id="grupo__required">
+      <label for="required" class="formulario__label">Required</label>
+      <div class="formulario__grupo-input">
+        <select
+          class="formulario__input"
+          formControlName="required"
+          name="required"
+          id="required"
+        >
+          <option value="true">true</option>
+          <option value="false">false</option>
+        </select>
+        <i class="formulario__validacion-estado fas fa-times-circle"></i>
+      </div>
+      <p class="formulario__input-error">Elige si es true o false.</p>
+    </div>
+
+    <!-- Grupo: Update -->
+    <div class="formulario__grupo" id="grupo__update">
+      <label for="update" class="formulario__label">Update</label>
+      <div class="formulario__grupo-input">
+        <select
+          class="formulario__input"
+          formControlName="update"
+          name="update"
+          id="update"
+        >
+          <option value="true">true</option>
+          <option value="false">false</option>
+        </select>
+        <i class="formulario__validacion-estado fas fa-times-circle"></i>
+      </div>
+      <p class="formulario__input-error">Elige si es true o false.</p>
+    </div>
+
+    <!-- Grupo: Unique -->
+    <div class="formulario__grupo" id="grupo__unique">
+      <label for="unique" class="formulario__label">Unique</label>
+      <div class="formulario__grupo-input">
+        <select
+          class="formulario__input"
+          formControlName="unique"
+          name="unique"
+          id="unique"
+        >
+          <option value="true">true</option>
+          <option value="false">false</option>
+        </select>
+        <i class="formulario__validacion-estado fas fa-times-circle"></i>
+      </div>
+      <p class="formulario__input-error">Elige si es true o false.</p>
+    </div>
+
+    <!-- Grupo: Size -->
+    <div class="formulario__grupo" id="grupo__size">
+      <label for="size" class="formulario__label">Size</label>
+      <div class="formulario__grupo-input">
+        <select class="formulario__input" name="size" id="size">
+          <option value="true">true</option>
+          <option value="false">false</option>
+        </select>
+        <i class="formulario__validacion-estado fas fa-times-circle"></i>
+      </div>
+      <p class="formulario__input-error">Elige si es true o false.</p>
+    </div>
+
+    <div class="formulario__mensaje" id="formulario__mensaje">
+      <p>
+        <i class="fas fa-exclamation-triangle"></i> <b>Error:</b> Por favor
+        rellena el formulario correctamente.
+      </p>
+    </div>
+
+    <div class="formulario__grupo formulario__grupo-btn-enviar">
+      <button type="submit" (click)="onSubmit()" class="formulario__btn">
+        Enviar
+      </button>
+      <p class="formulario__mensaje-exito" id="formulario__mensaje-exito">
+        Formulario enviado exitosamente!
+      </p>
+    </div>
+  </form>
+</main>

@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HandlerService } from '../../../services/handler.service';
+import { environment } from '../../../../../../../applications/client/src/environments/environment';
 
 @Component({
   selector: 'lib-signup',
@@ -8,11 +10,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class SignupComponent {
   appName = 'Legoft';
+  viche = 'assets/img/viche.png';
   logoUrl = 'assets/logo/Legoft-Logo-OK-01-HIGH.png';
 
   signupForm: FormGroup;
+  notifier: boolean = false;
+  errornotifier: boolean = false;
+  larespuesta: string = '';
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private hs: HandlerService) {
     this.signupForm = this.formBuilder.group({
       user: this.formBuilder.group({
         username: [
@@ -44,12 +50,61 @@ export class SignupComponent {
       screen: this.formBuilder.group({
         header: [1, [Validators.required]],
       }),
+      notifier: [false],
+      errornotifier: [false],
     });
   }
 
   onSubmit() {
+    this.signupForm.markAllAsTouched();
+
     if (this.signupForm.valid) {
-      console.log('Data submitted :', this.signupForm.value);
+      const sendEmail = {
+        to: this.signupForm.value.user.email,
+        subject: 'Check your Email',
+        url: `${environment.LEGOFT_BACKEND_URL}`,
+        msg: {
+          title: 'Check your Email',
+          text: 'To verify your email click on the link.',
+          reply: 'This is an automated email, please do not reply.',
+        },
+        user: {
+          user: this.signupForm.value.user.username,
+          email: this.signupForm.value.user.email,
+          password: this.signupForm.value.user.password,
+          screen: {
+            header: 1,
+          },
+        },
+      };
+
+      this.hs.post(sendEmail, `notifier`).subscribe(
+        (resp) => {
+          if (resp['success'] === false) {
+            this.errornotifier = true;
+            this.larespuesta = resp['message'];
+          } else {
+            this.notifier = true;
+          }
+        },
+        (err) => {
+          this.errornotifier = true;
+          this.larespuesta = err['message'];
+        }
+      );
+      (err: string) => {
+        this.errornotifier = true;
+        this.larespuesta = err;
+      };
     }
+  }
+
+  closeDialog() {
+    this.signupForm.reset();
+    this.notifier = false;
+  }
+
+  closeDialog2() {
+    this.errornotifier = false;
   }
 }

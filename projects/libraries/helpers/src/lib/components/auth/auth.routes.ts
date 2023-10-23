@@ -3,10 +3,16 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { VerifyEmailComponent } from './verify-email/verify-email.component';
+import { LayoutComponent } from './layout/layout.component';
 
 const AuthRoutes: Routes = [
   {
     path: '',
+    title: 'Legoft',
+    component: LayoutComponent,
+  },
+  {
+    path: 'signin',
     title: 'Legoft',
     component: LoginComponent,
   },

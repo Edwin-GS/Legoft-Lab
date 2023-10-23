@@ -1,20 +1,30 @@
-<div class="registration-container">
-  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <header>
-      <img src="{{ logoUrl }}" alt="Legoft logo" />
-    </header>
-    <!-- User Section -->
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+  rel="stylesheet"
+/>
+
+<section class="contactos" id="contactos">
+  <div class="image">
+    <a href="/#/"><img src="{{ logoUrl }}" alt="imagen-form" /></a>
+  </div>
+  <form action="" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="errornotifier" class="alert" [class.alert-open]="errornotifier">
+      <span class="fas fa-exclamation-circle"></span>
+      <span class="msg">{{ larespuesta }}</span>
+      <span class="fas fa-times" (click)="closeDialog2()"></span>
+    </div>
+
     <div formGroupName="user">
-      <div class="form-group">
-        <label for="userOrEmail">Email or user</label>
-        <input
-          placeholder="email or user"
-          type="email"
-          id="userOrEmail"
-          name="userOrEmail"
-          formControlName="userOrEmail"
-        />
-        <div
+      <div class="inputcaja">
+        <input type="text" formControlName="userOrEmail" />
+        <label for="">email</label>
+        <p
           class="error-message"
           *ngIf="
             loginForm.get('user.userOrEmail')?.hasError('required') &&
@@ -22,8 +32,8 @@
           "
         >
           Email is required.
-        </div>
-        <div
+        </p>
+        <p
           class="error-message"
           *ngIf="
             loginForm.get('user.userOrEmail')?.hasError('minlength') &&
@@ -31,8 +41,8 @@
           "
         >
           Email must not be empty.
-        </div>
-        <div
+        </p>
+        <p
           class="error-message"
           *ngIf="
             loginForm.get('user.userOrEmail')?.hasError('maxlength') &&
@@ -40,19 +50,13 @@
           "
         >
           Email cannot exceed 150 characters.
-        </div>
+        </p>
       </div>
 
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input
-          placeholder="password"
-          type="password"
-          id="password"
-          name="password"
-          formControlName="password"
-        />
-        <div
+      <div class="inputcaja">
+        <input type="password" formControlName="password" />
+        <label for="">password</label>
+        <p
           class="error-message"
           *ngIf="
             loginForm.get('user.password')?.hasError('required') &&
@@ -60,8 +64,8 @@
           "
         >
           Password is required.
-        </div>
-        <div
+        </p>
+        <p
           class="error-message"
           *ngIf="
             loginForm.get('user.password')?.hasError('pattern') &&
@@ -70,16 +74,18 @@
         >
           Password must contain 8-15 characters, uppercase, lowercase, numbers,
           and special characters.
-        </div>
+        </p>
       </div>
     </div>
 
-    <button type="submit" [disabled]="loginForm.invalid || loginForm.pristine">
-      Sign in
+    <button class="btnHome" type="submit">
+      {{ isSigningIn ? "Sign in..." : "Sign in" }}
     </button>
-  </form>
 
-  <p>
-    You don't have a legoft account? <a routerLink="signup">Create one here</a>
-  </p>
-</div>
+    <p><a href="/#/verify-email/:confirm">Forgot your password?</a></p>
+    <p>
+      You don't have a legoft account?
+      <a href="/#/signup">Create one here</a>
+    </p>
+  </form>
+</section>
