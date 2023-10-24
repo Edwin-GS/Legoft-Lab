@@ -48,6 +48,7 @@
   <table>
     <thead>
       <tr>
+        <th></th>
         <th>Icon</th>
         <th>Name</th>
         <th>Description</th>
@@ -56,6 +57,22 @@
     </thead>
     <tbody>
       <tr *ngFor="let application of filteredApplications">
+        <td>
+          <button
+            class="btnDelete"
+            type="button"
+            (click)="deleteApplication(application)"
+          >
+            🗑️
+          </button>
+          <button
+            class="btnEdit"
+            type="button"
+            (click)="editApplication(application)"
+          >
+            ✏️
+          </button>
+        </td>
         <td>
           <ng-container
             *ngIf="application.icon && application.icon !== '<ICON BASE64>'"
