@@ -50,6 +50,8 @@ export class ClassicComponent {
         return 'Users';
       case 'applications':
         return 'Applications';
+      case 'schemaentity':
+        return 'Add schema';
       default:
         return 'Dashboard';
     }

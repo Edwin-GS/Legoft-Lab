@@ -19,6 +19,8 @@ export class ApplicationComponent implements OnInit {
   errornotifier: boolean = false;
   larespuesta: string = '';
   notifier: boolean = false;
+  filteredApplications: any[] = [];
+  searchTerm: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -28,7 +30,6 @@ export class ApplicationComponent implements OnInit {
     this.user = this.dataService.getUser();
     this.id = this.dataService.getUserId();
   }
-
   ngOnInit() {
     this.newAppForm = this.formBuilder.group({
       name: [
@@ -49,9 +50,22 @@ export class ApplicationComponent implements OnInit {
       ],
       icon: [''],
     });
+
     this.loadApplications();
     this.errornotifier = false;
     this.notifier = false;
+    this.filteredApplications = [];
+  }
+
+  onInputChange(event: any) {
+    this.searchTerm = event.target.value.toLowerCase();
+    this.filterApplications();
+  }
+
+  filterApplications() {
+    this.filteredApplications = this.applications.filter((app) =>
+      app.name.toLowerCase().includes(this.searchTerm)
+    );
   }
 
   closeDialog() {
@@ -133,6 +147,10 @@ export class ApplicationComponent implements OnInit {
                 manager: app.manager,
               };
             });
+
+            this.filteredApplications = this.applications.filter((app) =>
+              app.name.toLowerCase().includes(this.searchTerm)
+            );
           } else {
             this.errornotifier = true;
             this.larespuesta = 'Data is not in the expected format.';

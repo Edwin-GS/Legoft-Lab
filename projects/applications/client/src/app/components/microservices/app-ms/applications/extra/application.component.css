@@ -1,3 +1,21 @@
+.btnHome {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 3rem;
+  border-radius: 5rem;
+  background: #2e86c1;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s linear;
+  border: none;
+}
+
+.btnHome:hover {
+  transform: scale(1.1);
+}
+
 /* Este es el bloque del popup */
 
 .popup {
@@ -111,22 +129,6 @@
   margin-top: 20px;
 }
 
-button {
-  margin-top: 30px;
-  padding: 12px 24px;
-  background-color: #2e86c1;
-  color: #ffffff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-}
-
-button:hover {
-  background-color: #1c4dab;
-}
-
 .modal {
   position: fixed;
   top: 0;
@@ -207,6 +209,10 @@ button:hover {
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
+  margin-top: 30px;
+  background-color: #2e86c1;
+  color: #ffffff;
+  border: none;
 }
 
 .modal button:first-of-type {
