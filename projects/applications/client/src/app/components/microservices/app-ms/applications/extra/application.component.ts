@@ -176,9 +176,8 @@ export class ApplicationComponent implements OnInit {
     }
   }
 
-  IdApli() {
-    const dataToShare = this.applications[0]._id;
-    this.dataService.setConsoleLogData(dataToShare);
+  IdApli(_id: any) {
+    this.dataService.setConsoleLogData(_id);
   }
 
   closeDialog2() {

@@ -51,6 +51,7 @@
         <th>Icon</th>
         <th>Name</th>
         <th>Description</th>
+        <th>Add schema</th>
         <th>Schema</th>
       </tr>
     </thead>
@@ -72,9 +73,22 @@
         <td>{{ application.description }}</td>
         <td>
           <a
-            (click)="IdApli()"
+            (click)="IdApli(application._id)"
             [routerLink]="['/legoft-lab/client', user, id, 'schemaentity']"
             >Add schema</a
+          >
+        </td>
+        <td>
+          <a
+            (click)="IdApli(application._id)"
+            [routerLink]="[
+              '/legoft-lab/client',
+              user,
+              id,
+              'applications',
+              'relationship'
+            ]"
+            >Schema</a
           >
         </td>
       </tr>

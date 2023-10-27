@@ -53,7 +53,6 @@ export class SchemaEntityComponent implements OnInit {
       };
 
       const dataToSendJSON = JSON.stringify(dataToSend);
-      console.log(dataToSendJSON, USER, APP_ID, 'sero');
       this.handlerService
         .post(dataToSendJSON, `schema-entities/add/${USER}/${APP_ID}`)
         .subscribe(
