@@ -389,3 +389,39 @@ button[type="submit"]:focus {
   outline-offset: 2px;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
 }
+
+.btnEdit {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 0.8rem 1rem;
+  border-radius: 1rem;
+  background: #2e86c1;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s linear;
+  border: none;
+}
+
+.btnEdit:hover {
+  transform: scale(1.1);
+}
+
+.btnDelete {
+  display: inline-block;
+  margin-top: 5px;
+  padding: 0.8rem 1rem;
+  border-radius: 1rem;
+  background: #2e86c1;
+  font-size: 1rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s linear;
+  border: none;
+}
+
+.btnDelete:hover {
+  transform: scale(1.1);
+}
