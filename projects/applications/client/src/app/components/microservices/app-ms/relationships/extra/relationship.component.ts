@@ -8,16 +8,19 @@ import { HandlerService } from 'projects/libraries/helpers/src/lib/services/hand
   styleUrls: ['./relationship.component.css'],
 })
 export class RelationshipComponent implements OnInit {
+  viche = 'assets/img/viche-x.png';
   user!: string;
+  id!: string;
   private id_Apli: any;
   schemasGeneral: any[] = [];
-  noSchemas: boolean = false;
+  notifier: boolean = false;
 
   constructor(
     private dataService: DataService,
     private handlerService: HandlerService
   ) {
     this.user = this.dataService.getUser();
+    this.id = this.dataService.getUserId();
     this.id_Apli = this.dataService.getConsoleLogData();
   }
 
@@ -30,19 +33,25 @@ export class RelationshipComponent implements OnInit {
       (response) => {
         if (response && response.data) {
           this.schemasGeneral = response.data[0].schemas;
-          console.log(this.schemasGeneral, 'Schemas 2');
-          this.noSchemas = this.schemasGeneral.length === 0;
         } else {
-          console.log('Hubo un error 1');
+          this.notifier = true;
         }
       },
       (error) => {
         if (error.status === 404) {
-          console.log('Hubo un error 2');
+          this.notifier = true;
         } else {
-          console.log('Hubo un error 3');
+          this.notifier = true;
         }
       }
     );
+  }
+
+  closeDialog() {
+    this.notifier = false;
+  }
+
+  IdApli(_id: any) {
+    this.dataService.setConsoleLogData(_id);
   }
 }

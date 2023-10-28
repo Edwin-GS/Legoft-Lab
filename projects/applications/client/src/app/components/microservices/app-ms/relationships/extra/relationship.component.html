@@ -3,6 +3,13 @@
   href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap"
 />
 
+<div *ngIf="notifier" [class.open-popup]="notifier" class="popup" id="popup">
+  <img src="{{ viche }}" alt="imagen-legoft" />
+  <h2>Error</h2>
+  <p>There was an error displaying the schemas.</p>
+  <button class="btnHome" type="button" (click)="closeDialog()">Ok</button>
+</div>
+
 <body>
   <section class="products">
     <div
@@ -13,7 +20,17 @@
         <div class="product-info">
           <h4 class="product-title">Index: {{ i + 1 }}</h4>
           <p class="product-price">Name: {{ schema.name }}</p>
-          <a class="product-btn" href="#">Relations</a>
+          <a
+            class="product-btn"
+            [routerLink]="[
+              '/legoft-lab/client',
+              user,
+              id,
+              'applications',
+              'relationships'
+            ]"
+            >Relationships</a
+          >
         </div>
       </div>
     </div>
