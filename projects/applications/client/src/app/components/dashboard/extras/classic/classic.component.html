@@ -1,241 +1,135 @@
-<body>
-  <div class="container-scroller">
-    <!--Navbar-->
-    <nav
-      class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row"
-    >
-      <div
-        class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center"
-      >
-        <a class="navbar-brand brand-logo" href="#"
-          ><img src="{{ logoUrl }}" alt="logo"
-        /></a>
-        <a class="navbar-brand brand-logo-mini" href="#"
-          ><img src="{{ logoMiniUrl }}" alt="logo"
-        /></a>
-      </div>
-      <div class="navbar-menu-wrapper d-flex align-items-stretch">
-        <button
-          class="navbar-toggler navbar-toggler align-self-center"
-          type="button"
-          data-toggle="minimize"
-        >
-          <span class="mdi mdi-menu"></span>
-        </button>
-        <div class="search-field d-none d-md-block">
-          <form class="d-flex align-items-center h-100" action="#">
-            <div class="input-group">
-              <div class="input-group-prepend bg-transparent">
-                <i class="input-group-text border-0 mdi mdi-magnify"></i>
-              </div>
-              <input
-                type="text"
-                class="form-control bg-transparent border-0"
-                placeholder="Search projects"
-              />
-            </div>
-          </form>
-        </div>
-        <ul class="navbar-nav navbar-nav-right">
-          <li class="nav-item nav-profile dropdown">
-            <a
-              class="nav-link dropdown-toggle"
-              id="profileDropdown"
-              href="#"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <div class="nav-profile-img">
-                <span class="material-icons"> person </span>
-                <span class="availability-status online"></span>
-              </div>
-              <div class="nav-profile-text">
-                <p class="mb-1 text-black">Username</p>
-              </div>
-            </a>
-            <div
-              class="dropdown-menu navbar-dropdown"
-              aria-labelledby="profileDropdown"
-            >
-              <a class="dropdown-item" href="#">
-                <span class="material-icons me-2 text-success"> cached </span>
-                Actividad
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">
-                <i class="mdi mdi-logout me-2 text-primary"></i> Logout
-              </a>
-            </div>
-          </li>
-          <li class="nav-item d-none d-lg-block full-screen-link">
-            <a class="nav-link">
-              <span class="material-icons"> fullscreen </span>
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link count-indicator dropdown-toggle"
-              id="messageDropdown"
-              href="#"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <span class="material-icons"> mail_outline </span>
-              <span class="count-symbol bg-warning"></span>
-            </a>
-          </li>
-          <li class="nav-item dropdown">
-            <a
-              class="nav-link count-indicator dropdown-toggle"
-              id="notificationDropdown"
-              href="#"
-              data-bs-toggle="dropdown"
-            >
-              <span class="material-icons"> notifications_none </span>
-              <span class="count-symbol bg-danger"></span>
-            </a>
-            <div
-              class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list"
-              aria-labelledby="notificationDropdown"
-            >
-              <h6 class="p-3 mb-0">Notifications</h6>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-success">
-                    <i class="mdi mdi-calendar"></i>
-                  </div>
-                </div>
-                <div
-                  class="preview-item-content d-flex align-items-start flex-column justify-content-center"
-                >
-                  <h6 class="preview-subject font-weight-normal mb-1">
-                    Event today
-                  </h6>
-                  <p class="text-gray ellipsis mb-0">
-                    Just a reminder that you have an event today
-                  </p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-warning">
-                    <i class="mdi mdi-settings"></i>
-                  </div>
-                </div>
-                <div
-                  class="preview-item-content d-flex align-items-start flex-column justify-content-center"
-                >
-                  <h6 class="preview-subject font-weight-normal mb-1">
-                    Settings
-                  </h6>
-                  <p class="text-gray ellipsis mb-0">Update dashboard</p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item preview-item">
-                <div class="preview-thumbnail">
-                  <div class="preview-icon bg-info">
-                    <i class="mdi mdi-link-variant"></i>
-                  </div>
-                </div>
-                <div
-                  class="preview-item-content d-flex align-items-start flex-column justify-content-center"
-                >
-                  <h6 class="preview-subject font-weight-normal mb-1">
-                    Launch Admin
-                  </h6>
-                  <p class="text-gray ellipsis mb-0">New admin wow!</p>
-                </div>
-              </a>
-              <div class="dropdown-divider"></div>
-              <h6 class="p-3 mb-0 text-center">See all notifications</h6>
-            </div>
-          </li>
+<link
+  rel="stylesheet"
+  href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
+/>
 
-          <li class="nav-item nav-settings d-none d-lg-block">
-            <a class="nav-link" href="#">
-              <span class="material-icons"> north </span>
-            </a>
-          </li>
-        </ul>
-        <button
-          class="navbar-toggler navbar-toggler-right d-lg-none align-self-center"
-          type="button"
-          data-toggle="offcanvas"
-        >
-          <span class="mdi mdi-menu"></span>
-        </button>
-      </div>
-    </nav>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+  rel="stylesheet"
+/>
 
-    <!-- Layout body -->
-    <div class="container-fluid page-body-wrapper">
-      <!-- Sidebar -->
-      <nav class="sidebar sidebar-offcanvas" id="sidebar">
-        <ul class="nav">
-          <li class="nav-item nav-profile">
-            <a href="#" class="nav-link">
-              <div class="nav-profile-image">
-                <span class="material-icons">person</span>
-                <span class="login-status online"></span>
-                <!--change to offline or busy as needed-->
-              </div>
-              <div class="nav-profile-text d-flex flex-column">
-                <span class="font-weight-bold mb-2">User</span>
-                <span class="text-secondary text-small">Rol</span>
-              </div>
-              <span class="material-icons"> beenhere </span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/legoft-lab/client', user, id]">
-              <span class="menu-title">Dashboard</span>
-              <i class="material-icons menu-icon"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              data-bs-toggle="collapse"
-              [routerLink]="['/legoft-lab/client', user, id, 'users']"
-              aria-expanded="false"
-              aria-controls="ui-basic"
-            >
-              <span class="menu-title">Usuarios</span>
-              <i class="material-icons menu-icon">people</i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              [routerLink]="['/legoft-lab/client', user, id, 'applications']"
-            >
-              <span class="menu-title">Applicaciones</span>
-              <i class="menu-icon material-icons">apps</i>
-            </a>
-          </li>
-        </ul>
-      </nav>
+<div *ngIf="notifier" class="popup" id="popup" [class.open-popup]="notifier">
+  <img src="{{ viche }}" alt="imagen-legoft" />
+  <h2>Sign out</h2>
+  <p>Are you sure you want to sign out?</p>
+  <a href="/#/signin" class="btnHome" (click)="closeDialog2()">Yes</a>
+  <a class="btnHome2" (click)="closeDialog()">No</a>
+</div>
 
-      <!-- Main -->
-      <div class="main-panel">
-        <div class="content-wrapper">
-          <div class="page-header">
-            <h3 class="page-title">
-              <span class="page-title-icon bg-gradient-primary text-white me-2">
-                <i class="material-icons">home</i>
-              </span>
-              Dashboard
-            </h3>
-          </div>
-
-          <!-- Elementos hijos se renderizan aqui -->
-          <router-outlet></router-outlet>
-        </div>
-      </div>
-      <!-- Main ends -->
-    </div>
+<input type="checkbox" id="nav-toggle" />
+<div class="sidebar">
+  <div class="sidebar-brand">
+    <h2><span>Legoft</span></h2>
   </div>
-</body>
+
+  <div class="sidebar-menu">
+    <ul>
+      <li>
+        <a
+          [routerLink]="['/legoft-lab/client', user, id]"
+          (click)="setActiveLink('dashboard')"
+          [class.active]="activeLink === 'dashboard'"
+        >
+          <span class="las la-home"></span> <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          [routerLink]="['/legoft-lab/client', user, id, 'users']"
+          (click)="setActiveLink('users')"
+          [class.active]="activeLink === 'users'"
+        >
+          <span class="las la-user"></span>
+          <span>Users </span>
+        </a>
+      </li>
+
+      <li>
+        <a
+          [routerLink]="['/legoft-lab/client', user, id, 'applications']"
+          (click)="setActiveLink('applications')"
+          [class.active]="activeLink === 'applications'"
+          ><span class="las la-archive"></span> <span>Applications</span></a
+        >
+      </li>
+      <li>
+        <a class="signout" (click)="closeDialogOpen()"
+          ><span class="las la-arrow-circle-right"></span>
+          <span>Sign out</span></a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="main-content">
+  <header>
+    <h2>
+      <label for="nav-toggle">
+        <span class="las la-bars"></span>
+      </label>
+      {{ getTitleForActiveLink() }}
+    </h2>
+    <div class="user-wrapper">
+      <img src="{{ avatar }}" width="40px" height="40px" alt="" />
+      <div>
+        <h4>Administrator</h4>
+        <small>{{ user }}</small>
+      </div>
+    </div>
+  </header>
+  <main>
+    <ng-container
+      *ngIf="isDashboardView(); then dashboardView; else otherView"
+    ></ng-container>
+    <ng-template #dashboardView>
+      <div class="cards">
+        <div class="card-single">
+          <div>
+            <h1>5</h1>
+            <span>Pendejo número 5</span>
+          </div>
+          <div>
+            <span class="las la-users"></span>
+          </div>
+        </div>
+
+        <div class="card-single">
+          <div>
+            <h1>12</h1>
+            <span>Pendejo número 12</span>
+          </div>
+          <div>
+            <span class="las la-users"></span>
+          </div>
+        </div>
+
+        <div class="card-single">
+          <div>
+            <h1>25</h1>
+            <span>Pendejo número 25</span>
+          </div>
+          <div>
+            <span class="las la-users"></span>
+          </div>
+        </div>
+
+        <div class="card-single">
+          <div>
+            <h1>2</h1>
+            <span>Pendejo número 2</span>
+          </div>
+          <div>
+            <span class="las la-users"></span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #otherView>
+      <router-outlet></router-outlet>
+    </ng-template>
+  </main>
+</div>

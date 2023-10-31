@@ -10,11 +10,18 @@ import { DataService } from 'projects/libraries/helpers/src/lib/components/auth/
 })
 export class ApplicationComponent implements OnInit {
   logoUrl: string = 'assets/favicon/android-icon-48x48.png';
+  viche = 'assets/img/viche.png';
   showModal: boolean = false;
   applications: any[] = [];
   newAppForm!: FormGroup;
   user!: string;
   id!: string;
+  appid!: string;
+  errornotifier: boolean = false;
+  larespuesta: string = '';
+  notifier: boolean = false;
+  filteredApplications: any[] = [];
+  searchTerm: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,7 +31,6 @@ export class ApplicationComponent implements OnInit {
     this.user = this.dataService.getUser();
     this.id = this.dataService.getUserId();
   }
-
   ngOnInit() {
     this.newAppForm = this.formBuilder.group({
       name: [
@@ -43,9 +49,28 @@ export class ApplicationComponent implements OnInit {
           Validators.maxLength(255),
         ],
       ],
-      icon: [''], // Added an icon field in the form
+      icon: [''],
     });
+
     this.loadApplications();
+    this.errornotifier = false;
+    this.notifier = false;
+    this.filteredApplications = [];
+  }
+
+  onInputChange(event: any) {
+    this.searchTerm = event.target.value.toLowerCase();
+    this.filterApplications();
+  }
+
+  filterApplications() {
+    this.filteredApplications = this.applications.filter((app) =>
+      app.name.toLowerCase().includes(this.searchTerm)
+    );
+  }
+
+  closeDialog() {
+    this.notifier = false;
   }
 
   openModal() {
@@ -54,6 +79,7 @@ export class ApplicationComponent implements OnInit {
 
   closeModal() {
     this.showModal = false;
+    this.newAppForm.reset();
   }
 
   onFileSelected(event: any) {
@@ -65,38 +91,73 @@ export class ApplicationComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = (e: any) => {
       this.newAppForm.patchValue({
-        icon: e.target.result, // Save the base64 string to the form
+        icon: e.target.result,
       });
     };
     reader.readAsDataURL(file);
   }
 
   createApplication() {
+    this.newAppForm.markAllAsTouched();
     if (this.newAppForm.valid) {
       const data = this.newAppForm.value;
 
-      // Convert the icon to base64 before sending it to the server
-      data.icon = btoa(data.icon);
+      if (this.appid) {
+        this.updateApplication(data);
+      } else {
+        data.icon = btoa(data.icon);
 
+        this.handlerService
+          .post(data, `applications/create/${this.dataService.getUser()}`)
+          .subscribe(
+            (resp) => {
+              if (resp && resp.success === false) {
+                this.errornotifier = true;
+                this.larespuesta = resp['message'];
+              } else {
+                this.notifier = true;
+                this.newAppForm.reset();
+                this.loadApplications();
+                this.showModal = false;
+              }
+            },
+            (err) => {
+              this.errornotifier = true;
+              this.larespuesta = err['message'];
+            }
+          );
+      }
+    } else {
+      this.errornotifier = true;
+      this.larespuesta = 'Make sure to fill in all the required fields.';
+    }
+  }
+
+  updateApplication(data: any) {
+    if (this.appid) {
+      data.icon = btoa(data.icon);
       this.handlerService
-        .post(data, `applications/create/${this.dataService.getUser()}`)
+        .put(
+          data,
+          `applications/update/${this.dataService.getUser()}/${this.appid}`
+        )
         .subscribe(
           (resp) => {
             if (resp && resp.success === false) {
-              console.log('Error creating application:', resp.message);
+              this.errornotifier = true;
+              this.larespuesta = resp['message'];
             } else {
-              console.log('Application created successfully:', resp);
+              this.notifier = true;
               this.newAppForm.reset();
               this.loadApplications();
               this.showModal = false;
             }
           },
           (err) => {
-            console.error('Error creating application:', err);
+            this.errornotifier = true;
+            this.larespuesta = err['message'];
           }
         );
-    } else {
-      console.error('Make sure to fill in all the required fields.');
     }
   }
 
@@ -105,10 +166,8 @@ export class ApplicationComponent implements OnInit {
       .get(`applications/check/publish/${this.dataService.getUser()}`)
       .subscribe(
         (response) => {
-          console.log('Received data:', response);
           if (response && response.data) {
             this.applications = response.data.map((app: any) => {
-              // Convert the base64 icon back to a readable image
               let decodedIcon = '';
               if (this.isBase64(app.icon)) {
                 decodedIcon = atob(app.icon);
@@ -121,19 +180,92 @@ export class ApplicationComponent implements OnInit {
                 manager: app.manager,
               };
             });
-            console.log('Loaded applications:', this.applications);
+
+            this.filteredApplications = this.applications.filter((app) =>
+              app.name.toLowerCase().includes(this.searchTerm)
+            );
           } else {
-            console.error('Data is not in the expected format.');
+            this.errornotifier = true;
+            this.larespuesta = 'Data is not in the expected format.';
           }
         },
         (error) => {
           if (error.status === 404) {
-            console.error('Requested resource not found.');
+            this.errornotifier = true;
+            this.larespuesta = 'Requested resource not found.';
           } else {
-            console.error('Error loading applications: ', error);
+            this.errornotifier = true;
+            (this.larespuesta = 'Error loading applications: '), error;
           }
         }
       );
+  }
+
+  editApplication(application: any) {
+    this.newAppForm.patchValue({
+      name: application.name,
+      description: application.description,
+      icon: application.icon,
+    });
+
+    this.showModal = true;
+    this.appid = application._id;
+
+    this.handlerService.get(`applications/get/${this.appid}`).subscribe(
+      (resp) => {
+        if (resp && resp.success === false) {
+          this.errornotifier = true;
+          this.larespuesta = resp['message'];
+        } else {
+          this.newAppForm.patchValue({
+            name: resp.data.name,
+            description: resp.data.description,
+            icon: resp.data.icon,
+          });
+          this.loadImageFromDatabase(resp.data.icon);
+        }
+      },
+      (err) => {
+        this.errornotifier = true;
+        this.larespuesta = err['message'];
+      }
+    );
+  }
+
+  deleteApplication(application: any) {
+    const applicationId = application._id;
+    this.handlerService
+      .delete(
+        `applications/delete/${this.dataService.getUser()}/${applicationId}`
+      )
+      .subscribe(
+        (resp) => {
+          if (resp && resp.success === false) {
+            this.errornotifier = true;
+            this.larespuesta = resp['message'];
+          } else {
+            this.notifier = true;
+            this.loadApplications();
+          }
+        },
+        (err) => {
+          this.errornotifier = true;
+          this.larespuesta = err.message;
+        }
+      );
+  }
+
+  loadImageFromDatabase(icon: string) {
+    if (this.isBase64(icon)) {
+      const img = new Image();
+      img.src = 'data:image/jpeg;base64,' + icon;
+      const imagePreview = document.getElementById(
+        'appImage'
+      ) as HTMLImageElement;
+      if (imagePreview) {
+        imagePreview.src = img.src;
+      }
+    }
   }
 
   isBase64(str: string) {
@@ -144,8 +276,11 @@ export class ApplicationComponent implements OnInit {
     }
   }
 
-  IdApli() {
-    const dataToShare = this.applications[0]._id;
-    this.dataService.setConsoleLogData(dataToShare);
+  IdApli(_id: any) {
+    this.dataService.setConsoleLogData(_id);
+  }
+
+  closeDialog2() {
+    this.errornotifier = false;
   }
 }

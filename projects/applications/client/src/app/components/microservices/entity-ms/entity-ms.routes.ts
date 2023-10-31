@@ -4,19 +4,6 @@ import { EntityComponent } from './entities/extra/entity.component';
 import { SchemaEntitiesComponent } from './schema-entities/schema-entities.component';
 import { SchemaEntityComponent } from './schema-entities/extra/schema-entity.component';
 
-/**
- * Base route information
- *
- * entities >> /legoft-lab/entities/:user/:user_id/:application_id/entities/:schema_name
- *
- * entity >> /legoft-lab/entities/:user/:user_id/:application_id/entity/:schema_name
- *
- * schema-entities >> /legoft-lab/entities/:user/:user_id/:application_id/schema-entities
- *
- * schema-entity >> /legoft-lab/entities/:user/:user_id/:application_id/schema-entity
- *
- * **/
-
 const EntityRoutes: Routes = [
   {
     path: '',

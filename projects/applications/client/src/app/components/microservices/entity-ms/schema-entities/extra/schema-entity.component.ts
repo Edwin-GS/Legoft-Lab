@@ -9,9 +9,13 @@ import { HandlerService } from 'projects/libraries/helpers/src/lib/services/hand
   styleUrls: ['./schema-entity.component.css'],
 })
 export class SchemaEntityComponent implements OnInit {
+  viche = 'assets/img/viche.png';
   formulario!: FormGroup;
   user!: string;
   private id_Apli: any;
+  notifier: boolean = false;
+  errornotifier: boolean = false;
+  larespuesta: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,66 +28,75 @@ export class SchemaEntityComponent implements OnInit {
 
   ngOnInit() {
     this.formulario = this.formBuilder.group({
+      index: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       name: ['', Validators.required],
-      type: ['', Validators.required],
-      required: ['', Validators.required],
-      update: ['', Validators.required],
-      unique: ['', Validators.required],
-      // size: ['', Validators.required],
+      description: ['', Validators.required],
     });
+    this.errornotifier = false;
+    this.notifier = false;
   }
 
   onSubmit() {
+    this.formulario.markAllAsTouched();
     if (this.formulario.valid) {
       const formData = this.formulario.value;
       const USER = this.user;
       const APP_ID = this.id_Apli;
+
+      const fields = JSON.parse(formData.description);
+
       const dataToSend = {
-        index: 5,
+        index: formData.index,
         name: formData.name,
-        fields: [
-          {
-            name: formData.name,
-            type: formData.type,
-            required: formData.required === 'true',
-            update: formData.update === 'true',
-            unique: formData.unique === 'true',
-          },
-        ],
+        fields: [fields],
         accessRoles: [{ role: 'SUPER' }, { role: 'ADMIN' }, { role: 'USER' }],
       };
 
-      console.log(dataToSend, 'Datos a enviar');
       const dataToSendJSON = JSON.stringify(dataToSend);
-      console.log(dataToSendJSON, 'Datos a enviar en formato JSON');
-
       this.handlerService
         .post(dataToSendJSON, `schema-entities/add/${USER}/${APP_ID}`)
         .subscribe(
           (resp) => {
             if (resp && resp.success === false) {
-              console.log('Error creating schema:', resp.message);
+              this.errornotifier = true;
+              this.larespuesta = resp['message'];
             } else {
-              console.log('Schema created successfully:', resp);
+              this.notifier = true;
+              this.formulario.reset();
             }
           },
           (err) => {
-            console.error('Error creating schema:', err);
+            this.errornotifier = true;
+            this.larespuesta = err['message'];
           }
         );
     } else {
-      console.error('Make sure to fill in all the required fields.');
+      this.errornotifier = true;
+      this.larespuesta = 'Make sure to fill in all the required fields.';
     }
   }
-}
 
-// onSubmit() {
-//   if (this.formulario.valid) {
-//     const formData = this.formulario.value;
-//     const USER = this.user;
-//     const APP_ID = this.id_Apli;
-//     console.log(formData.name, 'Los datos');
-//     console.log(USER, 'Pendejo');
-//     console.log(APP_ID, 'Pendejo de nuevo');
-//   }
-// }
+  setHolaInDescription() {
+    this.formulario
+      .get('description')
+      ?.setValue(
+        ' {"name":"nombre", "type": "string", "required": true, "update": true, "unique": true}'
+      );
+  }
+
+  setHola1InDescription() {
+    this.formulario
+      .get('description')
+      ?.setValue(
+        ' {"name":"model", "type": "enum", "required": true, "update": true, "unique": false, "enum": ["A4", "Medium", "Large"]}, {"name":"totals", "type": "object", "required": true, "update": true, "unique": false, "object": [ {"name":"vat", "type": "calculated", "required": true, "update": true, "unique": false, "size": {"min": 1, "max": 9999999}}} ]}'
+      );
+  }
+
+  closeDialog2() {
+    this.errornotifier = false;
+  }
+
+  closeDialog() {
+    this.notifier = false;
+  }
+}
