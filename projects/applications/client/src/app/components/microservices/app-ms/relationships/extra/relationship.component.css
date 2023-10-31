@@ -1,3 +1,15 @@
+/* .button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.button-container1 {
+  margin-right: 2px;
+}
+
+.button-container2 {
+  margin-left: 2px;
+} */
 /* Este es el bloque del popup */
 
 .popup {
@@ -109,8 +121,7 @@ body {
   box-shadow: 5px 15px 25px #eeeeee;
 }
 
-.product a:link,
-.product a:visited {
+.btn-a-1 {
   color: #ececec;
   display: inline-block;
   text-decoration: none;
@@ -118,10 +129,26 @@ body {
   border-radius: 1rem;
   margin-top: 1rem;
   font-size: 14px;
-  padding: 0.8rem 3rem;
+  padding: 0.5rem 1rem;
   transition: all 0.2s;
 }
 
-.product a:hover {
+.btn-a-1:hover {
   background-color: #2e86c1;
 }
+
+/* .btn-a-2 {
+  color: #ececec;
+  display: inline-block;
+  text-decoration: none;
+  background-color: #e74c3c;
+  border-radius: 1rem;
+  margin-top: 1rem;
+  font-size: 14px;
+  padding: 0.5rem 1rem;
+  transition: all 0.2s;
+}
+
+.btn-a-2:hover {
+  background-color: #cb4335;
+} */

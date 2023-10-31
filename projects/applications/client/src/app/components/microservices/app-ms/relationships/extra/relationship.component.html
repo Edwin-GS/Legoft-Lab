@@ -20,17 +20,25 @@
         <div class="product-info">
           <h4 class="product-title">Index: {{ i + 1 }}</h4>
           <p class="product-price">Name: {{ schema.name }}</p>
-          <a
-            class="product-btn"
-            [routerLink]="[
-              '/legoft-lab/client',
-              user,
-              id,
-              'applications',
-              'relationships'
-            ]"
-            >Relationships</a
-          >
+          <div class="button-container">
+            <div class="button-container1">
+              <a
+                class="product-btn btn-a-1"
+                [routerLink]="[
+                  '/legoft-lab/client',
+                  user,
+                  id,
+                  'applications',
+                  'relationships'
+                ]"
+                >Relationships</a
+              >
+            </div>
+
+            <!-- <div class="button-container2">
+              <a class="product-btn btn-a-2" (click)="deleteschema()">Delete</a>
+            </div> -->
+          </div>
         </div>
       </div>
     </div>
