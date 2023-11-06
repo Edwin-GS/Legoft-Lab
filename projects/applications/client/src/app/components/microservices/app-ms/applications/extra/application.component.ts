@@ -10,6 +10,7 @@ import { DataService } from 'projects/libraries/helpers/src/lib/components/auth/
 })
 export class ApplicationComponent implements OnInit {
   logoUrl: string = 'assets/favicon/android-icon-48x48.png';
+  appImageUrl: string = 'assets/img/mail.png';
   viche = 'assets/img/viche.png';
   showModal: boolean = false;
   applications: any[] = [];
@@ -22,6 +23,8 @@ export class ApplicationComponent implements OnInit {
   notifier: boolean = false;
   filteredApplications: any[] = [];
   searchTerm: string = '';
+
+  loading: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -162,6 +165,7 @@ export class ApplicationComponent implements OnInit {
   }
 
   loadApplications() {
+    this.loading = true;
     this.handlerService
       .get(`applications/check/publish/${this.dataService.getUser()}`)
       .subscribe(
@@ -184,12 +188,15 @@ export class ApplicationComponent implements OnInit {
             this.filteredApplications = this.applications.filter((app) =>
               app.name.toLowerCase().includes(this.searchTerm)
             );
+            this.loading = false;
           } else {
+            this.loading = false;
             this.errornotifier = true;
             this.larespuesta = 'Data is not in the expected format.';
           }
         },
         (error) => {
+          this.loading = false;
           if (error.status === 404) {
             this.errornotifier = true;
             this.larespuesta = 'Requested resource not found.';
@@ -276,7 +283,7 @@ export class ApplicationComponent implements OnInit {
     }
   }
 
-  IdApli(_id: any) {
+  setIdApli(_id: any) {
     this.dataService.setConsoleLogData(_id);
   }
 
