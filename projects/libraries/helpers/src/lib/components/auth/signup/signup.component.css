@@ -189,6 +189,13 @@ section {
   color: #2e86c1;
 }
 
+.contactos form .inputcaja #togglePassword {
+  position: absolute;
+  top: 1.7rem;
+  right: 0.5rem;
+  cursor: pointer;
+}
+
 .contactos p {
   margin-top: 3rem;
   text-align: center;

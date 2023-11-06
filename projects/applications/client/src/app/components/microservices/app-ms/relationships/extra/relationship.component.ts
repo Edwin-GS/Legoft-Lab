@@ -15,6 +15,8 @@ export class RelationshipComponent implements OnInit {
   schemasGeneral: any[] = [];
   notifier: boolean = false;
 
+  loading: boolean = false;
+
   constructor(
     private dataService: DataService,
     private handlerService: HandlerService
@@ -25,19 +27,26 @@ export class RelationshipComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadApplications();
+    // this.setIdApli(this.id_Apli);
+
+    console.log(this.id_Apli);
+    this.loadSchemas();
   }
 
-  loadApplications() {
+  loadSchemas() {
+    this.loading = true;
     this.handlerService.get(`schemas/${this.user}/${this.id_Apli}`).subscribe(
       (response) => {
         if (response && response.data) {
           this.schemasGeneral = response.data[0].schemas;
+          this.loading = false;
         } else {
           this.notifier = true;
+          this.loading = false;
         }
       },
       (error) => {
+        this.loading = false;
         if (error.status === 404) {
           this.notifier = true;
         } else {
@@ -51,7 +60,11 @@ export class RelationshipComponent implements OnInit {
     this.notifier = false;
   }
 
-  IdApli(_id: any) {
+  setIdApli(_id: any) {
     this.dataService.setConsoleLogData(_id);
   }
+
+  // deleteschema() {
+  //   console.log('Para borrar el schema una vez resuelto el problema.');
+  // }
 }

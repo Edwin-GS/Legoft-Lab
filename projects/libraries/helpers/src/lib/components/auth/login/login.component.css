@@ -156,8 +156,7 @@ section {
   position: relative;
 }
 
-.contactos form .inputcaja input,
-.contactos form .inputcaja textarea {
+.contactos form .inputcaja input {
   width: 100%;
   background: none;
   color: #333;
@@ -166,11 +165,6 @@ section {
   font-size: 1.7rem;
   border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
   text-transform: none;
-}
-
-.contactos form .inputcaja textarea {
-  resize: none;
-  height: 13rem;
 }
 
 .contactos form .inputcaja label {
@@ -187,6 +181,13 @@ section {
   top: 0.5rem;
   font-size: 1.5rem;
   color: #2e86c1;
+}
+
+.contactos form .inputcaja #togglePassword {
+  position: absolute;
+  top: 1.7rem;
+  right: 0.5rem;
+  cursor: pointer;
 }
 
 .contactos p {

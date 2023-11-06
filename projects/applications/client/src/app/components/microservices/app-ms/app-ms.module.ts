@@ -8,6 +8,7 @@ import { RelationshipComponent } from './relationships/extra/relationship.compon
 import { APPLICATION_ROUTES } from './app-ms.routes';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AppsShowComponent } from './applications/extra/apps-show/apps-show.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SchemasComponent,
     RelationshipsComponent,
     RelationshipComponent,
+    AppsShowComponent,
   ],
   exports: [SchemasComponent],
   imports: [CommonModule, APPLICATION_ROUTES, FormsModule, ReactiveFormsModule],
