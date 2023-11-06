@@ -96,7 +96,12 @@
       </div>
 
       <div class="inputcaja">
-        <input type="password" formControlName="password" />
+        <input type="password" formControlName="password" id="passwordInput" />
+        <i
+          class="fa-solid fa-eye"
+          id="togglePassword"
+          (click)="togglePasswordVisibility()"
+        ></i>
         <label for="">password</label>
         <p
           class="error-message"

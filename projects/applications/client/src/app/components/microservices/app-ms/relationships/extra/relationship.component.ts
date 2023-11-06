@@ -63,4 +63,8 @@ export class RelationshipComponent implements OnInit {
   setIdApli(_id: any) {
     this.dataService.setConsoleLogData(_id);
   }
+
+  // deleteschema() {
+  //   console.log('Para borrar el schema una vez resuelto el problema.');
+  // }
 }

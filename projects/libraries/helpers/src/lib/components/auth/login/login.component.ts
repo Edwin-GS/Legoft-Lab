@@ -88,4 +88,22 @@ export class LoginComponent implements OnInit {
   closeDialog2() {
     this.errornotifier = false;
   }
+
+  togglePasswordVisibility() {
+    const passwordInput = document.getElementById('passwordInput') as HTMLInputElement;
+    const togglePassword = document.getElementById('togglePassword');
+    
+    if (passwordInput && togglePassword) {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        togglePassword.classList.remove('fa-eye');
+        togglePassword.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        togglePassword.classList.remove('fa-eye-slash');
+        togglePassword.classList.add('fa-eye');
+      }
+    }
+  }
+
 }
