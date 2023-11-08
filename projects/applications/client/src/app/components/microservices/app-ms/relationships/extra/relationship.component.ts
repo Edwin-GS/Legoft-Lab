@@ -28,8 +28,6 @@ export class RelationshipComponent implements OnInit {
 
   ngOnInit() {
     // this.setIdApli(this.id_Apli);
-
-    console.log(this.id_Apli);
     this.loadSchemas();
   }
 

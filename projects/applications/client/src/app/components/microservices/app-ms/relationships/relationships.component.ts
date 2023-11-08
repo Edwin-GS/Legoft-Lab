@@ -28,12 +28,14 @@ export class RelationshipsComponent implements OnInit {
 
   ngOnInit() {
     this.formulario = this.formBuilder.group({
-      types: ['', [Validators.required]],
       refs: ['', Validators.required],
     });
     this.errornotifier = false;
     this.notifier = false;
+    this.relationships();
   }
+
+  relationships() {}
 
   onSubmit() {
     this.formulario.markAllAsTouched();
@@ -42,15 +44,10 @@ export class RelationshipsComponent implements OnInit {
       const USER = this.user;
       const APP_ID = this.id_Apli;
 
-      const refs = JSON.parse(formData.refs);
+      const parsedData = JSON.parse(`[${formData.refs}]`);
 
       const dataToSend = {
-        relationships: [
-          {
-            type: formData.types,
-            refs,
-          },
-        ],
+        relationships: parsedData,
       };
 
       const dataToSendJSON = JSON.stringify(dataToSend);
@@ -90,7 +87,7 @@ export class RelationshipsComponent implements OnInit {
     this.formulario
       .get('refs')
       ?.setValue(
-        '{"index": 1,"mode": "simple","local": "marcas", "ref": {"schema":"modelos"}}'
+        '{"type": "one-to-many","refs":{"index": 1,"mode": "simple","local": "invoice","ref": {"schema":"invoiceline"}}},{ "type": "many-to-one","refs": { "index": 2,"mode": "simple","local": "invoiceline","ref": {"schema":"invoice"}}}'
       );
   }
 
@@ -98,7 +95,7 @@ export class RelationshipsComponent implements OnInit {
     this.formulario
       .get('refs')
       ?.setValue(
-        ' {"index": 2, "mode": "simple", "local": "modelos", "ref": {"schema":"marcas"}}'
+        '{"type": "one-to-many","refs": {"index": 1,"mode": "simple","local": "modelos", "ref": {"schema":"garantiavehiculos"}}},{"type": "many-to-one","refs": {"index": 2,"mode": "simple","local": "garantiavehiculos","ref": {"schema":"modelos"}} }'
       );
   }
 }

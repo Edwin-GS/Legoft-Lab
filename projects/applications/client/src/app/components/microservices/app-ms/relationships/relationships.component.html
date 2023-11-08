@@ -12,7 +12,7 @@
 <div *ngIf="notifier" [class.open-popup]="notifier" class="popup" id="popup">
   <img src="{{ viche }}" alt="imagen-legoft" />
   <h2>Successfully</h2>
-  <p>Reltionship created successfully</p>
+  <p>Relationship created successfully</p>
   <button class="btnHome" type="button" (click)="closeDialog()">Ok</button>
 </div>
 
@@ -33,35 +33,30 @@
       <span class="fas fa-times" (click)="closeDialog2()"></span>
     </div>
 
-    <div class="div-entero-input">
-      <div class="input-div">
-        <label for="types">Types</label>
-        <input
-          type="text"
-          id="types"
-          name="types"
-          formControlName="types"
-          placeholder="one-to-many"
-        />
-        <p
-          class="error-message"
-          *ngIf="
-            formulario.get('types')?.hasError('required') &&
-            formulario.get('types')?.touched
-          "
-        >
-          Types is required.
-        </p>
-      </div>
-    </div>
-
     <div class="text-div">
-      <label for="refs">Refs</label>
+      <label for="refs">Relationships</label>
       <textarea
         id="refs"
         name="refs"
         formControlName="refs"
-        placeholder='{"index": 1,"mode": "simple","local": "marcas", "ref": {"schema":"modelos"}}'
+        placeholder='{
+          "type": "one-to-many",
+          "refs": {
+                     "index": 1,
+                     "mode": "simple",
+                   "local": "marcas", 
+                   "ref": {"schema":"modelos"}
+                  }	        
+          },
+         {
+          "type": "many-to-one",
+          "refs": {
+                     "index": 2,
+                     "mode": "simple",
+                   "local": "modelos", 
+                   "ref": {"schema":"marcas"}
+             }
+           }'
       ></textarea>
       <p
         class="error-message"

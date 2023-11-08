@@ -1,4 +1,7 @@
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap" />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap"
+/>
 
 <!-- <div *ngIf="notifier" [class.open-popup]="notifier" class="popup" id="popup">
   <img src="{{ viche }}" alt="imagen-legoft" />
@@ -7,13 +10,11 @@
   <button class="btnHome" type="button" (click)="closeDialog()">Ok</button>
 </div> -->
 
-
-<div *ngIf="schemasGeneral.length <=0 && !loading">
+<div *ngIf="schemasGeneral.length <= 0 && !loading">
   <div class="d-flex justify-content-center border">
     <h1 class="my-5">No schemas created.</h1>
   </div>
 </div>
-
 
 <div *ngIf="loading" class="d-flex justify-content-center">
   <div class="spinner-border" role="status">
@@ -21,18 +22,38 @@
   </div>
 </div>
 
-<section *ngIf="!loading && schemasGeneral.length >0" class="row row-cols-1 row-cols-md-2 g-4 rounded border m-3">
+<section
+  *ngIf="!loading && schemasGeneral.length > 0"
+  class="row row-cols-1 row-cols-md-2 g-4 rounded border m-3"
+>
   <div class="product" *ngFor="let schema of schemasGeneral; let i = index">
     <div class="product-info">
       <h4 class="product-title">Index: {{ i + 1 }}</h4>
       <p class="product-price">Name: {{ schema.name }}</p>
-      <a class="btn btn-outline-primary p-1" [routerLink]="[
-              '/legoft-lab/client',
-              user,
-              id,
-              'applications',
-              'relationships'
-            ]">Relationships</a>
+      <a
+        class="btn btn-outline-primary p-1 m-1"
+        [routerLink]="[
+          '/legoft-lab/client',
+          user,
+          id,
+          'applications',
+          'relationships'
+        ]"
+        >Add Relation</a
+      >
+      <a
+        *ngIf="schema.relationships"
+        [routerLink]="[
+          '/legoft-lab/client',
+          user,
+          id,
+          'applications',
+          'relationships'
+        ]"
+        class="btn btn-outline-primary p-1 m-1"
+        href=""
+        >View Relation</a
+      >
     </div>
   </div>
 </section>
