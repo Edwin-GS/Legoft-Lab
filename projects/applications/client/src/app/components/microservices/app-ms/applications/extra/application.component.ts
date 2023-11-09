@@ -21,6 +21,7 @@ export class ApplicationComponent implements OnInit {
   errornotifier: boolean = false;
   larespuesta: string = '';
   notifier: boolean = false;
+  notifier2: boolean = false;
   filteredApplications: any[] = [];
   searchTerm: string = '';
 
@@ -58,6 +59,7 @@ export class ApplicationComponent implements OnInit {
     this.loadApplications();
     this.errornotifier = false;
     this.notifier = false;
+    this.notifier2 = false;
     this.filteredApplications = [];
   }
 
@@ -122,6 +124,7 @@ export class ApplicationComponent implements OnInit {
                 this.newAppForm.reset();
                 this.loadApplications();
                 this.showModal = false;
+                this.larespuesta = resp['message'];
               }
             },
             (err) => {
@@ -253,6 +256,7 @@ export class ApplicationComponent implements OnInit {
           } else {
             this.notifier = true;
             this.loadApplications();
+            this.larespuesta = resp['message'];
           }
         },
         (err) => {
@@ -289,5 +293,21 @@ export class ApplicationComponent implements OnInit {
 
   closeDialog2() {
     this.errornotifier = false;
+  }
+
+  applicationId: any;
+
+  closeDialogOpen(application: any) {
+    this.notifier2 = true;
+    this.applicationId = application;
+  }
+
+  closeDialogApiYes() {
+    this.notifier2 = false;
+    this.deleteApplication(this.applicationId);
+  }
+
+  closeDialogApi() {
+    this.notifier2 = false;
   }
 }

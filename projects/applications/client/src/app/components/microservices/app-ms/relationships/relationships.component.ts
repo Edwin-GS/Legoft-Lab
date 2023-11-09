@@ -11,11 +11,14 @@ import { HandlerService } from 'projects/libraries/helpers/src/lib/services/hand
 export class RelationshipsComponent implements OnInit {
   viche = 'assets/img/viche.png';
   user!: string;
+  name: string;
+  namevacio: string = '';
   private id_Apli: any;
   notifier: boolean = false;
   formulario!: FormGroup;
   errornotifier: boolean = false;
   larespuesta: string = '';
+  schemasGeneral: any[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -24,6 +27,8 @@ export class RelationshipsComponent implements OnInit {
   ) {
     this.user = this.dataService.getUser();
     this.id_Apli = this.dataService.getConsoleLogData();
+    this.name = this.dataService.getNombreSchema();
+    this.namevacio = this.dataService.clearDataName();
   }
 
   ngOnInit() {
@@ -32,10 +37,21 @@ export class RelationshipsComponent implements OnInit {
     });
     this.errornotifier = false;
     this.notifier = false;
-    this.relationships();
+    this.relationshipsGet();
   }
 
-  relationships() {}
+  relationshipsGet() {
+    this.handlerService
+      .get(`schemas/${this.user}/${this.name}/${this.id_Apli}`)
+      .subscribe((response) => {
+        if (response && response.data) {
+          this.schemasGeneral = response.data.schemas.relationships;
+
+          const stringValue = JSON.stringify(this.schemasGeneral, null, 2);
+          this.formulario.get('refs')?.setValue(stringValue);
+        }
+      });
+  }
 
   onSubmit() {
     this.formulario.markAllAsTouched();

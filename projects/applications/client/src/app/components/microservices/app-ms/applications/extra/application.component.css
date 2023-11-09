@@ -9,11 +9,33 @@
   cursor: pointer;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   transition: all 0.3s linear;
-  border: none;
+  margin: 4px;
+  text-decoration: none;
 }
 
 .btnHome:hover {
-  transform: scale(1.1);
+  background-color: #1c4dab;
+  transition: background-color 0.2s;
+}
+
+.btnHome2 {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 3rem;
+  border-radius: 5rem;
+  background: #f44336;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s linear;
+  margin: 4px;
+  text-decoration: none;
+}
+
+.btnHome2:hover {
+  background-color: #ef2415;
+  transition: background-color 0.2s;
 }
 
 /* Este es el bloque del popup */
@@ -31,7 +53,7 @@
   color: #333;
   visibility: hidden;
   transition: tranform 0.4s, top 0.4s;
-  z-index: 300;
+  z-index: 100;
   border: 0.1rem solid rgba(0, 0, 0, 0.2);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
   border-radius: 0.5rem;

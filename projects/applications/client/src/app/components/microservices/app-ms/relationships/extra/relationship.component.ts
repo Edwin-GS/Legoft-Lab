@@ -14,7 +14,6 @@ export class RelationshipComponent implements OnInit {
   private id_Apli: any;
   schemasGeneral: any[] = [];
   notifier: boolean = false;
-
   loading: boolean = false;
 
   constructor(
@@ -29,6 +28,10 @@ export class RelationshipComponent implements OnInit {
   ngOnInit() {
     // this.setIdApli(this.id_Apli);
     this.loadSchemas();
+  }
+
+  nombreSchema(name: string) {
+    this.dataService.setNombreSchema(name);
   }
 
   loadSchemas() {

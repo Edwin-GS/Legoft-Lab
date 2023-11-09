@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 export class DataService {
   private user: string = '';
   private userId: string = '';
+  private nombreSchema: string = '';
   private id_Apli: any;
 
   constructor() {}
@@ -22,6 +23,10 @@ export class DataService {
     this.id_Apli = data;
   }
 
+  setNombreSchema(name: string) {
+    this.nombreSchema = name;
+  }
+
   getUser(): string {
     return this.user;
   }
@@ -32,5 +37,13 @@ export class DataService {
 
   getConsoleLogData() {
     return this.id_Apli;
+  }
+
+  getNombreSchema() {
+    return this.nombreSchema;
+  }
+
+  clearDataName() {
+    return (this.nombreSchema = '');
   }
 }

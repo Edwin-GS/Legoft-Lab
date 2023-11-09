@@ -35,8 +35,6 @@ export class AppsShowComponent implements OnInit {
       .get(`applications/find/${this.applicationId}`)
       .subscribe(
         (resp) => {
-          console.log(JSON.stringify(resp));
-
           if (resp.success === true) {
             let icon = '';
             if (this.isBase64(resp.data.icon)) {
@@ -46,7 +44,6 @@ export class AppsShowComponent implements OnInit {
             this.application.icon = icon;
             this.loading = false;
           } else {
-            console.log('errror');
             this.loading = false;
             this.errornotifier = true;
             this.larespuesta = 'Data is not in the expected format.';
