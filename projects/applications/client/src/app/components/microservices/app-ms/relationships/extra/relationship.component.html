@@ -1,14 +1,13 @@
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+  rel="stylesheet"
+/>
 <link
   rel="stylesheet"
-  href="https://fonts.googleapis.com/css2?family=Merriweather+Sans&display=swap"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
 />
-
-<!-- <div *ngIf="notifier" [class.open-popup]="notifier" class="popup" id="popup">
-  <img src="{{ viche }}" alt="imagen-legoft" />
-  <h2>Error</h2>
-  <p>There was an error displaying the schemas.</p>
-  <button class="btnHome" type="button" (click)="closeDialog()">Ok</button>
-</div> -->
 
 <div *ngIf="schemasGeneral.length <= 0 && !loading">
   <div class="d-flex justify-content-center border">
@@ -28,8 +27,20 @@
 >
   <div class="product" *ngFor="let schema of schemasGeneral; let i = index">
     <div class="product-info">
-      <h4 class="product-title">Index: {{ i + 1 }}</h4>
-      <p class="product-price">Name: {{ schema.name }}</p>
+      <a
+        class="caja-a"
+        [routerLink]="[
+          '/legoft-lab/client',
+          user,
+          id,
+          'schemaentity',
+          'entities'
+        ]"
+        (click)="nombreSchema(schema.name)"
+      >
+        <h4 class="product-title">Index: {{ i + 1 }}</h4>
+        <p class="product-price">Name: {{ schema.name }}</p>
+      </a>
       <a
         class="btn btn-outline-primary p-1 m-1"
         [routerLink]="[
@@ -39,20 +50,21 @@
           'applications',
           'relationships'
         ]"
+        (click)="nombreSchema(schema.name)"
         >Add Relation</a
       >
+
       <a
-        *ngIf="schema.relationships"
         [routerLink]="[
           '/legoft-lab/client',
           user,
           id,
-          'applications',
-          'relationships'
+          'schemaentity',
+          'entity'
         ]"
-        class="btn btn-outline-primary p-1 m-1"
         (click)="nombreSchema(schema.name)"
-        >View Relation</a
+        class="btn btn-outline-primary p-1 m-1"
+        >Add Entities</a
       >
     </div>
   </div>

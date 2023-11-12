@@ -18,6 +18,15 @@
 
 <div class="modal-content">
   <form [formGroup]="formulario" class="modal-form">
+    <div *ngIf="existingDataExists()">
+      <label for="existing">Existing relationship</label>
+      <textarea
+        id="existing"
+        name="existing"
+        formControlName="existing"
+      ></textarea>
+    </div>
+
     <div class="modal-buttons">
       <button class="bexample" type="button" (click)="setHolaInDescription()">
         Exam 1

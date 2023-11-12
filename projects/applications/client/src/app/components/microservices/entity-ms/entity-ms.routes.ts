@@ -11,12 +11,12 @@ const EntityRoutes: Routes = [
     title: 'Schemaentity',
   },
   {
-    path: 'entities/:schema_name',
+    path: 'entities',
     component: EntitiesComponent,
     title: 'Entities',
   },
   {
-    path: 'entity/:schema_name',
+    path: 'entity',
     component: EntityComponent,
     title: 'Entity',
   },

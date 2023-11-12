@@ -39,7 +39,7 @@ export class DataService {
     return this.id_Apli;
   }
 
-  getNombreSchema() {
+  getNombreSchema(): string {
     return this.nombreSchema;
   }
 

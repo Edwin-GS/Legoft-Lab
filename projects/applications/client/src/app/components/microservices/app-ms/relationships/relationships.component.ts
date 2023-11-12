@@ -11,7 +11,7 @@ import { HandlerService } from 'projects/libraries/helpers/src/lib/services/hand
 export class RelationshipsComponent implements OnInit {
   viche = 'assets/img/viche.png';
   user!: string;
-  name: string;
+  name!: string;
   namevacio: string = '';
   private id_Apli: any;
   notifier: boolean = false;
@@ -34,6 +34,7 @@ export class RelationshipsComponent implements OnInit {
   ngOnInit() {
     this.formulario = this.formBuilder.group({
       refs: ['', Validators.required],
+      existing: [''],
     });
     this.errornotifier = false;
     this.notifier = false;
@@ -48,9 +49,16 @@ export class RelationshipsComponent implements OnInit {
           this.schemasGeneral = response.data.schemas.relationships;
 
           const stringValue = JSON.stringify(this.schemasGeneral, null, 2);
-          this.formulario.get('refs')?.setValue(stringValue);
+          this.formulario.get('existing')?.setValue(stringValue);
         }
       });
+  }
+
+  existingDataExists(): boolean {
+    return (
+      this.formulario.get('existing')?.value !== null &&
+      this.formulario.get('existing')?.value !== undefined
+    );
   }
 
   onSubmit() {
