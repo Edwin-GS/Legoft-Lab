@@ -46,7 +46,18 @@
     <div class="product-info">
       <p class="product-price">Data: {{ data | json }}</p>
 
-      <a class="btn btn-outline-primary p-1 m-1">Update</a>
+      <a
+        [routerLink]="[
+          '/legoft-lab/client',
+          user,
+          id,
+          'schemaentity',
+          'entity'
+        ]"
+        (click)="EnviandoIdEntity(data)"
+        class="btn btn-outline-primary p-1 m-1"
+        >Update</a
+      >
 
       <a
         class="btn btn-outline-primary p-1 m-1"

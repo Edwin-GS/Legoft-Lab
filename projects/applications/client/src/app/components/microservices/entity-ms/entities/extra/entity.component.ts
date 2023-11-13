@@ -22,6 +22,8 @@ export class EntityComponent implements OnInit {
   errornotifier: boolean = false;
   larespuesta: string = '';
   notifier2: boolean = false;
+  data_Entity: any;
+  data_EntityClear: any;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -32,6 +34,8 @@ export class EntityComponent implements OnInit {
     this.id = this.dataService.getUserId();
     this.id_Apli = this.dataService.getConsoleLogData();
     this.nameShcema = this.dataService.getNombreSchema();
+    this.data_Entity = this.dataService.getDataEntity();
+    this.data_EntityClear = this.dataService.clearDataEntity();
   }
 
   ngOnInit() {
@@ -52,6 +56,8 @@ export class EntityComponent implements OnInit {
     this.notifier2 = false;
 
     this.getSchemas();
+
+    this.newAppForm.get('entities')?.setValue(JSON.stringify(this.data_Entity));
   }
 
   closeDialog() {
@@ -62,39 +68,76 @@ export class EntityComponent implements OnInit {
     this.errornotifier = false;
   }
 
+  clearText() {
+    this.newAppForm
+      .get('entities')
+      ?.setValue(
+        '{"numInvoice": 1,"model": "A4","totals": {"discount":0, "vat": 0,"total": 0}}'
+      );
+  }
+
   createEntities() {
     this.newAppForm.markAllAsTouched();
-    if (this.newAppForm.valid) {
-      const data = this.newAppForm.value.entities;
-      this.handlerService
-        .post(
-          data,
-          `entities/create/${this.user}/${this.nameShcema}/${this.id_Apli}`
-        )
-        .subscribe(
-          (resp) => {
-            if (resp && resp.success === false) {
-              this.errornotifier = true;
-              this.larespuesta = resp['message'];
-            } else {
-              this.notifier = true;
-              this.newAppForm
-                .get('entities')
-                ?.setValue(
-                  '{"numInvoice": 1,"model": "A4","totals": {"discount":0, "vat": 0,"total": 0}}'
-                );
-              this.larespuesta = resp['message'];
-            }
-          },
-          (err) => {
-            this.errornotifier = true;
-            this.larespuesta = err['message'];
-          }
-        );
+
+    const data = this.newAppForm.value.entities;
+    const parsedData = JSON.parse(data);
+    const idValue = parsedData._id;
+
+    if (idValue) {
+      this.updataEntities();
     } else {
-      this.errornotifier = true;
-      this.larespuesta = 'Error.';
+      if (this.newAppForm.valid) {
+        this.handlerService
+          .post(
+            data,
+            `entities/create/${this.user}/${this.nameShcema}/${this.id_Apli}`
+          )
+          .subscribe(
+            (resp) => {
+              if (resp && resp.success === false) {
+                this.errornotifier = true;
+                this.larespuesta = resp['message'];
+              } else {
+                this.notifier = true;
+                this.clearText();
+                this.larespuesta = resp['message'];
+              }
+            },
+            (err) => {
+              this.errornotifier = true;
+              this.larespuesta = err['message'];
+            }
+          );
+      } else {
+        this.errornotifier = true;
+        this.larespuesta = 'Error.';
+      }
     }
+  }
+
+  updataEntities() {
+    const data = this.newAppForm.value.entities;
+    this.handlerService
+      .put(
+        data,
+        `entities/update/${this.user}/${this.nameShcema}/${this.id_Apli}/${this.data_Entity._id}`
+      )
+      .subscribe(
+        (resp) => {
+          if (resp && resp.success === false) {
+            this.errornotifier = true;
+            this.larespuesta = resp['message'];
+          } else {
+            this.notifier = true;
+            this.clearText();
+            this.larespuesta = resp['message'];
+          }
+        },
+        (err) => {
+          this.errornotifier = true;
+          this.larespuesta = err.message;
+        }
+      );
   }
 
   getSchemas() {

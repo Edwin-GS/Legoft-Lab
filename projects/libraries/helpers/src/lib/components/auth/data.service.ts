@@ -8,6 +8,7 @@ export class DataService {
   private userId: string = '';
   private nombreSchema: string = '';
   private id_Apli: any;
+  private data_entity: any;
 
   constructor() {}
 
@@ -27,6 +28,10 @@ export class DataService {
     this.nombreSchema = name;
   }
 
+  setDataEntity(data: any) {
+    this.data_entity = data;
+  }
+
   getUser(): string {
     return this.user;
   }
@@ -43,7 +48,15 @@ export class DataService {
     return this.nombreSchema;
   }
 
+  getDataEntity(): any {
+    return this.data_entity;
+  }
+
   clearDataName() {
     return (this.nombreSchema = '');
+  }
+
+  clearDataEntity() {
+    return (this.data_entity = 'Press a sample button');
   }
 }

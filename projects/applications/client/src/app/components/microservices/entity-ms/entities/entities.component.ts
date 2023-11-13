@@ -74,6 +74,10 @@ export class EntitiesComponent implements OnInit {
     this.deleteEntities(this.applicationId);
   }
 
+  EnviandoIdEntity(data: any) {
+    this.dataService.setDataEntity(data);
+  }
+
   closeDialogApi() {
     this.notifier2 = false;
   }

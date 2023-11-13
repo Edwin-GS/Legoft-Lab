@@ -19,7 +19,7 @@
 <div class="modal-content">
   <form [formGroup]="newAppForm" class="modal-form">
     <div class="text-div">
-      <label for="refs">Existing fields</label>
+      <label for="schema">Existing fields</label>
       <textarea id="schema" name="schema" formControlName="schema"></textarea>
 
       <div class="modal-buttons">
@@ -45,12 +45,12 @@
         <span class="fas fa-times" (click)="closeDialog2()"></span>
       </div>
 
-      <label for="refs">Entities</label>
+      <label for="entities">Entities</label>
       <textarea
         id="entities"
         name="entities"
         formControlName="entities"
-        placeholder='{"numInvoice": 1,"model": "A4","totals": {"discount":0, "vat": 0,"total": 0}}'
+        placeholder="Press a sample button"
       ></textarea>
       <p
         class="error-message"
