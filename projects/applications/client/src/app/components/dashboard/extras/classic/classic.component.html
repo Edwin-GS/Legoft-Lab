@@ -10,12 +10,14 @@
   rel="stylesheet"
 />
 
-<div *ngIf="notifier" class="popup" id="popup" [class.open-popup]="notifier">
-  <img src="{{ viche }}" alt="imagen-legoft" />
-  <h2>Sign out</h2>
-  <p>Are you sure you want to sign out?</p>
-  <a href="/#/signin" class="btnHome" (click)="closeDialog2()">Yes</a>
-  <a class="btnHome2" (click)="closeDialog()">No</a>
+<div *ngIf="notifier" class="modal">
+  <div class="popup" id="popup" [class.open-popup]="notifier">
+    <img src="{{ viche }}" alt="imagen-legoft" />
+    <h2>Sign out</h2>
+    <p>Are you sure you want to sign out?</p>
+    <a href="/#/signin" class="btnHome" (click)="closeDialog2()">Yes</a>
+    <a class="btnHome2" (click)="closeDialog()">No</a>
+  </div>
 </div>
 
 <input type="checkbox" id="nav-toggle" />

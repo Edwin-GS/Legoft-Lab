@@ -8,18 +8,21 @@ import { HandlerService } from 'projects/libraries/helpers/src/lib/services/hand
   styleUrls: ['./relationship.component.css'],
 })
 export class RelationshipComponent implements OnInit {
-  viche = 'assets/img/viche-x.png';
+  viche = 'assets/img/viche.png';
+  logoUrl: string = 'assets/favicon/android-icon-48x48.png';
   user!: string;
   id!: string;
   private id_Apli: any;
   schemasGeneral: any[] = [];
   notifier: boolean = false;
-
   loading: boolean = false;
+  errornotifier: boolean = false;
+  larespuesta: string = '';
+  notifier2: boolean = false;
 
   constructor(
-    private dataService: DataService,
-    private handlerService: HandlerService
+    private handlerService: HandlerService,
+    private dataService: DataService
   ) {
     this.user = this.dataService.getUser();
     this.id = this.dataService.getUserId();
@@ -28,9 +31,15 @@ export class RelationshipComponent implements OnInit {
 
   ngOnInit() {
     // this.setIdApli(this.id_Apli);
-
-    console.log(this.id_Apli);
     this.loadSchemas();
+  }
+
+  closeDialog2() {
+    this.errornotifier = false;
+  }
+
+  nombreSchema(name: string) {
+    this.dataService.setNombreSchema(name);
   }
 
   loadSchemas() {
