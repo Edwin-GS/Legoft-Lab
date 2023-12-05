@@ -1,14 +1,9 @@
-<link
-  rel="stylesheet"
-  href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css"
-/>
+<link rel="stylesheet"
+  href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
-  rel="stylesheet"
-/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap" rel="stylesheet" />
 
 <div *ngIf="notifier" class="modal">
   <div class="popup" id="popup" [class.open-popup]="notifier">
@@ -29,39 +24,28 @@
   <div class="sidebar-menu">
     <ul>
       <li>
-        <a
-          [routerLink]="['/legoft-lab/client', user, id]"
-          (click)="setActiveLink('dashboard')"
-          [class.active]="activeLink === 'dashboard'"
-        >
+        <a [routerLink]="['/legoft-lab/client', user, id]" (click)="setActiveLink('dashboard')"
+          [class.active]="activeLink === 'dashboard'">
           <span class="las la-home"></span> <span>Dashboard</span>
         </a>
       </li>
 
       <li>
-        <a
-          [routerLink]="['/legoft-lab/client', user, id, 'users']"
-          (click)="setActiveLink('users')"
-          [class.active]="activeLink === 'users'"
-        >
+        <a [routerLink]="['/legoft-lab/client', user, id, 'users']" (click)="setActiveLink('users')"
+          [class.active]="activeLink === 'users'">
           <span class="las la-user"></span>
           <span>Users </span>
         </a>
       </li>
 
       <li>
-        <a
-          [routerLink]="['/legoft-lab/client', user, id, 'applications']"
-          (click)="setActiveLink('applications')"
-          [class.active]="activeLink === 'applications'"
-          ><span class="las la-archive"></span> <span>Applications</span></a
-        >
+        <a [routerLink]="['/legoft-lab/client', user, id, 'applications']" (click)="setActiveLink('applications')"
+          [class.active]="activeLink === 'applications'"><span class="las la-archive"></span>
+          <span>Applications</span></a>
       </li>
       <li>
-        <a class="signout" (click)="closeDialogOpen()"
-          ><span class="las la-arrow-circle-right"></span>
-          <span>Sign out</span></a
-        >
+        <a class="signout" (click)="closeDialogOpen()"><span class="las la-arrow-circle-right"></span>
+          <span>Sign out</span></a>
       </li>
     </ul>
   </div>
@@ -78,15 +62,12 @@
     <div class="user-wrapper">
       <img src="{{ avatar }}" width="40px" height="40px" alt="" />
       <div>
-        <h4>Administrator</h4>
         <small>{{ user }}</small>
       </div>
     </div>
   </header>
   <main>
-    <ng-container
-      *ngIf="isDashboardView(); then dashboardView; else otherView"
-    ></ng-container>
+    <ng-container *ngIf="isDashboardView(); then dashboardView; else otherView"></ng-container>
     <ng-template #dashboardView>
       <div class="cards">
         <div class="card-single">

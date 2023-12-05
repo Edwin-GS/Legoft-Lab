@@ -13,6 +13,8 @@ export class AppsShowComponent implements OnInit {
     private dataService: DataService
   ) {}
 
+  appImageUrl: string = 'assets/img/mail.png';
+
   applicationId: any;
   application: any;
   // _id: string = '';
@@ -22,6 +24,8 @@ export class AppsShowComponent implements OnInit {
   errornotifier: boolean = false;
   larespuesta: string = '';
   loading: boolean = false;
+  user: string = this.dataService.getUser();
+  userId: string = this.dataService.getUserId();
 
   ngOnInit(): void {
     this.getIdApli();

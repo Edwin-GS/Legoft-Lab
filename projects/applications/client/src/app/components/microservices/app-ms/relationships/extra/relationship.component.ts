@@ -12,7 +12,7 @@ export class RelationshipComponent implements OnInit {
   logoUrl: string = 'assets/favicon/android-icon-48x48.png';
   user!: string;
   id!: string;
-  private id_Apli: any;
+  applicationId: any;
   schemasGeneral: any[] = [];
   notifier: boolean = false;
   loading: boolean = false;
@@ -26,7 +26,7 @@ export class RelationshipComponent implements OnInit {
   ) {
     this.user = this.dataService.getUser();
     this.id = this.dataService.getUserId();
-    this.id_Apli = this.dataService.getConsoleLogData();
+    this.applicationId = this.dataService.getConsoleLogData();
   }
 
   ngOnInit() {
@@ -44,25 +44,27 @@ export class RelationshipComponent implements OnInit {
 
   loadSchemas() {
     this.loading = true;
-    this.handlerService.get(`schemas/${this.user}/${this.id_Apli}`).subscribe(
-      (response) => {
-        if (response && response.data) {
-          this.schemasGeneral = response.data[0].schemas;
+    this.handlerService
+      .get(`schemas/${this.user}/${this.applicationId}`)
+      .subscribe(
+        (response) => {
+          if (response && response.data) {
+            this.schemasGeneral = response.data[0].schemas;
+            this.loading = false;
+          } else {
+            this.notifier = true;
+            this.loading = false;
+          }
+        },
+        (error) => {
           this.loading = false;
-        } else {
-          this.notifier = true;
-          this.loading = false;
+          if (error.status === 404) {
+            this.notifier = true;
+          } else {
+            this.notifier = true;
+          }
         }
-      },
-      (error) => {
-        this.loading = false;
-        if (error.status === 404) {
-          this.notifier = true;
-        } else {
-          this.notifier = true;
-        }
-      }
-    );
+      );
   }
 
   closeDialog() {

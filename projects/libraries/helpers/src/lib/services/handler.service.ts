@@ -92,8 +92,8 @@ export class HandlerService {
   }
 
   response(data: any) {
-    this.sid = data['sid'];
-    if (data['sid'] && this.sid !== OPEN_AUTH && this.sid !== HANDLER_AUTH) {
+    if (data['sid'] !== OPEN_AUTH && this.sid !== HANDLER_AUTH) {
+      this.sid = data['sid'];
       localStorage.setItem('LEGOFT_SID_SITE', this.sid);
     }
     return data['resp'];
