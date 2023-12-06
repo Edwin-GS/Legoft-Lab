@@ -1,13 +1,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
-  rel="stylesheet"
-/>
-<link
-  rel="stylesheet"
-  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
 <div *ngIf="notifier" [class.open-popup]="notifier" class="popup" id="popup">
   <img src="{{ viche }}" alt="imagen-legoft" />
@@ -16,7 +10,7 @@
   <button class="btnHome" type="button" (click)="closeDialog()">Ok</button>
 </div>
 
-<div class="modal-content">
+<!-- <div class="modal-content">
   <form [formGroup]="formulario" class="modal-form">
     <div class="modal-buttons">
       <button class="bexample" type="button" (click)="setHolaInDescription()">
@@ -36,49 +30,28 @@
     <div class="div-entero-input">
       <div class="input-div">
         <label for="index">Index</label>
-        <input
-          type="number"
-          id="index"
-          name="index"
-          formControlName="index"
-          placeholder="1"
-        />
-        <p
-          class="error-message"
-          *ngIf="
+        <input type="number" id="index" name="index" formControlName="index" placeholder="1" />
+        <p class="error-message" *ngIf="
             formulario.get('index')?.hasError('required') &&
             formulario.get('index')?.touched
-          "
-        >
+          ">
           Index is required.
         </p>
-        <p
-          class="error-message"
-          *ngIf="
+        <p class="error-message" *ngIf="
             formulario.get('index')?.hasError('pattern') &&
             formulario.get('index')?.touched
-          "
-        >
+          ">
           Numbers only.
         </p>
       </div>
 
       <div class="input-div">
         <label for="name">Name</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          formControlName="name"
-          placeholder="legoft"
-        />
-        <p
-          class="error-message"
-          *ngIf="
+        <input type="text" id="name" name="name" formControlName="name" placeholder="legoft" />
+        <p class="error-message" *ngIf="
             formulario.get('name')?.hasError('required') &&
             formulario.get('name')?.touched
-          "
-        >
+          ">
           Name is required.
         </p>
       </div>
@@ -86,19 +59,12 @@
 
     <div class="text-div">
       <label for="description">Fields</label>
-      <textarea
-        id="description"
-        name="description"
-        formControlName="description"
-        placeholder=' {"name":"nombre", "type": "string", "required": true, "update": true, "unique": true}'
-      ></textarea>
-      <p
-        class="error-message"
-        *ngIf="
+      <textarea id="description" name="description" formControlName="description"
+        placeholder=' {"name":"nombre", "type": "string", "required": true, "update": true, "unique": true}'></textarea>
+      <p class="error-message" *ngIf="
           formulario.get('description')?.hasError('required') &&
           formulario.get('description')?.touched
-        "
-      >
+        ">
         Description is required.
       </p>
     </div>
@@ -107,4 +73,151 @@
       <button class="bsave" type="button" (click)="onSubmit()">Save</button>
     </div>
   </form>
+</div> -->
+
+
+<div class="container">
+  <article class="m-4">
+    <div>
+      <h1>Create schema by adding fields</h1>
+    </div>
+    <div>
+      <button class="btn btn-primary m-1" mat-button (click)="addRow()">
+        Add field
+      </button>
+      <button class="btn btn-danger m-1" mat-button (click)="removeSelectedRows()">
+        Remove fields
+      </button>
+    </div>
+  </article>
+
+
+
+
+  <table class="table table-striped table-hover" mat-table [dataSource]="dataSource">
+    <ng-container [matColumnDef]="col.key" *ngFor="let col of columnsSchema">
+      <th mat-header-cell *matHeaderCellDef [ngSwitch]="col.key">
+        <span *ngSwitchCase="'isSelected'">
+          <mat-checkbox (change)="selectAll($event)" [checked]="isAllSelected()"
+            [indeterminate]="!isAllSelected() && isAnySelected()"></mat-checkbox>
+        </span>
+        <span *ngSwitchDefault>{{ col.label }}</span>
+      </th>
+
+
+      <td mat-cell *matCellDef="let element">
+        <div [ngSwitch]="col.type" *ngIf="!element.isEdit">
+          <ng-container *ngSwitchCase="'isSelected'">
+            <mat-checkbox (change)="element.isSelected = $event.checked" [checked]="element.isSelected"></mat-checkbox>
+          </ng-container>
+          <div class="btn-edit" *ngSwitchCase="'isEdit'">
+            <button class="btn btn-primary m-1" mat-button (click)="element.isEdit = !element.isEdit">
+              <i class="las la-pen"></i>
+            </button>
+            <button mat-button class="btn btn-danger m-1" (click)="removeRow(element.id)">
+              <i class="lar la-trash-alt"></i>
+            </button>
+          </div>
+          <span *ngSwitchCase="'date'">
+            {{ element[col.key] | date: 'mediumDate' }}
+          </span>
+          <span *ngSwitchDefault>
+            {{ element[col.key] }}
+          </span>
+        </div>
+
+
+        <div [ngSwitch]="col.type" *ngIf="element.isEdit">
+          <div *ngSwitchCase="'isSelected'"></div>
+          <div class="btn-edit" *ngSwitchCase="'isEdit'">
+            <button class="btn btn-primary" mat-button (click)="editRow(element)"
+              [disabled]="disableSubmit(element.id)">
+              <i class="las la-check"></i>
+            </button>
+          </div>
+          <mat-form-field class="form-input" *ngSwitchCase="'date'" appearance="fill">
+            <mat-label>Choose a date</mat-label>
+            <input matInput [matDatepicker]="picker" [(ngModel)]="element[col.key]" />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          <ng-container *ngSwitchCase="'boolean'">
+            <mat-checkbox [(ngModel)]="element[col.key]"></mat-checkbox>
+          </ng-container>
+          <ng-container *ngSwitchCase="'select'">
+            <mat-select [(ngModel)]="element[col.key]"></mat-select>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'select'">
+            <select [(ngModel)]="element[col.key]">
+              <option *ngFor="let option of getOptions(col.key)" [value]="option">
+                {{ option }}
+              </option>
+            </select>
+          </ng-container>
+
+          <ng-container *ngIf="col.type === 'object' && col.key === 'size'">
+            <mat-form-field appearance="fill">
+              <mat-label>Min</mat-label>
+              <input matInput type="number" [(ngModel)]="element[col.key].min"
+                (change)="inputHandler($event, element.id, col.key + '.min')" />
+            </mat-form-field>
+            <mat-form-field appearance="fill">
+              <mat-label>Max</mat-label>
+              <input matInput type="number" [(ngModel)]="element[col.key].max"
+                (change)="inputHandler($event, element.id, col.key + '.max')" />
+            </mat-form-field>
+
+          </ng-container>
+
+          <!-- Inside your table -->
+          <ng-container *ngIf="col.type==='object'&& col.key ==='object'">
+            <mat-form-field appearance="fill">
+              <mat-label>{{ col.label }}</mat-label>
+              <input matInput type="text" [(ngModel)]="element[col.key]"
+                (change)="inputHandler($event, element.id, col.key)" />
+            </mat-form-field>
+          </ng-container>
+
+          <ng-container *ngIf="col.type === 'text'">
+            <mat-form-field appearance="fill">
+              <mat-label>{{ col.label }}</mat-label>
+              <input matInput type="text" [(ngModel)]="element[col.key]"
+                (change)="inputHandler($event, element.id, col.key)" />
+            </mat-form-field>
+          </ng-container>
+
+          <!-- <ng-container *ngIf="col.type === 'enum'">
+            <mat-form-field appearance="fill">
+              <mat-label>{{ col.label }}</mat-label>
+              <mat-select [(ngModel)]="element[col.key]" (change)="inputHandler($event, element.id, col.key)">
+                <option *ngFor="let option of element[col.key]" [value]="option">{{ option }}</option>
+              </mat-select>
+            </mat-form-field>
+          </ng-container> -->
+
+          <ng-container *ngIf="col.type === 'objectId'">
+            <mat-form-field appearance="fill">
+              <mat-label>{{ col.label }}</mat-label>
+              <input matInput [required]="col.required" [pattern]="col.pattern" type="text"
+                [(ngModel)]="element[col.key]" (change)="inputHandler($event, element.id, col.key)" />
+            </mat-form-field>
+          </ng-container>
+
+
+          <!-- 
+          <mat-form-field class="form-input" *ngSwitchDefault>
+            <input matInput [required]="col.required" [pattern]="col.pattern" [type]="col.type"
+              [(ngModel)]="element[col.key]" (change)="inputHandler($event, element.id, col.key)" />
+          </mat-form-field> -->
+        </div>
+
+
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+
 </div>

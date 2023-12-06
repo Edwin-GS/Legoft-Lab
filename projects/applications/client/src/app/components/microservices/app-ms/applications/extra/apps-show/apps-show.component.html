@@ -68,7 +68,75 @@
         </div>
     </ng-template>
 
+    <div class="mb-2 d-flex justify-content-center align-items-center">
+        <!-- <a class="btn btn-outline-primary p-1 m-1" (click)="editApplication(application)">Update</a>
+        <a class="btn btn-outline-primary p-1 m-1" (click)="closeDialogOpen(application)">Delete</a> -->
+    </div>
+    <!-- <div *ngIf="showModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img [src]="logoUrl" alt="Legoft logo" class="modal-logo" />
+                <h2>Create App</h2>
+            </div>
+            <form [formGroup]="newAppForm" class="modal-form">
+                <div *ngIf="errornotifier" class="alert" [class.alert-open]="errornotifier">
+                    <span class="fas fa-exclamation-circle"></span>
+                    <span class="msg">{{ larespuesta }}</span>
+                    <span class="fas fa-times" (click)="closeDialog2()"></span>
+                </div>
 
+                <label for="appName">Name</label>
+                <input type="text" id="appName" name="appName" formControlName="name" />
+                <p class="error-message" *ngIf="
+                newAppForm.get('name')?.hasError('required') &&
+                newAppForm.get('name')?.touched
+              ">
+                    Name is required.
+                </p>
+                <p class="error-message" *ngIf="
+                newAppForm.get('name')?.hasError('minlength') &&
+                newAppForm.get('name')?.touched
+              ">
+                    Name must be at least 1 characters long.
+                </p>
+                <p class="error-message" *ngIf="
+                newAppForm.get('name')?.hasError('maxlength') &&
+                newAppForm.get('name')?.touched
+              ">
+                    Name cannot exceed 50 characters.
+                </p>
+
+                <label for="appDescription">Description</label>
+                <textarea id="appDescription" name="appDescription" formControlName="description"></textarea>
+                <p class="error-message" *ngIf="
+                newAppForm.get('description')?.hasError('required') &&
+                newAppForm.get('description')?.touched
+              ">
+                    Description is required.
+                </p>
+                <p class="error-message" *ngIf="
+                newAppForm.get('description')?.hasError('minlength') &&
+                newAppForm.get('description')?.touched
+              ">
+                    Description must be at least 1 characters long.
+                </p>
+                <p class="error-message" *ngIf="
+                newAppForm.get('description')?.hasError('maxlength') &&
+                newAppForm.get('description')?.touched
+              ">
+                    Description cannot exceed 255 characters.
+                </p>
+
+                <label for="appImage">Image</label>
+                <input type="file" id="appImage" name="appImage" (change)="onFileSelected($event)" accept="image/*" />
+
+                <div class="modal-buttons">
+                    <button type="button" (click)="createApplication()">Save</button>
+                    <button type="button" (click)="closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div> -->
     <app-relationship></app-relationship>
 
 

@@ -208,12 +208,7 @@
           <h5 class="card-title fs-4">{{ application.name }}</h5>
           <p class="card-text">{{ application.description }}</p>
         </div>
-        <div class="mb-2 d-flex justify-content-center align-items-center">
-          <a class="btn btn-outline-primary p-1 m-1" (click)="editApplication(application)">Update</a>
-          <a class="btn btn-outline-primary p-1 m-1" (click)="closeDialogOpen(application)">Delete</a>
-        </div>
-        <a class="btn btn-outline-primary p-1 mb-2" (click)="setIdApli(application._id)"
-          [routerLink]="['/legoft-lab/client', user, id, 'schemaentity']">Add schema</a>
+
       </a>
     </div>
   </div>

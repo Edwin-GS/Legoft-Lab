@@ -26,6 +26,7 @@ export class AppsShowComponent implements OnInit {
   loading: boolean = false;
   user: string = this.dataService.getUser();
   userId: string = this.dataService.getUserId();
+  showModal: boolean = false;
 
   ngOnInit(): void {
     this.getIdApli();
@@ -106,6 +107,82 @@ export class AppsShowComponent implements OnInit {
       return minutes === 1 ? '1 minute ago' : minutes + ' minutes ago';
     } else {
       return 'Just now';
+    }
+  }
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  // editApplication(application: any) {
+  //   this.newAppForm.patchValue({
+  //     name: application.name,
+  //     description: application.description,
+  //     icon: application.icon,
+  //   });
+
+  //   this.showModal = true;
+  //   this.appid = application._id;
+
+  //   this.handlerService.get(`applications/get/${this.appid}`).subscribe(
+  //     (resp) => {
+  //       if (resp && resp.success === false) {
+  //         this.errornotifier = true;
+  //         this.larespuesta = resp['message'];
+  //       } else {
+  //         this.newAppForm.patchValue({
+  //           name: resp.data.name,
+  //           description: resp.data.description,
+  //           icon: resp.data.icon,
+  //         });
+  //         this.loadImageFromDatabase(resp.data.icon);
+  //       }
+  //     },
+  //     (err) => {
+  //       this.errornotifier = true;
+  //       this.larespuesta = err['message'];
+  //     }
+  //   );
+  // }
+
+  // deleteApplication(application: any) {
+  //   const applicationId = application._id;
+  //   this.handlerService
+  //     .delete(
+  //       `applications/delete/${this.dataService.getUser()}/${applicationId}`
+  //     )
+  //     .subscribe(
+  //       (resp) => {
+  //         if (resp && resp.success === false) {
+  //           this.errornotifier = true;
+  //           this.larespuesta = resp['message'];
+  //         } else {
+  //           this.notifier = true;
+  //           this.loadApplications();
+  //           this.larespuesta = resp['message'];
+  //         }
+  //       },
+  //       (err) => {
+  //         this.errornotifier = true;
+  //         this.larespuesta = err.message;
+  //       }
+  //     );
+  // }
+
+  loadImageFromDatabase(icon: string) {
+    if (this.isBase64(icon)) {
+      const img = new Image();
+      img.src = 'data:image/jpeg;base64,' + icon;
+      const imagePreview = document.getElementById(
+        'appImage'
+      ) as HTMLImageElement;
+      if (imagePreview) {
+        imagePreview.src = img.src;
+      }
     }
   }
 }
