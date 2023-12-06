@@ -50,7 +50,7 @@
   <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
   <input type="search" id="search" class="form-control" aria-label="Search" aria-describedby="inputGroup-sizing-lg"
     placeholder="Search" (input)="onInputChange($event)">
-  <button class="btn btn-outline-dark btn-sm" type="button" id="button-addon2" (click)="openModal()">
+  <button class="btn btn-outline-primary btn-sm" type="button" id="button-addon2" (click)="openModal()">
     <i class="las la-plus-circle"></i>
     New App
   </button>
@@ -200,7 +200,10 @@
           <ng-container *ngIf="application.icon && application.icon !== '<ICON BASE64>'">
             <img class="card-img-top img-fluid" [src]="application.icon" alt="Icon" />
           </ng-container>
-          <ng-container *ngIf="!application.icon || application.icon === '<ICON BASE64>'">
+          <ng-container *ngIf="!application.icon">
+            <img class="card-img-top" [src]="appImageUrl" alt="Icon" />
+          </ng-container>
+          <ng-container *ngIf="application.icon === '<ICON BASE64>'">
             <img class="card-img-top" [src]="appImageUrl" alt="Icon" />
           </ng-container>
         </a>
@@ -208,7 +211,10 @@
           <h5 class="card-title fs-4">{{ application.name }}</h5>
           <p class="card-text">{{ application.description }}</p>
         </div>
-
+        <div class="mb-2 d-flex justify-content-center align-items-center">
+          <a class="btn btn-outline-primary p-1 m-1" (click)="editApplication(application)">Update</a>
+          <a class="btn btn-outline-primary p-1 m-1" (click)="closeDialogOpen(application)">Delete</a>
+        </div>
       </a>
     </div>
   </div>

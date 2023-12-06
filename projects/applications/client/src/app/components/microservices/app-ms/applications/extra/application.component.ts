@@ -299,7 +299,7 @@ export class ApplicationComponent implements OnInit {
 
   closeDialogOpen(application: any) {
     this.notifier2 = true;
-    this.applicationId = application;
+    this.applicationId = application.id;
   }
 
   closeDialogApiYes() {
