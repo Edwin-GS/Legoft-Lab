@@ -1,1 +1,85 @@
-<p>relationships works!</p>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+
+<div *ngIf="notifier" [class.open-popup]="notifier" class="popup" id="popup">
+  <img src="{{ viche }}" alt="imagen-legoft" />
+  <h2>Successfully</h2>
+  <p>Relationship created successfully</p>
+  <button class="btnHome" type="button" (click)="closeDialog()">Ok</button>
+</div>
+
+<div class="modal-content">
+  <form [formGroup]="formulario" class="modal-form">
+    <div *ngIf="existingDataExists()">
+      <label for="existing">Existing relationship</label>
+      <textarea
+        id="existing"
+        name="existing"
+        formControlName="existing"
+      ></textarea>
+    </div>
+
+    <div class="modal-buttons">
+      <button class="bexample" type="button" (click)="setHolaInDescription()">
+        Exam 1
+      </button>
+      <button class="bexample" type="button" (click)="setHola1InDescription()">
+        Exam 2
+      </button>
+    </div>
+
+    <div *ngIf="errornotifier" class="alert" [class.alert-open]="errornotifier">
+      <span class="fas fa-exclamation-circle"></span>
+      <span class="msg">{{ larespuesta }}</span>
+      <span class="fas fa-times" (click)="closeDialog2()"></span>
+    </div>
+
+    <div class="text-div">
+      <label for="refs">Relationships</label>
+      <textarea
+        id="refs"
+        name="refs"
+        formControlName="refs"
+        placeholder='{
+          "type": "one-to-many",
+          "refs": {
+                     "index": 1,
+                     "mode": "simple",
+                   "local": "marcas", 
+                   "ref": {"schema":"modelos"}
+                  }	        
+          },
+         {
+          "type": "many-to-one",
+          "refs": {
+                     "index": 2,
+                     "mode": "simple",
+                   "local": "modelos", 
+                   "ref": {"schema":"marcas"}
+             }
+           }'
+      ></textarea>
+      <p
+        class="error-message"
+        *ngIf="
+          formulario.get('refs')?.hasError('required') &&
+          formulario.get('refs')?.touched
+        "
+      >
+        Refs is required.
+      </p>
+    </div>
+
+    <div class="modal-buttons">
+      <button class="bsave" type="button" (click)="onSubmit()">Save</button>
+    </div>
+  </form>
+</div>

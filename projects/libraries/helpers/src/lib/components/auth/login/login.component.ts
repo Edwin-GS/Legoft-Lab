@@ -1,50 +1,111 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {HandlerService} from "../../../services/handler.service";
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HandlerService } from '../../../services/handler.service';
+import { DataService } from '../data.service';
 
 @Component({
   selector: 'lib-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-
-  /**
-   * Login with admin only by email
-   * **/
-
+  appName = 'Legoft';
+  logoUrl = 'assets/logo/Legoft-Logo-OK-01-HIGH.png';
+  dashboard = 'legoft-lab/client/:user/:user_id';
   @Input() isAdmin = false;
 
-  constructor(private hs: HandlerService) {
+  loginForm: FormGroup;
+  isLoggedin: boolean = false;
+  errornotifier: boolean = false;
+  larespuesta: string = '';
+  isSigningIn: boolean = false;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private hs: HandlerService,
+    private dataService: DataService
+  ) {
+    this.loginForm = this.formBuilder.group({
+      user: this.formBuilder.group({
+        userOrEmail: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(1),
+            Validators.maxLength(150),
+          ],
+        ],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(
+              '^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,15}$'
+            ),
+          ],
+        ],
+      }),
+    });
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
 
-    this.login()
-  }
+  onSubmit() {
+    this.isSigningIn = true;
+    localStorage.setItem('LEGOFT_SID_SITE', '');
 
-  login() {
-
-    localStorage.setItem('LEGOFT_SID_SITE', '')
-
-    let user = {userOrEmail: "andres25", password: "Andres25."}
-
-    this.hs.post(user, `users/login`)
-      .subscribe((resp) => {
-
+    const user = this.loginForm.value.user;
+    this.hs.post(user, `users/login`).subscribe(
+      (resp) => {
         if (resp['success'] === false) {
-
-          console.log('Error creating user')
-
+          this.errornotifier = true;
+          this.larespuesta = resp['message'];
         } else {
-
-          console.log(resp)
-
+          localStorage.setItem(
+            'USER',
+            JSON.stringify({ id: resp.data.id, user: resp.data.user })
+          );
+          this.isLoggedin = true;
+          this.dataService.setUser(resp.data.user);
+          this.dataService.setUserId(resp.data.id);
+          const updatedDashboard = this.dashboard
+            .replace(':user', resp.data.user)
+            .replace(':user_id', resp.data.id);
+          this.router.navigate([updatedDashboard]);
         }
-      }, (err) => {
-
-        console.error('Error creating user: ' + err);
+      },
+      (err) => {
+        this.errornotifier = true;
+        this.larespuesta = err['message'];
+      },
+      () => {
+        this.isSigningIn = false;
       }
+    );
+  }
 
-    )
+  closeDialog2() {
+    this.errornotifier = false;
+  }
+
+  togglePasswordVisibility() {
+    const passwordInput = document.getElementById(
+      'passwordInput'
+    ) as HTMLInputElement;
+    const togglePassword = document.getElementById('togglePassword');
+
+    if (passwordInput && togglePassword) {
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        togglePassword.classList.remove('fa-eye');
+        togglePassword.classList.add('fa-eye-slash');
+      } else {
+        passwordInput.type = 'password';
+        togglePassword.classList.remove('fa-eye-slash');
+        togglePassword.classList.add('fa-eye');
+      }
+    }
   }
 }

@@ -1,1 +1,118 @@
-<p>classic works!</p>
+<link rel="stylesheet"
+  href="https://maxst.icons8.com/vue-static/landings/line-awesome/line-awesome/1.3.0/css/line-awesome.min.css" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap" rel="stylesheet" />
+
+<div *ngIf="notifier" class="modal">
+  <div class="popup" id="popup" [class.open-popup]="notifier">
+    <img src="{{ viche }}" alt="imagen-legoft" />
+    <h2>Sign out</h2>
+    <p>Are you sure you want to sign out?</p>
+    <a href="/#/signin" class="btnHome" (click)="closeDialog2()">Yes</a>
+    <a class="btnHome2" (click)="closeDialog()">No</a>
+  </div>
+</div>
+
+<input type="checkbox" id="nav-toggle" />
+<div class="sidebar">
+  <div class="sidebar-brand">
+    <h2><span>Legoft</span></h2>
+  </div>
+
+  <div class="sidebar-menu">
+    <ul>
+      <li>
+        <a [routerLink]="['/legoft-lab/client', user, id]" (click)="setActiveLink('dashboard')"
+          [class.active]="activeLink === 'dashboard'">
+          <span class="las la-home"></span> <span>Dashboard</span>
+        </a>
+      </li>
+
+      <li>
+        <a [routerLink]="['/legoft-lab/client', user, id, 'users']" (click)="setActiveLink('users')"
+          [class.active]="activeLink === 'users'">
+          <span class="las la-user"></span>
+          <span>Users </span>
+        </a>
+      </li>
+
+      <li>
+        <a [routerLink]="['/legoft-lab/client', user, id, 'applications']" (click)="setActiveLink('applications')"
+          [class.active]="activeLink === 'applications'"><span class="las la-archive"></span>
+          <span>Applications</span></a>
+      </li>
+      <li>
+        <a class="signout" (click)="closeDialogOpen()"><span class="las la-arrow-circle-right"></span>
+          <span>Sign out</span></a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="main-content">
+  <header>
+    <h2>
+      <label for="nav-toggle">
+        <span class="las la-bars"></span>
+      </label>
+      {{ getTitleForActiveLink() }}
+    </h2>
+    <div class="user-wrapper">
+      <img src="{{ avatar }}" width="40px" height="40px" alt="" />
+      <div>
+        <small>{{ user }}</small>
+      </div>
+    </div>
+  </header>
+  <main>
+    <ng-container *ngIf="isDashboardView(); then dashboardView; else otherView"></ng-container>
+    <ng-template #dashboardView>
+      <div class="cards">
+        <div class="card-single">
+          <div>
+            <h1>5</h1>
+            <span>Pendejo número 5</span>
+          </div>
+          <div>
+            <span class="las la-users"></span>
+          </div>
+        </div>
+
+        <div class="card-single">
+          <div>
+            <h1>12</h1>
+            <span>Pendejo número 12</span>
+          </div>
+          <div>
+            <span class="las la-users"></span>
+          </div>
+        </div>
+
+        <div class="card-single">
+          <div>
+            <h1>25</h1>
+            <span>Pendejo número 25</span>
+          </div>
+          <div>
+            <span class="las la-users"></span>
+          </div>
+        </div>
+
+        <div class="card-single">
+          <div>
+            <h1>2</h1>
+            <span>Pendejo número 2</span>
+          </div>
+          <div>
+            <span class="las la-users"></span>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+    <ng-template #otherView>
+      <router-outlet></router-outlet>
+    </ng-template>
+  </main>
+</div>

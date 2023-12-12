@@ -1,0 +1,147 @@
+<div class="container">
+
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end m-3">
+        <a [routerLink]="['/legoft-lab/client', user, userId, 'applications']" type="button"
+            class="btn btn-dark d-flex align-items-center">
+            <i class="las la-arrow-left fs-4 me-1"></i>
+            <p class="m-0">Mis Apps</p>
+        </a>
+    </div>
+
+
+    <ng-container *ngIf="loading; else elseTemplate">
+
+        <div class="card m-3" aria-hidden="true">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <div class="m-5 d-flex align-items-center justify-content-center">
+                        <div class="spinner-border" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title placeholder-glow">
+                            <span class="placeholder col-6"></span>
+                        </h5>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-12"></span>
+                        </p>
+                        <p class="card-text placeholder-glow">
+                            <span class="placeholder col-4 placeholder-xs"></span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+
+    <ng-template #elseTemplate>
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-3">
+                    <ng-container *ngIf="application.icon && application.icon !== '<ICON BASE64>'">
+                        <img class="img-fluid rounded-start" [src]="application.icon" alt="Icon" class="icon" />
+                    </ng-container>
+
+                    <ng-container *ngIf="!application.icon ">
+                        <img class="img-fluid rounded-start" [src]="appImageUrl" alt="Icon" />
+                    </ng-container>
+                </div>
+                <div class="col-md-9">
+                    <div class="card-body h-100 d-flex flex-column justify-content-between">
+                        <h5 class="card-title fs-4">{{application.name}}</h5>
+                        <p class="card-text">
+                            {{application.description}}
+                        </p>
+                        <p class="card-text"><small class="text-body-secondary">Last updated:
+                                {{getTime(application.date)}}</small>
+                        </p>
+                        <div class="d-flex justify-content-end align-items-end">
+                            <a class="mt-3 ms-3 btn btn-primary" (click)="editApplication(application)"> <i
+                                    class="lar la-edit fs-4"></i>Editar</a>
+                            <a class="mt-3 ms-3 btn btn-danger" (click)="closeDialogOpen(application)"><i
+                                    class="las la-trash fs-4"></i>Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="mb-2 d-flex justify-content-center align-items-center">
+            <a class="btn btn-outline-primary p-1 m-1" (click)="editApplication(application)">Update</a>
+            <a class="btn btn-outline-primary p-1 m-1" (click)="closeDialogOpen(application)">Delete</a>
+        </div> -->
+    </ng-template>
+
+    <div *ngIf="showModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img [src]="logoUrl" alt="Legoft logo" class="modal-logo" />
+                <h2>Create App</h2>
+            </div>
+            <form [formGroup]="newAppForm" class="modal-form">
+                <div *ngIf="errornotifier" class="alert" [class.alert-open]="errornotifier">
+                    <span class="fas fa-exclamation-circle"></span>
+                    <span class="msg">{{ larespuesta }}</span>
+                    <span class="fas fa-times" (click)="closeDialog2()"></span>
+                </div>
+
+                <label for="appName">Name</label>
+                <input type="text" id="appName" name="appName" formControlName="name" />
+                <p class="error-message" *ngIf="
+                newAppForm.get('name')?.hasError('required') &&
+                newAppForm.get('name')?.touched
+              ">
+                    Name is required.
+                </p>
+                <p class="error-message" *ngIf="
+                newAppForm.get('name')?.hasError('minlength') &&
+                newAppForm.get('name')?.touched
+              ">
+                    Name must be at least 1 characters long.
+                </p>
+                <p class="error-message" *ngIf="
+                newAppForm.get('name')?.hasError('maxlength') &&
+                newAppForm.get('name')?.touched
+              ">
+                    Name cannot exceed 50 characters.
+                </p>
+
+                <label for="appDescription">Description</label>
+                <textarea id="appDescription" name="appDescription" formControlName="description"></textarea>
+                <p class="error-message" *ngIf="
+                newAppForm.get('description')?.hasError('required') &&
+                newAppForm.get('description')?.touched
+              ">
+                    Description is required.
+                </p>
+                <p class="error-message" *ngIf="
+                newAppForm.get('description')?.hasError('minlength') &&
+                newAppForm.get('description')?.touched
+              ">
+                    Description must be at least 1 characters long.
+                </p>
+                <p class="error-message" *ngIf="
+                newAppForm.get('description')?.hasError('maxlength') &&
+                newAppForm.get('description')?.touched
+              ">
+                    Description cannot exceed 255 characters.
+                </p>
+
+                <label for="appImage">Image</label>
+                <!-- <input type="file" id="appImage" name="appImage" (change)="onFileSelected($event)" accept="image/*" /> -->
+
+                <div class="modal-buttons">
+                    <!-- <button type="button" (click)="createApplication()">Save</button> -->
+                    <button type="button" (click)="closeModal()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <app-relationship></app-relationship>
+
+
+
+</div>

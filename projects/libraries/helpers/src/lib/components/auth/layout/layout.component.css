@@ -1,0 +1,669 @@
+/* Azul claro: #3498DB
+Azul oscuro: #2E86C1 */
+
+* {
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+}
+
+html {
+  font-size: 62.4%;
+  overflow: hidden;
+}
+
+body {
+  background: #f9f9f9;
+}
+
+section {
+  min-height: 100vh;
+  padding: 0 9%;
+  padding-top: 7.5rem;
+  padding-bottom: 2rem;
+}
+
+.btnHome {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 3rem;
+  border-radius: 5rem;
+  background: #2e86c1;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s linear;
+}
+
+.btnHome:hover {
+  transform: scale(1.1);
+}
+
+.headerHome {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  box-shadow: 0 0.5rem 1rem rgba(4, 3, 3, 0.1);
+  padding: 2rem 9%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1000;
+}
+
+.headerHome .logoHome {
+  font-size: 2rem;
+  color: #3498db;
+  font-weight: 500;
+}
+
+.headerHome .logoHome span {
+  color: #2e86c1;
+}
+
+.headerHome .navbarHome a {
+  font-size: 1.2rem;
+  margin-left: 2rem;
+  color: #3498db;
+}
+
+.headerHome .navbarHome a:hover {
+  color: #2e86c1;
+}
+
+.headerHome input {
+  display: none;
+}
+
+.headerHome label {
+  font-size: 2rem;
+  color: #3498db;
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.inicioHome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url(assets/img/inicio_fondo.png) no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.inicioHome .contentHome h3 {
+  font-weight: 500;
+}
+
+.inicioHome .imageHome img {
+  width: 40vw;
+  animation: float 3s linear infinite;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0rem);
+  }
+  50% {
+    transform: translateY(-3.5rem);
+  }
+}
+
+.inicioHome .contentHome h3 {
+  font-size: 5.5rem;
+  color: #333;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.inicioHome .contentHome h3 span {
+  color: #3498db;
+  text-transform: uppercase;
+}
+
+.inicioHome .contentHome p {
+  font-size: 1.3rem;
+  color: #666;
+  padding: 1rem 0;
+  line-height: 1.5;
+}
+
+@media (max-width: 1200px) {
+  html {
+    font-size: 55%;
+  }
+}
+
+@media (max-width: 990) {
+  section {
+    padding: 0 3%;
+    padding-top: 7.5rem;
+    padding-bottom: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .headerHome label {
+    visibility: visible;
+    opacity: 1;
+  }
+
+  .headerHome .navbarHome {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: white;
+    padding: 1rem 2rem;
+    border-top: 0.1rem solid rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+    transform-origin: top;
+    transform: scaleY(0);
+    opacity: 0;
+    transition: 0.2s linear;
+  }
+
+  .headerHome .navbarHome a {
+    display: block;
+    margin: 2rem 0;
+    font-size: 1.2rem;
+  }
+
+  .headerHome input:checked ~ .navbarHome {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  .headerHome input:checked ~ label::before {
+    content: "\f00d";
+  }
+
+  .inicioHome {
+    flex-flow: column-reverse;
+  }
+
+  .inicioHome .imageHome img {
+    width: 100%;
+  }
+
+  .inicioHome .contentHome h3 {
+    font-size: 3.6rem;
+    line-height: 1;
+  }
+
+  .inicioHome .contentHome p {
+    font-size: 1.5rem;
+    line-height: 1.5;
+  }
+
+  .acerca_de {
+    background-position: right;
+  }
+
+  .suscribete p {
+    width: auto;
+  }
+}
+
+@media (max-width: 450px) {
+  html {
+    font-size: 49%;
+  }
+
+  .acerca_de .columnaHome .contentHome .bottons a {
+    width: 100%;
+    text-align: center;
+  }
+
+  .acerca_de .columnaHome .contentHome a:last-child {
+    margin: 1rem 0;
+  }
+}
+
+/* Para las secciones de funciones */
+.btnCaja {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.8rem 3rem;
+  border-radius: 5rem;
+  background: #2e86c1;
+  font-size: 1.5rem;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  transition: all 0.3s linear;
+}
+
+.btnCaja:hover {
+  transform: scale(1.1);
+}
+
+.heading {
+  text-align: center;
+  background: #333;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 3rem;
+  text-transform: uppercase;
+  padding: 1rem;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.detallesHome .caja-contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.detallesHome .caja-contenedor .caja {
+  flex: 1 1 30rem;
+  background: white;
+  border-radius: 0.5rem;
+  border: 0.1rem solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  margin: 1.5rem;
+  padding: 3rem 2rem;
+  border-radius: 0.5rem;
+  text-align: center;
+  transition: 0.2s linear;
+}
+
+.detallesHome .caja-contenedor .caja h3 {
+  font-size: 2rem;
+  color: #333;
+  padding-top: 1rem;
+}
+
+.detallesHome .caja-contenedor .caja img {
+  height: 15rem;
+}
+
+.acerca_de {
+  background: url(assets/img/fondo_2.png);
+  background-size: cover;
+  background-position: center;
+  padding-bottom: 3rem;
+}
+
+.acerca_de .columnaHome {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.acerca_de .columnaHome .imageHome2 {
+  flex: 1 1 30rem;
+  animation: float 3s linear infinite;
+}
+
+.acerca_de .columnaHome .imageHome2 img {
+  width: 100%;
+}
+
+.acerca_de .columnaHome .contentHome {
+  flex: 1 1 30rem;
+}
+
+.acerca_de .columnaHome .contentHome h3 {
+  font-size: 3rem;
+  color: #333;
+  line-height: 1;
+}
+
+.acerca_de .columnaHome .contentHome p {
+  font-size: 1.5rem;
+  color: #333;
+  padding: 1rem 0;
+  line-height: 1.5;
+}
+
+.acerca_de .columnaHome .contentHome .bottons a:last-child {
+  margin-left: 2rem;
+}
+
+/* Para el div de suscribirte */
+
+.suscribete {
+  text-align: center;
+  padding: 5rem 1rem;
+  background: url(assets/img/fondosub.png) no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.suscribete h3 {
+  color: white;
+  font-size: 3rem;
+  text-transform: uppercase;
+  line-height: 1;
+  font-weight: 500;
+}
+
+.suscribete p {
+  color: whitesmoke;
+  font-size: 1.6rem;
+  margin: 2rem auto;
+  line-height: 1.5;
+  width: auto;
+}
+
+.suscribete form {
+  display: flex;
+  max-width: 70rem;
+  border: 0.2rem solid whitesmoke;
+  padding: 0.5rem;
+  border-radius: 5rem;
+  margin: 2rem auto;
+  height: 5.5rem;
+}
+
+.suscribete form input[type="email"] {
+  padding: 0 2rem;
+  font-size: 1.7rem;
+  background: none;
+  width: 100%;
+  color: white;
+  text-transform: none;
+}
+
+.suscribete form input[type="email"]::placeholder {
+  color: whitesmoke;
+  text-transform: capitalize;
+}
+
+.suscribete form input[type="submit"] {
+  background: white;
+  width: 20rem;
+  font-size: 1.7rem;
+  border-radius: 5rem;
+  cursor: pointer;
+}
+
+.suscribete form input[type="submit"]:hover {
+  color: #2e86c1;
+}
+
+/* Este es el bloque de opiniones */
+
+.opiniones .caja-contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.opiniones .caja-contenedor .caja {
+  background: white;
+  margin: 1rem;
+  padding: 1rem;
+  text-align: center;
+  position: relative;
+  border: 0.1rem solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  flex: 1 1 30rem;
+  border-radius: 0.5rem;
+}
+
+.opiniones .caja-contenedor .caja .fa-comment {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  font-size: 4rem;
+  color: #2e86c1;
+  opacity: 0.3;
+}
+
+.opiniones .caja-contenedor .caja .user img {
+  border-radius: 50%;
+  object-fit: cover;
+  height: 8rem;
+  width: 8rem;
+  margin-top: 2rem;
+}
+
+.opiniones .caja-contenedor .caja .user h3 {
+  color: black;
+  font-size: 2rem;
+}
+
+.opiniones .caja-contenedor .caja .user .stars i {
+  color: #333;
+  font-size: 1.5rem;
+  padding: 1rem 0;
+}
+
+.opiniones .caja-contenedor .caja .comentarios {
+  color: black;
+  font-size: 1.5rem;
+  padding: 1rem;
+  line-height: 1.5;
+}
+
+/* El bloque de los precios */
+
+.precios .caja-contenedor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.precios .caja-contenedor .caja {
+  flex: 1 1 28rem;
+  margin: 1rem;
+  padding: 1rem;
+  background: white;
+  border: 0.1rem solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  text-align: center;
+  padding-bottom: 3rem;
+}
+
+.precios .caja-contenedor .caja:nth-child(2),
+.precios .caja-contenedor .caja:hover {
+  border: 0.2rem solid #2e86c1;
+}
+
+.precios .caja-contenedor .caja .titulo {
+  color: #333;
+  font-size: 2.5rem;
+  padding-top: 1rem;
+  line-height: 1;
+}
+
+.precios .caja-contenedor .caja .tipos {
+  font-size: 4rem;
+  color: #2e86c1;
+  padding: 1rem 0;
+}
+
+.precios .caja-contenedor .caja .tipos span {
+  font-size: 2rem;
+}
+
+.precios .caja-contenedor .caja ul {
+  padding: 1rem 0;
+  list-style: none;
+}
+
+.precios .caja-contenedor .caja ul li {
+  font-size: 1.7rem;
+  color: #333;
+  padding: 0.5rem 0;
+  line-height: 1.5;
+}
+
+.precios .caja-contenedor .caja ul li .fa-check {
+  color: lightgreen;
+}
+
+.precios .caja-contenedor .caja ul li .fa-times {
+  color: red;
+}
+
+/* Este es el bloque de contactos */
+
+.contactos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding-bottom: 4rem;
+}
+
+.contactos .image {
+  flex: 1 1 30rem;
+  animation: float 3s linear infinite;
+}
+
+.contactos .image img {
+  width: 100%;
+  padding: 2rem;
+}
+
+.contactos form {
+  flex: 1 1 30rem;
+  padding: 2rem 3rem;
+  border: 0.1rem solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  border-radius: 0.5rem;
+  background: white;
+}
+
+.contactos .heading {
+  text-align: left;
+  padding: 0;
+  padding-bottom: 2rem;
+}
+
+.contactos form .inputcaja {
+  position: relative;
+}
+
+.contactos form .inputcaja input,
+.contactos form .inputcaja textarea {
+  width: 100%;
+  background: none;
+  color: #333;
+  margin: 1.5rem 0;
+  padding: 0.5rem 0;
+  font-size: 1.7rem;
+  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.1);
+  text-transform: none;
+}
+
+.contactos form .inputcaja textarea {
+  resize: none;
+  height: 13rem;
+}
+
+.contactos form .inputcaja label {
+  position: absolute;
+  top: 1.7rem;
+  left: 0;
+  font-size: 1.7rem;
+  color: #333;
+  transition: 0.2s linear;
+}
+
+.contactos form .inputcaja input:focus ~ label,
+.contactos form .inputcaja input:valid ~ label,
+.contactos form .inputcaja textarea:focus ~ label,
+.contactos form .inputcaja textarea:valid ~ label {
+  top: 0.5rem;
+  font-size: 1.5rem;
+  color: #2e86c1;
+}
+
+/* El bloque de footer */
+
+.footer {
+  padding-top: 3rem;
+  background: url(assets/img/footer-fondo2.png);
+  background-size: cover;
+  background-position: center;
+}
+
+.footer .caja-contenedor {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.footer .caja-contenedor .caja {
+  flex: 1 1 15rem;
+  margin: 2rem;
+}
+
+.footer .caja-contenedor .caja h3 {
+  font-size: 2.5rem;
+  padding: 1rem 0;
+  color: white;
+  text-decoration: underline;
+  text-underline-offset: 1rem;
+}
+
+.footer .caja-contenedor .caja p {
+  font-size: 1.5rem;
+  padding: 0.5rem 0;
+  color: whitesmoke;
+  line-height: 1.5;
+}
+
+.footer .caja-contenedor .caja a {
+  display: block;
+  font-size: 1.5rem;
+  padding: 0.5rem 0;
+  color: white;
+}
+
+.footer .caja-contenedor .caja a:hover {
+  text-decoration: underline;
+}
+
+.footer .caja-contenedor .caja .info {
+  display: flex;
+  align-items: center;
+}
+
+.footer .caja-contenedor .caja .info i {
+  margin: 0.5rem 0;
+  margin-right: 1rem;
+  border-radius: 50%;
+  background: whitesmoke;
+  color: #2e86c1;
+  font-size: 1.8rem;
+  height: 4.5rem;
+  width: 4.5rem;
+  line-height: 4.5rem;
+  text-align: center;
+}
+
+.footer .creditos {
+  font-size: 2rem;
+  font-weight: normal;
+  letter-spacing: 0.1rem;
+  color: white;
+  border-top: 0.1rem solid white;
+  padding: 2.5rem 1rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.footer .creditos a {
+  color: white;
+}

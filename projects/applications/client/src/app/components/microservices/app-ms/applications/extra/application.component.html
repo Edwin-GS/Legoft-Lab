@@ -1,1 +1,293 @@
-<p>application works!</p>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+<div *ngIf="notifier2" class="modal">
+  <div class="popup" id="popup" [class.open-popup]="notifier2">
+    <img src="{{ viche }}" alt="imagen-legoft" />
+    <h2>Delete</h2>
+    <p>Are you sure you want to delete the application?</p>
+    <a class="btnHome" (click)="closeDialogApiYes()">Yes</a>
+    <a class="btnHome2" (click)="closeDialogApi()">No</a>
+  </div>
+</div>
+
+<div *ngIf="notifier" class="modal">
+  <div [class.open-popup]="notifier" class="popup" id="popup">
+    <img src="{{ viche }}" alt="imagen-legoft" />
+    <h2>Successfully</h2>
+    <p>{{ larespuesta }}</p>
+    <a class="btnHome" type="button" (click)="closeDialog()">Ok</a>
+  </div>
+</div>
+
+<!-- <form>
+  <label for="search" class="mb-2 text-sm font-medium text-gray-900 sr-only"
+    >Search</label
+  >
+  <div class="relative">
+    <div
+      class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"
+    ></div>
+    <input
+      type="search"
+      id="search"
+      class="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+      placeholder="Search"
+      (input)="onInputChange($event)"
+    />
+    <button
+      (click)="openModal()"
+      type="submit"
+      class="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2"
+    >
+      Create App
+    </button>
+  </div>
+</form> -->
+
+<div class="input-group input-group-lg mb-3">
+  <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none"></div>
+  <input type="search" id="search" class="form-control" aria-label="Search" aria-describedby="inputGroup-sizing-lg"
+    placeholder="Search" (input)="onInputChange($event)">
+  <button class="btn btn-outline-primary btn-sm" type="button" id="button-addon2" (click)="openModal()">
+    <i class="las la-plus-circle"></i>
+    New App
+  </button>
+</div>
+
+<div *ngIf="loading; else loadedCompleteTemplate" class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
+  <div class="col">
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200?bg=ff5733&text=Card+Image" class="card-img-top img-fluid"
+        alt="Placeholder Image" />
+
+      <div class="card-body">
+        <h5 class="card-title placeholder-glow">
+          <span class="placeholder col-6"></span>
+        </h5>
+        <p class="card-text placeholder-glow">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+          <span class="placeholder col-8"></span>
+        </p>
+        <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200?bg=ff5733&text=Card+Image" class="card-img-top img-fluid"
+        alt="Placeholder Image" />
+      <div class="card-body">
+        <h5 class="card-title placeholder-glow">
+          <span class="placeholder col-6"></span>
+        </h5>
+        <p class="card-text placeholder-glow">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+          <span class="placeholder col-8"></span>
+        </p>
+        <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200?bg=ff5733&text=Card+Image" class="card-img-top img-fluid"
+        alt="Placeholder Image" />
+      <div class="card-body">
+        <h5 class="card-title placeholder-glow">
+          <span class="placeholder col-6"></span>
+        </h5>
+        <p class="card-text placeholder-glow">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+          <span class="placeholder col-8"></span>
+        </p>
+        <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card">
+      <img src="https://via.placeholder.com/300x200?bg=ff5733&text=Card+Image" class="card-img-top img-fluid"
+        alt="Placeholder Image" />
+      <div class="card-body">
+        <h5 class="card-title placeholder-glow">
+          <span class="placeholder col-6"></span>
+        </h5>
+        <p class="card-text placeholder-glow">
+          <span class="placeholder col-7"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-4"></span>
+          <span class="placeholder col-6"></span>
+          <span class="placeholder col-8"></span>
+        </p>
+        <a class="btn btn-primary disabled placeholder col-6" aria-disabled="true"></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loadedCompleteTemplate class="container">
+  <!-- <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>Icon</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Add schema</th>
+        <th>Schema</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let application of filteredApplications">
+        <td>
+          <button class="btnDelete" type="button" (click)="deleteApplication(application)">
+            🗑️
+          </button>
+          <button class="btnEdit" type="button" (click)="editApplication(application)">
+            ✏️
+          </button>
+        </td>
+        <td>
+          <ng-container *ngIf="application.icon && application.icon !== '<ICON BASE64>'">
+            <img [src]="application.icon" alt="Icon" class="icon" />
+          </ng-container>
+          <ng-container *ngIf="!application.icon || application.icon === '<ICON BASE64>'">
+            <p>[No icon inserted]</p>
+          </ng-container>
+        </td>
+        <td>{{ application.name }}</td>
+        <td>{{ application.description }}</td>
+        <td>
+          <a (click)="IdApli(application._id)" [routerLink]="['/legoft-lab/client', user, id, 'schemaentity']">Add
+            schema</a>
+        </td>
+        <td>
+          <a (click)="IdApli(application._id)" [routerLink]="[
+              '/legoft-lab/client',
+              user,
+              id,
+              'applications',
+              'relationship'
+            ]">Schema</a>
+        </td>
+      </tr>
+    </tbody>
+  </table> -->
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-4">
+    <div class="col" *ngFor="let application of filteredApplications">
+      <a class="card link-underline link-underline-opacity-0">
+        <a (click)="setIdApli(application._id)" [routerLink]="[
+            '/legoft-lab/client',
+            user,
+            id,
+            'applications',
+            'show',
+            application._id
+          ]">
+          <ng-container *ngIf="application.icon && application.icon !== '<ICON BASE64>'">
+            <img class="card-img-top img-fluid" [src]="application.icon" alt="Icon" />
+          </ng-container>
+          <ng-container *ngIf="!application.icon">
+            <img class="card-img-top" [src]="appImageUrl" alt="Icon" />
+          </ng-container>
+          <ng-container *ngIf="application.icon === '<ICON BASE64>'">
+            <img class="card-img-top" [src]="appImageUrl" alt="Icon" />
+          </ng-container>
+        </a>
+        <div class="card-body">
+          <h5 class="card-title fs-4">{{ application.name }}</h5>
+          <p class="card-text">{{ application.description }}</p>
+        </div>
+        <div class="mb-2 d-flex justify-content-center align-items-center">
+          <a class="btn btn-outline-primary p-1 m-1" (click)="editApplication(application)">Update</a>
+          <a class="btn btn-outline-primary p-1 m-1" (click)="closeDialogOpen(application)">Delete</a>
+        </div>
+      </a>
+    </div>
+  </div>
+</ng-template>
+
+<div *ngIf="applications.length <= 0 && loading == false">
+  <div class="no-applications-message">
+    <h1>No applications created.</h1>
+  </div>
+</div>
+
+<div *ngIf="showModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <img [src]="logoUrl" alt="Legoft logo" class="modal-logo" />
+      <h2>Create App</h2>
+    </div>
+    <form [formGroup]="newAppForm" class="modal-form">
+      <div *ngIf="errornotifier" class="alert" [class.alert-open]="errornotifier">
+        <span class="fas fa-exclamation-circle"></span>
+        <span class="msg">{{ larespuesta }}</span>
+        <span class="fas fa-times" (click)="closeDialog2()"></span>
+      </div>
+
+      <label for="appName">Name</label>
+      <input type="text" id="appName" name="appName" formControlName="name" />
+      <p class="error-message" *ngIf="
+          newAppForm.get('name')?.hasError('required') &&
+          newAppForm.get('name')?.touched
+        ">
+        Name is required.
+      </p>
+      <p class="error-message" *ngIf="
+          newAppForm.get('name')?.hasError('minlength') &&
+          newAppForm.get('name')?.touched
+        ">
+        Name must be at least 1 characters long.
+      </p>
+      <p class="error-message" *ngIf="
+          newAppForm.get('name')?.hasError('maxlength') &&
+          newAppForm.get('name')?.touched
+        ">
+        Name cannot exceed 50 characters.
+      </p>
+
+      <label for="appDescription">Description</label>
+      <textarea id="appDescription" name="appDescription" formControlName="description"></textarea>
+      <p class="error-message" *ngIf="
+          newAppForm.get('description')?.hasError('required') &&
+          newAppForm.get('description')?.touched
+        ">
+        Description is required.
+      </p>
+      <p class="error-message" *ngIf="
+          newAppForm.get('description')?.hasError('minlength') &&
+          newAppForm.get('description')?.touched
+        ">
+        Description must be at least 1 characters long.
+      </p>
+      <p class="error-message" *ngIf="
+          newAppForm.get('description')?.hasError('maxlength') &&
+          newAppForm.get('description')?.touched
+        ">
+        Description cannot exceed 255 characters.
+      </p>
+
+      <label for="appImage">Image</label>
+      <input type="file" id="appImage" name="appImage" (change)="onFileSelected($event)" accept="image/*" />
+
+      <div class="modal-buttons">
+        <button type="button" (click)="createApplication()">Save</button>
+        <button type="button" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

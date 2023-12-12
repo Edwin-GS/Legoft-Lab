@@ -1,13 +1,11 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FollowedsComponent} from './followeds/followeds.component';
-import {FollowersComponent} from './followers/followers.component';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FollowedsComponent } from './followeds/followeds.component';
+import { FollowersComponent } from './followers/followers.component';
 import { FollowerComponent } from './followers/extra/follower.component';
 import { FollowedComponent } from './followeds/extra/followed.component';
 import { UserComponent } from './users/user.component';
-import {USER_ROUTES} from "./users-ms.routes";
-
-
+import { USER_ROUTES } from './users-ms.routes';
 
 @NgModule({
   declarations: [
@@ -15,12 +13,8 @@ import {USER_ROUTES} from "./users-ms.routes";
     FollowersComponent,
     FollowerComponent,
     FollowedComponent,
-    UserComponent
+    UserComponent,
   ],
-  imports: [
-    CommonModule,
-    USER_ROUTES
-  ]
+  imports: [CommonModule, USER_ROUTES],
 })
-export class UserMsModule {
-}
+export class UserMsModule {}

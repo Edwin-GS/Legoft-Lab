@@ -1,1 +1,90 @@
-<p>entity works!</p>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+  rel="stylesheet"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+
+<div *ngIf="notifier" [class.open-popup]="notifier" class="popup" id="popup">
+  <img src="{{ viche }}" alt="imagen-legoft" />
+  <h2>Successfully</h2>
+  <p>{{ larespuesta }}</p>
+  <button class="btnHome" type="button" (click)="closeDialog()">Ok</button>
+</div>
+
+<div class="modal-content">
+  <form [formGroup]="newAppForm" class="modal-form">
+    <div class="text-div">
+      <label for="schema">Existing fields</label>
+      <textarea id="schema" name="schema" formControlName="schema"></textarea>
+
+      <div class="modal-buttons">
+        <button class="bexample" type="button" (click)="setHolaInDescription()">
+          Exam 1
+        </button>
+        <button
+          class="bexample"
+          type="button"
+          (click)="setHola1InDescription()"
+        >
+          Exam 2
+        </button>
+      </div>
+
+      <div
+        *ngIf="errornotifier"
+        class="alert"
+        [class.alert-open]="errornotifier"
+      >
+        <span class="fas fa-exclamation-circle"></span>
+        <span class="msg">{{ larespuesta }}</span>
+        <span class="fas fa-times" (click)="closeDialog2()"></span>
+      </div>
+
+      <label for="entities">Entities</label>
+      <textarea
+        id="entities"
+        name="entities"
+        formControlName="entities"
+        placeholder="Press a sample button"
+      ></textarea>
+      <p
+        class="error-message"
+        *ngIf="
+          newAppForm.get('entities')?.hasError('required') &&
+          newAppForm.get('entities')?.touched
+        "
+      >
+        Entities is required.
+      </p>
+      <p
+        class="error-message"
+        *ngIf="
+          newAppForm.get('entities')?.hasError('minlength') &&
+          newAppForm.get('entities')?.touched
+        "
+      >
+        Entities must be at least 1 characters long.
+      </p>
+      <p
+        class="error-message"
+        *ngIf="
+          newAppForm.get('entities')?.hasError('maxlength') &&
+          newAppForm.get('entities')?.touched
+        "
+      >
+        Entities cannot exceed 255 characters.
+      </p>
+    </div>
+
+    <div class="modal-buttons">
+      <button class="bsave" type="button" (click)="createEntities()">
+        Save
+      </button>
+    </div>
+  </form>
+</div>

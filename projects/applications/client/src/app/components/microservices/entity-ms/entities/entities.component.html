@@ -1,1 +1,69 @@
-<p>entities works!</p>
+<div *ngIf="entitiesGeneral.length <= 0 && !loading">
+  <div class="d-flex justify-content-center border">
+    <h1 class="my-5">No entities created.</h1>
+  </div>
+</div>
+
+<div *ngIf="loading" class="d-flex justify-content-center">
+  <div class="spinner-border" role="status">
+    <span class="visually-hidden">Loading...</span>
+  </div>
+</div>
+
+<div *ngIf="notifier2" class="modal">
+  <div class="popup" id="popup" [class.open-popup]="notifier2">
+    <img src="{{ viche }}" alt="imagen-legoft" />
+    <h2>Delete</h2>
+    <p>Are you sure you want to delete the entitie?</p>
+    <a class="btnHome" (click)="closeDialogApiYes()">Yes</a>
+    <a class="btnHome2" (click)="closeDialogApi()">No</a>
+  </div>
+</div>
+
+<div *ngIf="notifier" class="modal">
+  <div [class.open-popup]="notifier" class="popup" id="popup">
+    <img src="{{ viche }}" alt="imagen-legoft" />
+    <h2>Successfully</h2>
+    <p>{{ larespuesta }}</p>
+    <a class="btnHome" type="button" (click)="closeDialog()">Ok</a>
+  </div>
+</div>
+
+<div *ngIf="errornotifier" class="modal">
+  <div [class.open-popup]="errornotifier" class="popup" id="popup">
+    <img src="{{ vicherror }}" alt="imagen-legoft" />
+    <h2>Error</h2>
+    <p>{{ larespuesta }}</p>
+    <a class="btnHome" type="button" (click)="closeDialogError()">Ok</a>
+  </div>
+</div>
+
+<section
+  *ngIf="!loading && entitiesGeneral.length > 0"
+  class="row row-cols-1 row-cols-md-2 g-4 rounded border m-3"
+>
+  <div class="product" *ngFor="let data of entitiesGeneral; let i = index">
+    <div class="product-info">
+      <p class="product-price">Data: {{ data | json }}</p>
+
+      <a
+        [routerLink]="[
+          '/legoft-lab/client',
+          user,
+          id,
+          'schemaentity',
+          'entity'
+        ]"
+        (click)="EnviandoIdEntity(data)"
+        class="btn btn-outline-primary p-1 m-1"
+        >Update</a
+      >
+
+      <a
+        class="btn btn-outline-primary p-1 m-1"
+        (click)="closeDialogOpen(data._id)"
+        >Delete</a
+      >
+    </div>
+  </div>
+</section>

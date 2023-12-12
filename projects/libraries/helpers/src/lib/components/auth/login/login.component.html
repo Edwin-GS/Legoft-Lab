@@ -1,1 +1,96 @@
-<p>login works!</p>
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+/>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap"
+  rel="stylesheet"
+/>
+
+<section class="contactos" id="contactos">
+  <div class="image">
+    <a href="/#/"><img src="{{ logoUrl }}" alt="imagen-form" /></a>
+  </div>
+  <form action="" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div *ngIf="errornotifier" class="alert" [class.alert-open]="errornotifier">
+      <span class="fas fa-exclamation-circle"></span>
+      <span class="msg">{{ larespuesta }}</span>
+      <span class="fas fa-times" (click)="closeDialog2()"></span>
+    </div>
+
+    <div formGroupName="user">
+      <div class="inputcaja">
+        <input type="text" formControlName="userOrEmail" autofocus />
+        <label for="">email</label>
+        <p
+          class="error-message"
+          *ngIf="
+            loginForm.get('user.userOrEmail')?.hasError('required') &&
+            loginForm.get('user.userOrEmail')?.touched
+          "
+        >
+          Email is required.
+        </p>
+        <p
+          class="error-message"
+          *ngIf="
+            loginForm.get('user.userOrEmail')?.hasError('minlength') &&
+            loginForm.get('user.userOrEmail')?.touched
+          "
+        >
+          Email must not be empty.
+        </p>
+        <p
+          class="error-message"
+          *ngIf="
+            loginForm.get('user.userOrEmail')?.hasError('maxlength') &&
+            loginForm.get('user.userOrEmail')?.touched
+          "
+        >
+          Email cannot exceed 150 characters.
+        </p>
+      </div>
+
+      <div class="inputcaja">
+        <input type="password" formControlName="password" id="passwordInput" />
+        <i
+          class="fa-solid fa-eye"
+          id="togglePassword"
+          (click)="togglePasswordVisibility()"
+        ></i>
+        <label for="">password</label>
+        <p
+          class="error-message"
+          *ngIf="
+            loginForm.get('user.password')?.hasError('required') &&
+            loginForm.get('user.password')?.touched
+          "
+        >
+          Password is required.
+        </p>
+        <p
+          class="error-message"
+          *ngIf="
+            loginForm.get('user.password')?.hasError('pattern') &&
+            loginForm.get('user.password')?.touched
+          "
+        >
+          Password must contain 8-15 characters, uppercase, lowercase, numbers,
+          and special characters.
+        </p>
+      </div>
+    </div>
+
+    <button class="btnHome" type="submit">
+      {{ isSigningIn ? "Signing In..." : "Sign in" }}
+    </button>
+
+    <p><a href="/#/verify-email/:confirm">Forgot your password?</a></p>
+    <p>
+      You don't have a legoft account?
+      <a href="/#/signup">Create one here</a>
+    </p>
+  </form>
+</section>
