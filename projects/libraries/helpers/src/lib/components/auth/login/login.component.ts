@@ -57,22 +57,23 @@ export class LoginComponent implements OnInit {
     localStorage.setItem('LEGOFT_SID_SITE', '');
 
     const user = this.loginForm.value.user;
-
     this.hs.post(user, `users/login`).subscribe(
       (resp) => {
         if (resp['success'] === false) {
           this.errornotifier = true;
           this.larespuesta = resp['message'];
         } else {
+          localStorage.setItem(
+            'USER',
+            JSON.stringify({ id: resp.data.id, user: resp.data.user })
+          );
           this.isLoggedin = true;
           this.dataService.setUser(resp.data.user);
           this.dataService.setUserId(resp.data.id);
           const updatedDashboard = this.dashboard
             .replace(':user', resp.data.user)
             .replace(':user_id', resp.data.id);
-          this.router.navigate([updatedDashboard], {
-            queryParams: { user: resp.data.user, id: resp.data.id },
-          });
+          this.router.navigate([updatedDashboard]);
         }
       },
       (err) => {
@@ -90,9 +91,11 @@ export class LoginComponent implements OnInit {
   }
 
   togglePasswordVisibility() {
-    const passwordInput = document.getElementById('passwordInput') as HTMLInputElement;
+    const passwordInput = document.getElementById(
+      'passwordInput'
+    ) as HTMLInputElement;
     const togglePassword = document.getElementById('togglePassword');
-    
+
     if (passwordInput && togglePassword) {
       if (passwordInput.type === 'password') {
         passwordInput.type = 'text';
@@ -105,5 +108,4 @@ export class LoginComponent implements OnInit {
       }
     }
   }
-
 }

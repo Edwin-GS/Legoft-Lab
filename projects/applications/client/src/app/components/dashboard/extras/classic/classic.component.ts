@@ -19,6 +19,10 @@ export class ClassicComponent {
   notifier: boolean = false;
 
   constructor(private router: Router, private dataService: DataService) {
+    const userData = JSON.parse(localStorage.getItem('USER') || '');
+    console.log(userData);
+    this.dataService.setUser(userData.user);
+    this.dataService.setUserId(userData.id);
     this.user = this.dataService.getUser();
     this.id = this.dataService.getUserId();
     this.activeLink = 'dashboard';

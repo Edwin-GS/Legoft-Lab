@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from 'projects/libraries/helpers/src/lib/components/auth/data.service';
 import { HandlerService } from 'projects/libraries/helpers/src/lib/services/handler.service';
 
@@ -9,9 +10,13 @@ import { HandlerService } from 'projects/libraries/helpers/src/lib/services/hand
 })
 export class AppsShowComponent implements OnInit {
   constructor(
+    private formBuilder: FormBuilder,
     private handlerService: HandlerService,
     private dataService: DataService
   ) {}
+
+  appImageUrl: string = 'assets/img/mail.png';
+  logoUrl: string = 'assets/favicon/android-icon-48x48.png';
 
   applicationId: any;
   application: any;
@@ -19,18 +24,43 @@ export class AppsShowComponent implements OnInit {
   // name: string = '';
 
   notifier: boolean = false;
+  notifier2: boolean = false;
   errornotifier: boolean = false;
   larespuesta: string = '';
   loading: boolean = false;
+  user: string = this.dataService.getUser();
+  userId: string = this.dataService.getUserId();
+  showModal: boolean = false;
+  newAppForm!: FormGroup;
 
   ngOnInit(): void {
     this.getIdApli();
     this.loadApplication();
+
+    this.newAppForm = this.formBuilder.group({
+      name: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(50),
+        ],
+      ],
+      description: [
+        '',
+        [
+          Validators.required,
+          Validators.minLength(1),
+          Validators.maxLength(255),
+        ],
+      ],
+      icon: [''],
+    });
   }
 
   loadApplication() {
     this.loading = true;
-
+    console.log(this.applicationId);
     this.handlerService
       .get(`applications/find/${this.applicationId}`)
       .subscribe(
@@ -102,6 +132,89 @@ export class AppsShowComponent implements OnInit {
       return minutes === 1 ? '1 minute ago' : minutes + ' minutes ago';
     } else {
       return 'Just now';
+    }
+  }
+
+  openModal() {
+    this.showModal = true;
+  }
+
+  closeModal() {
+    this.showModal = false;
+  }
+
+  closeDialog2() {
+    this.errornotifier = false;
+  }
+
+  closeDialogOpen(application: any) {
+    this.notifier2 = true;
+    this.applicationId = application;
+  }
+
+  editApplication(application: any) {
+    this.newAppForm.patchValue({
+      name: application.name,
+      description: application.description,
+      icon: application.icon,
+    });
+
+    this.showModal = true;
+
+    this.handlerService.get(`applications/get/${this.applicationId}`).subscribe(
+      (resp) => {
+        if (resp && resp.success === false) {
+          this.errornotifier = true;
+          this.larespuesta = resp['message'];
+        } else {
+          this.newAppForm.patchValue({
+            name: resp.data.name,
+            description: resp.data.description,
+            icon: resp.data.icon,
+          });
+          this.loadImageFromDatabase(resp.data.icon);
+        }
+      },
+      (err) => {
+        this.errornotifier = true;
+        this.larespuesta = err['message'];
+      }
+    );
+  }
+
+  deleteApplication(application: any) {
+    const applicationId = application._id;
+    this.handlerService
+      .delete(
+        `applications/delete/${this.dataService.getUser()}/${applicationId}`
+      )
+      .subscribe(
+        (resp) => {
+          if (resp && resp.success === false) {
+            this.errornotifier = true;
+            this.larespuesta = resp['message'];
+          } else {
+            this.notifier = true;
+            this.larespuesta = resp['message'];
+          }
+        },
+        (err) => {
+          this.errornotifier = true;
+          this.larespuesta = err.message;
+        }
+      );
+  }
+
+  loadImageFromDatabase(icon: string) {
+    if (this.isBase64(icon)) {
+      const img = new Image();
+      img.src = 'data:image/jpeg;base64,' + icon;
+      const imagePreview = document.getElementById(
+        'appImage'
+      ) as HTMLImageElement;
+      if (imagePreview) {
+        imagePreview.src = img.src;
+      }
     }
   }
 }

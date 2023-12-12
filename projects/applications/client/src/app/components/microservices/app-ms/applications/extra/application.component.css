@@ -370,9 +370,10 @@ label {
   stroke-linecap: round;
   stroke-linejoin: round;
   stroke-width: 2;
+  cursor:pointer
 }
 
-input[type="search"] {
+/* input[type="search"] {
   display: block;
   width: 100%;
   padding: 1rem;
@@ -385,8 +386,8 @@ input[type="search"] {
   outline: 2px solid transparent;
   outline-offset: 2px;
   transition: background-color 0.2s, border-color 0.2s, box-shadow 0.2s;
-}
-
+} */
+/*
 button[type="submit"] {
   color: #fff;
   position: absolute;
@@ -411,7 +412,7 @@ button[type="submit"]:focus {
   outline-offset: 2px;
   box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.5);
 }
-
+*/
 .btnEdit {
   display: inline-block;
   margin-top: 5px;
